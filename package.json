@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build dorvak-ui && ng build test-app",
+    "build:lib": "ng build dorvak-ui",
+    "build:test-app": "ng build test-app --base-href /dorvak-ui/",
     "watch-lib": "ng build dorvak-ui --watch --configuration development",
     "test": "ng test"
   },
