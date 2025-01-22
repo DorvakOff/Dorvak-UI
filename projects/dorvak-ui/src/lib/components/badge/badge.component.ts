@@ -15,6 +15,7 @@ export class BadgeComponent implements OnInit {
   ngOnInit() {
     this.componentStyle = {
       '--badge-background-color': colorUtils.getVariantCssValue(this.variant),
+      '--badge-background-color-hover': colorUtils.lightenHSL(`--color-${this.variant}`, 10),
       '--badge-color': colorUtils.getVariantCssValue(`${this.variant}-foreground`)
     }
   }

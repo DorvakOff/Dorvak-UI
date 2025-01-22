@@ -1,11 +1,18 @@
+:host {
+  --badge-color: ;
+  --badge-background-color: ;
+  --badge-background-color-hover: ;
+}
+
 .badge {
   background-color: hsl(var(--badge-background-color));
   color: hsl(var(--badge-color));
   border-radius: var(--radius);
   padding: 0.25rem 0.5rem;
+  margin: 0.25rem;
   transition: background-color 0.2s;
 
   &:hover {
-    background-color: hsl(var(--color-primary) 100%);
+    background-color: var(--badge-background-color-hover);
   }
 }

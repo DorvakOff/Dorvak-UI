@@ -6,7 +6,7 @@
     "start": "ng serve",
     "build:lib": "ng build dorvak-ui",
     "build:test-app": "ng build test-app --base-href /dorvak-ui/",
-    "watch-lib": "ng build dorvak-ui --watch --configuration development",
+    "watch:lib": "ng build dorvak-ui --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
