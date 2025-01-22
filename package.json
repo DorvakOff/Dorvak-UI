@@ -4,8 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build dorvak-ui --watch --configuration development",
+    "build": "ng build dorvak-ui && ng build test-app",
+    "watch-lib": "ng build dorvak-ui --watch --configuration development",
     "test": "ng test"
   },
   "private": true,
