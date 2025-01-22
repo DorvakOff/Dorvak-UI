@@ -35,12 +35,18 @@ jobs:
         uses: actions/setup-node@v4.1.0
         with:
           node-version: '20'
-      - name: Install dependencies
-        run: npm install
-      - name: Build static content
-        run: npm run build
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build library
+        run: ng build dorvak-ui
+
+      - name: Build test app
+        run: ng build test-app --base-href /dorvak-ui/
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
