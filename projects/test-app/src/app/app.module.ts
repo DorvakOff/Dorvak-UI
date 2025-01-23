@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {DorvakUiModule} from "dorvak-ui";
+import {LucideAngularModule} from "lucide-angular";
+import { icons } from 'lucide-angular';
 
 @NgModule({
   declarations: [
@@ -10,7 +12,8 @@ import {DorvakUiModule} from "dorvak-ui";
   ],
   imports: [
     BrowserModule,
-    DorvakUiModule
+    DorvakUiModule,
+    LucideAngularModule.pick(icons)
   ],
   providers: [],
   bootstrap: [AppComponent]
