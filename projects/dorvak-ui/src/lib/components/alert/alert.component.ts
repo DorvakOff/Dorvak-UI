@@ -22,7 +22,7 @@ import {NgClass} from "@angular/common";
       @if (icon) {
         <i-lucide [name]="icon" [size]="28"/>
       }
-      <div class="flex flex-col gap-2">
+      <div class="flex flex-col">
         <span slot="title" class="font-bold">
             <ng-content select="[slot='title']"/>
         </span>
