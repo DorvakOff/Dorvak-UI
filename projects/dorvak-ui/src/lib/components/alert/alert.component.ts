@@ -2,23 +2,34 @@ import {Component, Input} from '@angular/core';
 import {Variant} from "../../models/variant";
 import {LucideIconNode} from "lucide-angular/icons/types";
 import {LucideAngularModule} from "lucide-angular";
-import {NgClass} from "@angular/common";
+import {cva} from "class-variance-authority";
+
+const alertVariants = cva(
+  "border-2 p-3 flex gap-2 rounded-md m-3 bg min-w-sm max-w-xl",
+  {
+    variants: {
+      variant: {
+        primary: "border-primary text-primary bg-primary/10",
+        secondary: "border-secondary text-secondary bg-secondary/10",
+        success: "border-success text-success bg-success/10",
+        destructive: "border-destructive text-destructive bg-destructive/10",
+        warning: "border-warning text-warning bg-warning/10",
+        info: "border-info text-info bg-info/10"
+      }
+    },
+    defaultVariants: {
+      variant: "primary"
+    }
+  }
+)
 
 @Component({
   selector: 'dui-alert',
   imports: [
-    LucideAngularModule,
-    NgClass
+    LucideAngularModule
   ],
   template: `
-    <div class="border-2 p-3 flex gap-2 rounded-md m-3 bg min-w-sm max-w-xl" [ngClass]="{
-      'border-primary text-primary bg-primary/10': variant === 'primary',
-      'border-secondary text-secondary bg-secondary/10': variant === 'secondary',
-      'border-success text-success bg-success/10': variant === 'success',
-      'border-destructive text-destructive bg-destructive/10': variant === 'destructive',
-      'border-warning text-warning bg-warning/10': variant === 'warning',
-      'border-info text-info bg-info/10': variant === 'info'
-    }">
+    <div [class]="alertVariants({ variant })">
       @if (icon) {
         <i-lucide [name]="icon" [size]="28"/>
       }
@@ -32,6 +43,8 @@ import {NgClass} from "@angular/common";
   `,
 })
 export class AlertComponent {
+
+  alertVariants = alertVariants;
 
   @Input() variant: Variant = 'primary';
   @Input() icon: string | readonly LucideIconNode[] | undefined;

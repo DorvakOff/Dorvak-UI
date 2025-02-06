@@ -10,7 +10,8 @@
       "prefix": "dui",
       "schematics": {
         "@schematics/angular:component": {
-          "style": "scss"
+          "inlineStyle": true,
+          "inlineTemplate": true
         }
       },
       "architect": {

@@ -1,29 +1,46 @@
-import {booleanAttribute, Component, EventEmitter, Input, Output} from '@angular/core';
-import {NgClass} from '@angular/common';
+import {booleanAttribute, Component, Input} from '@angular/core';
 import {Variant} from "../../models/variant";
 import {LucideIconNode} from "lucide-angular/icons/types";
 import {LucideAngularModule} from "lucide-angular";
+import { cva } from "class-variance-authority"
+
+const buttonVariants = cva(
+  "shadow inline-flex justify-center text-nowrap items-center gap-2 rounded-md text-sm transition-colors duration-300 select-none disabled:opacity-50 disabled:cursor-not-allowed",
+  {
+    variants: {
+      variant: {
+        primary: "bg-primary text-primary-foreground enabled:hover:bg-primary/90",
+        secondary: "bg-secondary text-secondary-foreground enabled:hover:bg-secondary/90",
+        success: "bg-success text-success-foreground enabled:hover:bg-success/90",
+        destructive: "bg-destructive text-destructive-foreground enabled:hover:bg-destructive/90",
+        warning: "bg-warning text-warning-foreground enabled:hover:bg-warning/90",
+        info: "bg-info text-info-foreground enabled:hover:bg-info/90",
+      },
+      size: {
+        default: "!h-10 px-4 py-2",
+        sm: "h-9 px-3",
+        lg: "h-11 px-8",
+        icon: "h-10 w-10",
+      }
+    },
+    defaultVariants: {
+      size: "default",
+      variant: "primary"
+    }
+  }
+)
 
 @Component({
   selector: 'dui-button',
   imports: [
-    NgClass,
     LucideAngularModule
   ],
   template: `
-    <button [disabled]="disabled || loading" class="inline-flex justify-center items-center gap-2 rounded-md text-sm transition-colors duration-300 m-1 select-none" [ngClass]="{
-      'bg-primary text-primary-foreground hover:bg-primary/90': variant === 'primary',
-      'bg-secondary text-secondary-foreground hover:bg-secondary/90': variant === 'secondary',
-      'bg-success text-success-foreground hover:bg-success/90': variant === 'success',
-      'bg-destructive text-destructive-foreground hover:bg-destructive/90': variant === 'destructive',
-      'bg-warning text-warning-foreground hover:bg-warning/90': variant === 'warning',
-      'bg-info text-info-foreground hover:bg-info/90': variant === 'info',
-      '!h-10 px-4 py-2': size === 'default',
-      'h-9 px-3': size === 'sm',
-      'h-11 px-8': size === 'lg',
-      'h-10 w-10': size === 'icon',
-      'cursor-not-allowed opacity-50': disabled || loading
-    }">
+    <button
+      [disabled]="disabled || loading"
+      [class]="buttonVariants({ variant, size })"
+      [type]="submit ? 'submit' : 'button'"
+    >
       @if (loading) {
         <i-lucide name="loader-circle" size="16" class="animate-spin"/>
         <span class="sr-only">Loading...</span>
@@ -40,18 +57,12 @@ import {LucideAngularModule} from "lucide-angular";
 })
 export class ButtonComponent {
 
+  buttonVariants = buttonVariants;
+
   @Input() size: 'default' | 'sm' | 'lg' | 'icon' = 'default';
   @Input() variant: Variant = 'primary';
   @Input() icon: string | LucideIconNode[] | undefined;
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
   @Input({ transform: booleanAttribute }) loading: boolean = false;
-
-  @Output() click = new EventEmitter<void>();
-
-  handleClick() {
-    if (!this.disabled && !this.loading) {
-      this.click.emit();
-    }
-  }
-
+  @Input({ transform: booleanAttribute }) submit: boolean = false;
 }
