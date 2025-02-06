@@ -32,12 +32,12 @@
 
 <div class="flex gap-2">
   <dui-button icon="check" (click)="testAlert()">Primary</dui-button>
-  <dui-button variant="primary" size="icon" icon="check"/>
-  <dui-button variant="secondary">Secondary</dui-button>
-  <dui-button variant="destructive">Danger</dui-button>
-  <dui-button variant="info">Info</dui-button>
-  <dui-button variant="warning">Warning</dui-button>
-  <dui-button variant="success">Success</dui-button>
+  <dui-button variant="primary" size="icon" icon="check" (click)="testAlert()"/>
+  <dui-button variant="secondary" (click)="testAlert()">Secondary</dui-button>
+  <dui-button variant="destructive" (click)="testAlert()">Danger</dui-button>
+  <dui-button variant="info" (click)="testAlert()">Info</dui-button>
+  <dui-button variant="warning" (click)="testAlert()">Warning</dui-button>
+  <dui-button variant="success" (click)="testAlert()">Success</dui-button>
   <dui-button disabled (click)="testAlert()">Disabled</dui-button>
   <dui-button loading (click)="testAlert()">Loading</dui-button>
 </div>
