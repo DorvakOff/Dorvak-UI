@@ -11,7 +11,7 @@ import {NgClass} from "@angular/common";
     NgClass
   ],
   template: `
-    <div class="border-2 p-3 flex gap-3 rounded-md m-3 bg min-w-sm max-w-xl" [ngClass]="{
+    <div class="border-2 p-3 flex gap-2 rounded-md m-3 bg min-w-sm max-w-xl" [ngClass]="{
       'border-primary text-primary bg-primary/10': variant === 'primary',
       'border-secondary text-secondary bg-secondary/10': variant === 'secondary',
       'border-success text-success bg-success/10': variant === 'success',
