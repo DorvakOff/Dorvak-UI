@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import {Variant} from "../../models/variant";
 
 @Component({
-  selector: 'dui-button',
-  standalone: true,
-  imports: [CommonModule],
-  template: `
+    selector: 'dui-button',
+    imports: [CommonModule],
+    standalone: true,
+    template: `
     <button [ngClass]="[size, variant]">
       <ng-content/>
     </button>
   `,
-  styles: [
-    `
+    styles: [
+        `
         button {
           display: inline-flex;
           align-items: center;
@@ -48,7 +48,7 @@ import {Variant} from "../../models/variant";
         }
       }
     `
-  ]
+    ]
 })
 export class ButtonComponent {
 

@@ -5,10 +5,11 @@ import {ButtonComponent} from "./components/button/button.component";
 
 @NgModule({
   declarations: [
+
   ],
   imports: [
-    AlertComponent,
     BadgeComponent,
+    AlertComponent,
     ButtonComponent
   ],
   exports: [

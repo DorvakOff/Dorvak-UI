@@ -23,32 +23,32 @@
   font-weight: 500;
 }
 
-.alert-primary {
+.primary {
   border: 2px solid hsl(var(--color-primary));
   color: hsl(var(--color-primary));
 }
 
-.alert-secondary {
+.secondary {
   border: 2px solid hsl(var(--color-secondary));
   color: hsl(var(--color-secondary));
 }
 
-.alert-danger {
+.danger {
   border: 2px solid hsl(var(--color-danger));
   color: hsl(var(--color-danger));
 }
 
-.alert-info {
+.info {
   border: 2px solid hsl(var(--color-info));
   color: hsl(var(--color-info));
 }
 
-.alert-warning {
+.warning {
   border: 2px solid hsl(var(--color-warning));
   color: hsl(var(--color-warning));
 }
 
-.alert-success {
+.success {
   border: 2px solid hsl(var(--color-success));
   color: hsl(var(--color-success));
 }

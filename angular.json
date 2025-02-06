@@ -8,6 +8,11 @@
       "root": "projects/dorvak-ui",
       "sourceRoot": "projects/dorvak-ui/src",
       "prefix": "dui",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
