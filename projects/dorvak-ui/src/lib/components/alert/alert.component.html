@@ -1,0 +1,9 @@
+<div [ngClass]="['alert', 'alert-' + variant]">
+  <i-lucide *ngIf="icon" [name]="icon" [size]="28"/>
+  <div class="alert-content">
+        <span slot="title">
+            <ng-content select="[slot='title']"/>
+        </span>
+    <ng-content/>
+  </div>
+</div>

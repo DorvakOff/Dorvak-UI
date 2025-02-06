@@ -1,0 +1,15 @@
+:root {
+  --radius: 0.5rem;
+  --color-primary: 221.2 83.2% 60.3%;
+  --color-primary-foreground: 0 0% 95%;
+  --color-secondary: 142.1 76.2% 46.3%;
+  --color-secondary-foreground: 355.7 100% 97.3%;
+  --color-danger: 0 84.2% 60.2%;
+  --color-danger-foreground: 0 0% 98%;
+  --color-info: 221.2 83.2% 53.3%;
+  --color-info-foreground: 210 40% 98%;
+  --color-warning: 24.6 95% 53.1%;
+  --color-warning-foreground: 60 9.1% 97.8%;
+  --color-success: 142.1 76.2% 36.3%;
+  --color-success-foreground: 355.7 100% 97.3%;
+}
