@@ -1,30 +1,39 @@
-<h1>Angular Components Test Page</h1>
+<h1 class="font-bold text-4xl font-outfit">Angular Components Test Page</h1>
 
-<h2>Alerts</h2>
+<hr class="my-8">
+<h2 class="font-bold text-2xl font-outfit">Alerts</h2>
 <dui-alert icon="check" variant="success">
   <span slot="title">Success</span>
   This is a primary alert—check it out!
 </dui-alert>
-<dui-alert icon="x" variant="danger">
+<dui-alert icon="x" variant="destructive">
   <span slot="title">Non</span>
   ça marche pas
 </dui-alert>
 
-<h2>Badges</h2>
+<hr class="my-8">
+<h2 class="font-bold text-2xl font-outfit">Badges</h2>
 
-<dui-badge icon="check">
-  Primary
-</dui-badge>
-<dui-badge variant="secondary">Secondary</dui-badge>
-<dui-badge variant="danger">Danger</dui-badge>
-<dui-badge variant="info">Info</dui-badge>
-<dui-badge variant="warning">Warning</dui-badge>
-<dui-badge variant="success">Success</dui-badge>
+<div class="flex">
+  <dui-badge icon="check">Primary</dui-badge>
+  <dui-badge variant="secondary">Secondary</dui-badge>
+  <dui-badge variant="destructive">Danger</dui-badge>
+  <dui-badge variant="info">Info</dui-badge>
+  <dui-badge variant="warning">Warning</dui-badge>
+  <dui-badge variant="success">Success</dui-badge>
+</div>
 
-<h2>Buttons</h2>
-<dui-button variant="primary" size="sm">Primary</dui-button>
-<dui-button variant="secondary">Secondary</dui-button>
-<dui-button variant="danger">Danger</dui-button>
-<dui-button variant="info">Info</dui-button>
-<dui-button variant="warning">Warning</dui-button>
-<dui-button variant="success">Success</dui-button>
+<hr class="my-8">
+<h2 class="font-bold text-2xl font-outfit">Buttons</h2>
+
+<div class="flex">
+  <dui-button icon="check" (click)="testAlert()">Primary</dui-button>
+  <dui-button variant="primary" size="icon" icon="check"/>
+  <dui-button variant="secondary">Secondary</dui-button>
+  <dui-button variant="destructive">Danger</dui-button>
+  <dui-button variant="info">Info</dui-button>
+  <dui-button variant="warning">Warning</dui-button>
+  <dui-button variant="success">Success</dui-button>
+  <dui-button disabled (click)="testAlert()">Disabled</dui-button>
+  <dui-button loading (click)="testAlert()">Loading</dui-button>
+</div>
