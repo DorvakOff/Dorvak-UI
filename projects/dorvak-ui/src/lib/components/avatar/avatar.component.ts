@@ -16,8 +16,7 @@ import {NgOptimizedImage} from "@angular/common";
       }
     </div>
 
-  `,
-  styles: ``
+  `
 })
 export class AvatarComponent {
 

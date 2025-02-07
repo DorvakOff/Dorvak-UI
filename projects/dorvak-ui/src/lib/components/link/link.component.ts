@@ -7,8 +7,7 @@ import {Component, Input} from '@angular/core';
     <a [href]="href" [target]="target" class="text-primary hover:underline transition-colors duration-300 inline">
       <ng-content/>
     </a>
-  `,
-  styles: ``
+  `
 })
 export class LinkComponent {
 

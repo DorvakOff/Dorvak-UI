@@ -26,8 +26,7 @@ import {cn} from "../../utils/utils";
         </div>
       </div>
     }
-  `,
-  styles: ``
+  `
 })
 export class PaginationComponent {
 

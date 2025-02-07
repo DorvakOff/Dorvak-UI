@@ -6,12 +6,16 @@ import {LinkComponent} from "./components/link/link.component";
 import {PaginationComponent} from "./components/pagination/pagination.component";
 import {AvatarComponent} from "./components/avatar/avatar.component";
 import {SeparatorComponent} from "./components/separator/separator.component";
+import {InputComponent} from "./components/input/input.component";
+import {LabelComponent} from "./components/label/label.component";
 
 const components = [
   AlertComponent,
   AvatarComponent,
   BadgeComponent,
   ButtonComponent,
+  InputComponent,
+  LabelComponent,
   LinkComponent,
   PaginationComponent,
   SeparatorComponent
