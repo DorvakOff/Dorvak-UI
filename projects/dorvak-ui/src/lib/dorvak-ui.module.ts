@@ -8,12 +8,14 @@ import {AvatarComponent} from "./components/avatar/avatar.component";
 import {SeparatorComponent} from "./components/separator/separator.component";
 import {InputComponent} from "./components/input/input.component";
 import {LabelComponent} from "./components/label/label.component";
+import {CardComponent} from "./components/card/card.component";
 
 const components = [
   AlertComponent,
   AvatarComponent,
   BadgeComponent,
   ButtonComponent,
+  CardComponent,
   InputComponent,
   LabelComponent,
   LinkComponent,

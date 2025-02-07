@@ -6,6 +6,8 @@ import {DorvakUiModule} from "dorvak-ui";
 import {LucideAngularModule} from "lucide-angular";
 import { icons } from 'lucide-angular';
 import {RouterLink, RouterModule} from "@angular/router";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {NgOptimizedImage} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -16,7 +18,10 @@ import {RouterLink, RouterModule} from "@angular/router";
     DorvakUiModule,
     LucideAngularModule.pick(icons),
     RouterLink,
-    RouterModule.forRoot([])
+    RouterModule.forRoot([]),
+    ReactiveFormsModule,
+    FormsModule,
+    NgOptimizedImage
   ],
   providers: [],
   bootstrap: [AppComponent]

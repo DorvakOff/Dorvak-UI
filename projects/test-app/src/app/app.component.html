@@ -19,7 +19,7 @@
 <h2 class="font-bold text-2xl font-outfit">Avatars</h2>
 <div class="flex gap-2">
   <dui-avatar src="https://github.com/DorvakOff.png" alt="@DorvakOff" fallback="DVK"/>
-  <dui-separator vertical />
+  <dui-separator vertical/>
   <dui-avatar src="htazetps://github.com/DorvakOff.png" alt="@DorvakOff" fallback="DVK"/>
 </div>
 
@@ -52,14 +52,49 @@
 </div>
 
 <dui-separator/>
-<h2 class="font-bold text-2xl font-outfit">Inputs</h2>
-<dui-input placeholder="contact@dorvak.com" type="email"/>
-<dui-input type="number" min="0" max="100"/>
-<dui-input disabled placeholder="placeholder"/>
+<h2 class="font-bold text-2xl font-outfit">Cards</h2>
+<dui-card class="w-2/3 self-center relative">
+  <span slot="title">Authentification</span>
+  <span slot="subtitle">You need to login to access this page</span>
 
-<div class="flex gap-1.5 flex-col m-2">
-  <dui-label for="test-input" required>Test Input</dui-label>
-  <dui-input value="value" id="test-input" required/>
+  <div class="absolute top-5 right-5 h-16 w-16 rounded-md bg-muted border-border border overflow-hidden">
+    <img ngSrc="https://github.com/DorvakOff.png" draggable="false" alt="Image" fill/>
+  </div>
+
+  <div slot="content" class="flex gap-2">
+    <form [formGroup]="formCard" slot="content" class="flex gap-2 flex-col w-1/2" (ngSubmit)="testAlert(formCard.value)">
+      <dui-label for="email1" required>Email</dui-label>
+      <dui-input placeholder="contact@dorvak.com" type="email" id="email1" required formControlName="email"/>
+      <dui-label for="password1" required>Password</dui-label>
+      <dui-input placeholder="Enter password" type="password" id="password1" required formControlName="password"/>
+
+      <div class="flex-1"></div>
+      <dui-button variant="primary" class="w-full" icon="log-in" submit>Login</dui-button>
+    </form>
+    <dui-separator vertical/>
+    <form [formGroup]="formCard" slot="content" class="flex gap-2 flex-col w-1/2" (ngSubmit)="testAlert(formCard.value)">
+      <dui-label for="email" required>Email</dui-label>
+      <dui-input placeholder="contact@dorvak.com" type="email" id="email" required formControlName="email"/>
+      <dui-label for="username" required>Username</dui-label>
+      <dui-input placeholder="Dorvak" id="username" required formControlName="username"/>
+      <dui-label for="password" required>Password</dui-label>
+      <dui-input placeholder="Enter password" type="password" id="password" required formControlName="password"/>
+
+      <dui-button variant="primary" class="w-full" icon="log-in" submit>Register</dui-button>
+    </form>
+  </div>
+</dui-card>
+
+<dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Inputs</h2>
+<dui-input placeholder="contact@dorvak.com" type="email" class="w-[300px]"/>
+<dui-input type="number" min="0" max="100" class="w-[300px]"/>
+<dui-input disabled placeholder="placeholder" class="w-[300px]"/>
+<dui-input readonly value="Valeur readonly" class="w-[300px]"/>
+
+<div class="flex gap-1.5 flex-col">
+  <dui-label for="test-input" required>Test Label</dui-label>
+  <dui-input value="value" id="test-input" required class="w-[300px]"/>
 </div>
 
 <dui-separator/>
