@@ -1,11 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {booleanAttribute, Component, Input} from '@angular/core';
 import {Variant} from "../../models/variant";
 import {LucideIconNode} from "lucide-angular/icons/types";
 import {LucideAngularModule} from "lucide-angular";
 import {cva} from "class-variance-authority";
+import {ButtonComponent} from "../button/button.component";
 
 const alertVariants = cva(
-  "border-2 p-3 flex gap-2 rounded-md m-3 bg min-w-sm max-w-xl",
+  "border-2 p-3 flex gap-2 rounded-md m-3 bg min-w-sm max-w-xl relative",
   {
     variants: {
       variant: {
@@ -26,20 +27,26 @@ const alertVariants = cva(
 @Component({
   selector: 'dui-alert',
   imports: [
-    LucideAngularModule
+    LucideAngularModule,
+    ButtonComponent
   ],
   template: `
-    <div [class]="alertVariants({ variant })">
-      @if (icon) {
-        <i-lucide [name]="icon" [size]="28"/>
-      }
-      <div class="flex flex-col">
-        <span slot="title" class="font-bold">
-            <ng-content select="[slot='title']"/>
-        </span>
-        <ng-content/>
+    @if (!this._dismissed) {
+      <div [class]="alertVariants({ variant })" #host>
+        @if (closable) {
+          <dui-button variant="link" icon="x" size="icon" class="absolute top-2 right-2" (click)="dismiss()"/>
+        }
+        @if (icon) {
+          <i-lucide [name]="icon" [size]="28"/>
+        }
+        <div class="flex flex-col">
+          <span slot="title" class="font-bold">
+              <ng-content select="[slot='title']"/>
+          </span>
+          <ng-content/>
+        </div>
       </div>
-    </div>
+    }
   `,
 })
 export class AlertComponent {
@@ -48,5 +55,11 @@ export class AlertComponent {
 
   @Input() variant: Variant = 'primary';
   @Input() icon: string | readonly LucideIconNode[] | undefined;
+  @Input({transform: booleanAttribute}) closable: boolean = false;
 
+  protected _dismissed = false;
+
+  dismiss() {
+    this._dismissed = true;
+  }
 }
