@@ -20,7 +20,7 @@
 <div class="flex gap-2">
   <dui-avatar src="https://github.com/DorvakOff.png" alt="@DorvakOff" fallback="DVK"/>
   <dui-separator vertical/>
-  <dui-avatar src="htazetps://github.com/DorvakOff.png" alt="@DorvakOff" fallback="DVK"/>
+  <dui-avatar src="brokenlink" alt="@DorvakOff" fallback="DVK"/>
 </div>
 
 <dui-separator/>
@@ -90,12 +90,15 @@
 <dui-input placeholder="contact@dorvak.com" type="email" class="w-[300px]"/>
 <dui-input type="number" min="0" max="100" class="w-[300px]"/>
 <dui-input disabled placeholder="placeholder" class="w-[300px]"/>
+<dui-input placeholder="Input with icon" icon="circle-x" class="w-[300px]"/>
 <dui-input readonly value="Valeur readonly" class="w-[300px]"/>
 
 <div class="flex gap-1.5 flex-col">
   <dui-label for="test-input" required>Test Label</dui-label>
   <dui-input value="value" id="test-input" required class="w-[300px]"/>
 </div>
+
+<dui-input-otp (codeEntered)="testAlert($event)"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Links</h2>

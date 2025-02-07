@@ -9,6 +9,7 @@ import {SeparatorComponent} from "./components/separator/separator.component";
 import {InputComponent} from "./components/input/input.component";
 import {LabelComponent} from "./components/label/label.component";
 import {CardComponent} from "./components/card/card.component";
+import {InputOtpComponent} from "./components/input-otp/input-otp.component";
 
 const components = [
   AlertComponent,
@@ -17,6 +18,7 @@ const components = [
   ButtonComponent,
   CardComponent,
   InputComponent,
+  InputOtpComponent,
   LabelComponent,
   LinkComponent,
   PaginationComponent,
