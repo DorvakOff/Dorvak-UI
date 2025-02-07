@@ -1,6 +1,6 @@
 <h1 class="font-bold text-4xl font-outfit">Angular Components Test Page</h1>
 
-<hr class="my-8">
+<dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Alerts</h2>
 <dui-alert icon="check" variant="success">
   <span slot="title">Success</span>
@@ -15,7 +15,15 @@
   ça marche peut être
 </dui-alert>
 
-<hr class="my-8">
+<dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Avatars</h2>
+<div class="flex gap-2">
+  <dui-avatar src="https://github.com/DorvakOff.png" alt="@DorvakOff" fallback="DVK"/>
+  <dui-separator vertical />
+  <dui-avatar src="htazetps://github.com/DorvakOff.png" alt="@DorvakOff" fallback="DVK"/>
+</div>
+
+<dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Badges</h2>
 
 <div class="flex gap-2">
@@ -27,7 +35,7 @@
   <dui-badge variant="success">Success</dui-badge>
 </div>
 
-<hr class="my-8">
+<dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Buttons</h2>
 
 <div class="flex gap-2">
@@ -38,11 +46,16 @@
   <dui-button variant="info" (click)="testAlert()">Info</dui-button>
   <dui-button variant="warning" (click)="testAlert()">Warning</dui-button>
   <dui-button variant="success" (click)="testAlert()">Success</dui-button>
+  <dui-button variant="ghost" (click)="testAlert()">Ghost</dui-button>
   <dui-button disabled (click)="testAlert()">Disabled</dui-button>
   <dui-button loading (click)="testAlert()">Loading</dui-button>
 </div>
 
-
-<hr class="my-8">
+<dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Links</h2>
 <dui-link href="https://www.google.com">Google</dui-link>
+
+<dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Pagination</h2>
+<dui-pagination [total]="100" [pageSize]="10"/>
+<dui-pagination [total]="100" [pageSize]="10" showItemsCount="false"/>
