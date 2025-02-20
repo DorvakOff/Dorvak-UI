@@ -22,7 +22,8 @@ export class AppComponent {
   constructor(private fb: FormBuilder) {
     this.formCard = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
+      username: ['', [Validators.required]]
     });
   }
 
