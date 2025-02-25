@@ -52,6 +52,7 @@ const config: Config = {
           DEFAULT: 'hsl(var(--popover))',
           foreground: 'hsl(var(--popover-foreground))'
         },
+        input: 'hsl(var(--input))',
         border: 'hsl(var(--border))',
       },
       borderRadius: {

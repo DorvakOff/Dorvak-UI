@@ -159,5 +159,18 @@
 <dui-select [items]="selectItems" (selectedChange)="testAlert($event)" class="w-[300px]"/>
 
 <dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Switches</h2>
+<div class="flex gap-2 items-center">
+  <dui-switch id="switch"/>
+  <dui-label for="switch">Switch</dui-label>
+</div>
+<div class="flex gap-2 items-center">
+  <dui-switch id="switch2" disabled checked/>
+  <dui-label for="switch2">Disabled switch</dui-label>
+</div>
+
+<dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Textareas</h2>
 <dui-textarea placeholder="Write something here"/>
+<dui-textarea placeholder="Disabled"/>
+<dui-textarea value="Readonly" readonly/>

@@ -16,6 +16,7 @@ import {ComboboxComponent} from "./components/combobox/combobox.component";
 import {SelectComponent} from "./components/select/select.component";
 import {TextareaComponent} from "./components/textarea/textarea.component";
 import {AlertModalComponent} from "./components/alert-modal/alert-modal.component";
+import {SwitchComponent} from "./components/switch/switch.component";
 
 const components = [
   AlertComponent,
@@ -34,6 +35,7 @@ const components = [
   PaginationComponent,
   SelectComponent,
   SeparatorComponent,
+  SwitchComponent,
   TextareaComponent
 ];
 

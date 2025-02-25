@@ -32,7 +32,7 @@ import {LucideIconNode} from "lucide-angular/icons/types";
   template: `
     <div
       [class]="cn(
-        'form-control flex items-center gap-1 h-9 rounded-md border bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground md:text-sm focus-within:border-primary',
+        'form-control flex items-center gap-1 h-9 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground md:text-sm focus-within:border-primary',
         disabled && 'cursor-not-allowed bg-muted text-muted-foreground',
         'group-[.ng-invalid:not(.ng-pristine)]:border-destructive group-[.ng-invalid:not(.ng-pristine)]:focus-within:border-destructive',
         iconPosition === 'left' && 'flex-row-reverse'
@@ -55,7 +55,7 @@ import {LucideIconNode} from "lucide-angular/icons/types";
         (ngModelChange)="valueChange.emit($event)"
       />
       @if (icon) {
-        <button type="button" [disabled]="!iconClick" (click)="handleIconClick()" class="enabled:hover:text-primary text-muted-foreground transition-colors duration-300 cursor-[inherit]">
+        <button type="button" [disabled]="!iconClick" (click)="handleIconClick(); $event.stopPropagation()" class="enabled:hover:text-primary text-muted-foreground transition-colors duration-300 cursor-[inherit]">
           <i-lucide [name]="icon" size="16"/>
         </button>
       }

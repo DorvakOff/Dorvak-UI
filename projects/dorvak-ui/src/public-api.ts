@@ -21,4 +21,5 @@ export * from './lib/components/modal/modal.component';
 export * from './lib/components/pagination/pagination.component';
 export * from './lib/components/select/select.component';
 export * from './lib/components/separator/separator.component';
+export * from './lib/components/switch/switch.component';
 export * from './lib/components/textarea/textarea.component';

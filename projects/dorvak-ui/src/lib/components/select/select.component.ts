@@ -28,7 +28,7 @@ export interface SelectItem {
     <div class="relative">
       <dui-input [id]="id" [required]="required" [placeholder]="placeholder" [value]="selected.label" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
         <div [class]="cn(
-            'absolute top-10 left-0 w-full bg-popover text-popover-foreground border border-gray-300 rounded-md shadow-md p-2 duration-300',
+            'absolute top-10 left-0 w-full bg-popover text-popover-foreground border border-gray-300 rounded-md shadow-md p-2 duration-300 z-10',
             showOnTop && 'bottom-10 top-auto'
             )"
              [class.hidden]="!visible && !dismissing"

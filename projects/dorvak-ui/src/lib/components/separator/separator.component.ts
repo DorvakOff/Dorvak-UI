@@ -5,7 +5,7 @@ import {cn} from "../../utils/utils";
   selector: 'dui-separator',
   imports: [],
   template: `
-    <div [class]="cn('bg-border shrink-0', vertical ? 'w-0.5 h-full mx-2' : 'w-full h-0.5 my-2')"></div>
+    <div [class]="cn('bg-border shrink-0', vertical ? 'w-[1px] h-full mx-2' : 'w-full h-[1px] my-2')"></div>
   `
 })
 export class SeparatorComponent {
