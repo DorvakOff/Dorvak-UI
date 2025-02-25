@@ -99,9 +99,14 @@
 <h2 class="font-bold text-2xl font-outfit">Combobox</h2>
 <dui-combobox
   [items]="comboItems"
-  (selectedChange)="testAlert($event)"
   label="Select an item"
   class="w-[300px]"
+/>
+<dui-combobox
+  [items]="comboItems"
+  label="Select multiple items"
+  class="w-[300px]"
+  multi
 />
 
 <dui-separator/>
@@ -144,7 +149,7 @@
 
   <div slot="content" class="flex flex-col gap-2 w-full">
     <form [formGroup]="formModal" class="flex gap-2 flex-col" (ngSubmit)="testAlert(formModal.value); modal2.close()">
-      <dui-combobox [items]="comboItems" required label="Combobox" formControlName="combo"/>
+      <dui-combobox [items]="comboItems" required label="Combobox" formControlName="combo" multi/>
       <dui-select [items]="selectItems" required label="Select" formControlName="select"/>
       <dui-textarea placeholder="Write something here" label="Write something here" required formControlName="textarea"/>
 

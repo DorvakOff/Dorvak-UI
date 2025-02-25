@@ -4,7 +4,7 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
-  Input,
+  Input, OnInit,
   Output,
   ViewChild,
 } from '@angular/core';
@@ -18,6 +18,8 @@ export interface ComboboxItem {
   value: any;
   label: string;
 }
+
+type SelectedType<Multi extends boolean> = Multi extends true ? ComboboxItem[] : ComboboxItem;
 
 @Component({
   selector: 'dui-combobox',
@@ -46,7 +48,7 @@ export interface ComboboxItem {
         </label>
       }
       <div class="relative">
-        <dui-input [id]="id" [required]="required" [placeholder]="placeholder" [value]="selected.label" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
+        <dui-input [id]="id" [required]="required" [placeholder]="placeholder" [value]="getValue()" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
           <div [class]="cn(
               'absolute top-10 left-0 w-full bg-popover text-popover-foreground border border-gray-300 rounded-md shadow-md p-2 duration-300 z-10',
               showOnTop && 'bottom-10 top-auto'
@@ -57,11 +59,11 @@ export interface ComboboxItem {
             <dui-input class="w-full" placeholder="Search..." icon="search" iconPosition="left" [(value)]="_searchValue" #search disableErrorBorder/>
             <ul class="mt-2 max-h-40 overflow-y-auto overscroll-contain">
               @for (item of filteredItems; track item.value) {
-                <li [class]="cn('cursor-pointer flex justify-between items-center hover:bg-accent hover:text-accent-foreground focus-within:bg-accent focus-within:text-accent-foreground rounded-sm px-2 py-1 outline-none', item.value === selected.value && 'bg-accent text-accent-foreground')"
+                <li [class]="cn('cursor-pointer flex justify-between items-center hover:bg-accent hover:text-accent-foreground focus-within:bg-accent focus-within:text-accent-foreground rounded-sm px-2 py-1 outline-none', isSelected(item) && 'bg-accent text-accent-foreground')"
                   (click)="onSelect(item); $event.stopPropagation()" tabindex="0" (keydown.enter)="onSelect(item)"
                 >
                   <span>{{ item.label }}</span>
-                  @if (item.value === selected.value) {
+                  @if (isSelected(item)) {
                     <i-lucide name="check" size="20" />
                   }
                 </li>
@@ -73,13 +75,14 @@ export interface ComboboxItem {
   `,
   styles: ``
 })
-export class ComboboxComponent implements ControlValueAccessor {
+export class ComboboxComponent implements ControlValueAccessor, OnInit {
 
   @Input() label: string = '';
   @Input() items: ComboboxItem[] = [];
   @Input() placeholder: string = 'Select...';
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
   @Input({ transform: booleanAttribute }) required: boolean = false;
+  @Input({ transform: booleanAttribute }) multi = false;
 
   @Output() selectedChange: EventEmitter<any> = new EventEmitter<any>();
 
@@ -88,7 +91,7 @@ export class ComboboxComponent implements ControlValueAccessor {
   @ViewChild('input') input!: InputComponent;
 
   readonly id: string = uniqueId('dui-combobox');
-  private _selected: ComboboxItem = {value: null, label: ''};
+  private _selected!: SelectedType<this['multi']>;
   protected _searchValue: string = '';
   protected showOnTop: boolean = false;
   protected visible: boolean = false;
@@ -105,13 +108,22 @@ export class ComboboxComponent implements ControlValueAccessor {
     ).subscribe(showOnTop => this.showOnTop = showOnTop);
   }
 
-  set selected(value: ComboboxItem) {
-    this.markAsTouched();
-    this._selected = value;
-    this.selectedChange.emit(value.value);
+  ngOnInit() {
+    this.selected = (this.multi ? [] : { value: null, label: '' }) as SelectedType<this['multi']>;
   }
 
-  get selected(): ComboboxItem {
+  set selected(value: SelectedType<this['multi']>) {
+    this.markAsTouched();
+    this._selected = value;
+    if (this.multi) {
+      let selected = Array.isArray(value) ? value : [];
+      this.selectedChange.emit(selected.map(item => item.value));
+    } else {
+      this.selectedChange.emit((value as ComboboxItem).value);
+    }
+  }
+
+  get selected(): SelectedType<this['multi']> {
     return this._selected;
   }
 
@@ -175,8 +187,21 @@ export class ComboboxComponent implements ControlValueAccessor {
   }
 
   protected onSelect(item: ComboboxItem) {
-    this.selected = item;
-    this.closeCombobox();
+    if (this.multi) {
+      let selected = Array.isArray(this.selected) ? this.selected : [];
+      if (selected.some(selectedItem => selectedItem.value === item.value)) {
+        this.selected = selected.filter(selectedItem => selectedItem.value !== item.value) as SelectedType<this['multi']>;
+      } else {
+        this.selected = [...selected, item] as SelectedType<this['multi']>;
+      }
+    } else {
+      this.selected = item as SelectedType<this['multi']>;
+      this.closeCombobox();
+    }
+  }
+
+  isSelected(item: ComboboxItem): boolean {
+    return this.multi && Array.isArray(this.selected) ? this.selected.some(selectedItem => selectedItem.value === item.value) : (this.selected as ComboboxItem).value === item.value;
   }
 
   protected readonly cn = cn;
@@ -203,5 +228,20 @@ export class ComboboxComponent implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+  }
+
+  getValue() {
+    if (this.multi) {
+      let selected = this.selected as ComboboxItem[] | undefined;
+      if (selected && selected.length > 1) {
+        return `${selected.length} items selected`;
+      } else if (selected && selected.length === 1) {
+        return selected[0].label;
+      } else {
+        return '';
+      }
+    } else {
+      return (this.selected as ComboboxItem).label;
+    }
   }
 }
