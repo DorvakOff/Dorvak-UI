@@ -1,4 +1,4 @@
-import {Component, Renderer2} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, Renderer2, ViewChild} from '@angular/core';
 import {CardComponent} from "../card/card.component";
 import {ButtonComponent} from "../button/button.component";
 
@@ -27,6 +27,11 @@ import {ButtonComponent} from "../button/button.component";
 })
 export class ModalComponent {
 
+  @Input() allowClickOutside = true;
+  @Input() allowClose: Function | null = () => true;
+
+  @ViewChild(CardComponent, { read: ElementRef }) modal!: ElementRef<HTMLElement>;
+
   isOpen = false;
   protected dismissing = false;
 
@@ -34,8 +39,11 @@ export class ModalComponent {
   }
 
   open() {
-    this.isOpen = true;
     this.renderer.addClass(document.body, 'overflow-hidden');
+    setTimeout(() => {
+      this.dismissing = false;
+      this.isOpen = true;
+    }, 100);
   }
 
   close() {
@@ -46,5 +54,22 @@ export class ModalComponent {
     setTimeout(() => {
       this.dismissing = false;
     }, 300);
+  }
+
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: MouseEvent) {
+    if (this.allowClose && !this.allowClose()) {
+      return
+    }
+
+    if (!this.allowClickOutside || !this.isOpen) {
+      return;
+    }
+
+    if (this.modal.nativeElement.contains(event.target as Node)) {
+      return;
+    }
+
+    this.close();
   }
 }

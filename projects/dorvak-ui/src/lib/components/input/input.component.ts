@@ -43,7 +43,7 @@ import {LucideIconNode} from "lucide-angular/icons/types";
         [disabled]="disabled"
         [type]="_type"
         [placeholder]="placeholder"
-        [id]="id"
+        [attr.id]="id"
         [name]="name"
         [autocomplete]="autocomplete"
         [required]="required"
@@ -66,7 +66,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() type: string = 'text';
   _type: string = 'text';
   @Input() placeholder: string = '';
-  @Input() id: string = '';
+  @Input() id: string | null = null;
   @Input() name: string = '';
   @Input() icon: string | LucideIconNode[] | undefined;
   @Input() autocomplete: string = 'off';
