@@ -12,5 +12,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/DorvakOff/Dorvak-UI.git"
-  }
+  },
+  "author": "Dorvak",
+  "homepage": "https://dorvakoff.github.io/Dorvak-UI/",
+  "license": "MIT"
 }
