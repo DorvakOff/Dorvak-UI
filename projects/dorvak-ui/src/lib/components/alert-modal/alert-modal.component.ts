@@ -29,19 +29,25 @@ export class AlertModalComponent implements AfterViewInit {
   @Output() confirm: EventEmitter<void> = new EventEmitter<void>();
   @Output() cancel: EventEmitter<void> = new EventEmitter<void>();
 
+  _closed: boolean = true;
+
   @ViewChild(ModalComponent) modal!: ModalComponent;
 
   ngAfterViewInit() {
     this.modal.onClose.subscribe(() => {
-      this.cancel.emit();
+      if (!this._closed) {
+        this.cancel.emit();
+      }
     });
   }
 
   open() {
+    this._closed = false;
     this.modal.open();
   }
 
   close() {
+    this._closed = true;
     this.modal.close();
   }
 
