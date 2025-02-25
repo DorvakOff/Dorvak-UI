@@ -34,11 +34,12 @@ import {LucideIconNode} from "lucide-angular/icons/types";
       [class]="cn(
         'form-control flex items-center gap-1 h-9 rounded-md border bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground md:text-sm focus-within:border-primary',
         disabled && 'cursor-not-allowed bg-muted text-muted-foreground',
-        'group-[.ng-invalid:not(.ng-pristine)]:border-destructive group-[.ng-invalid:not(.ng-pristine)]:focus-within:border-destructive'
+        'group-[.ng-invalid:not(.ng-pristine)]:border-destructive group-[.ng-invalid:not(.ng-pristine)]:focus-within:border-destructive',
+        iconPosition === 'left' && 'flex-row-reverse'
       )">
       <input
         #input
-        class="border-none bg-transparent w-full focus-visible:outline-none disabled:cursor-not-allowed"
+        class="border-none bg-transparent w-full focus-visible:outline-none cursor-[inherit]"
         [class.hide-arrows]="hideArrows"
         [disabled]="disabled"
         [type]="_type"
@@ -54,7 +55,7 @@ import {LucideIconNode} from "lucide-angular/icons/types";
         (ngModelChange)="valueChange.emit($event)"
       />
       @if (icon) {
-        <button type="button" [disabled]="!iconClick" (click)="handleIconClick()" class="enabled:hover:text-primary text-muted-foreground transition-colors duration-300">
+        <button type="button" [disabled]="!iconClick" (click)="handleIconClick()" class="enabled:hover:text-primary text-muted-foreground transition-colors duration-300 cursor-[inherit]">
           <i-lucide [name]="icon" size="16"/>
         </button>
       }
@@ -69,6 +70,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() id: string | null = null;
   @Input() name: string = '';
   @Input() icon: string | LucideIconNode[] | undefined;
+  @Input() iconPosition: 'left' | 'right' = 'right';
   @Input() autocomplete: string = 'off';
   @Input({transform: booleanAttribute}) valid: boolean = true;
   @Input({transform: numberAttribute}) min: number | undefined;

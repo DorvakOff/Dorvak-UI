@@ -12,21 +12,29 @@ import {CardComponent} from "./components/card/card.component";
 import {InputOtpComponent} from "./components/input-otp/input-otp.component";
 import {BreadcrumbComponent} from "./components/breadcrumb/breadcrumb.component";
 import {ModalComponent} from "./components/modal/modal.component";
+import {ComboboxComponent} from "./components/combobox/combobox.component";
+import {SelectComponent} from "./components/select/select.component";
+import {TextareaComponent} from "./components/textarea/textarea.component";
+import {AlertModalComponent} from "./components/alert-modal/alert-modal.component";
 
 const components = [
   AlertComponent,
+  AlertModalComponent,
   AvatarComponent,
   BadgeComponent,
   BreadcrumbComponent,
   ButtonComponent,
   CardComponent,
+  ComboboxComponent,
   InputComponent,
   InputOtpComponent,
   LabelComponent,
   LinkComponent,
   ModalComponent,
   PaginationComponent,
-  SeparatorComponent
+  SelectComponent,
+  SeparatorComponent,
+  TextareaComponent
 ];
 
 @NgModule({

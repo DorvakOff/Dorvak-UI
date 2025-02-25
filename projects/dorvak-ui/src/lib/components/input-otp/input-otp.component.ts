@@ -17,7 +17,7 @@ import {LucideAngularModule} from "lucide-angular";
       <input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
              class="w-8 h-10 focus-within:border-primary focus-visible:outline-none bg-transparent text-center text-foreground border rounded-tr-md rounded-br-md"
              (input)="onType($event, 2)" type="number" min="0" max="9" maxlength="1"/>
-      <i-lucide name="minus" size="24"/>
+      <i-lucide name="minus" size="24" class="mx-1"/>
       <input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
              class="w-8 h-10 focus-within:border-primary focus-visible:outline-none bg-transparent text-center text-foreground border rounded-tl-md rounded-bl-md"
              (input)="onType($event, 3)" type="number" min="0" max="9" maxlength="1"/>

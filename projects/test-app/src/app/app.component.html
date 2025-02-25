@@ -16,6 +16,11 @@
 </dui-alert>
 
 <dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Alert modal</h2>
+<dui-button (click)="alert.open()" class="w-fit">Open Alert</dui-button>
+<dui-alert-modal #alert (confirm)="testAlert('confirm')" (cancel)="testAlert('cancel')" title="Are you sure?" message="Do you really want to do this?"/>
+
+<dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Avatars</h2>
 <div class="flex gap-2">
   <dui-avatar src="https://github.com/DorvakOff.png" alt="@DorvakOff" fallback="DVK"/>
@@ -90,6 +95,14 @@
 </dui-card>
 
 <dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Combobox</h2>
+<dui-combobox
+  [items]="comboItems"
+  (selectedChange)="testAlert($event)"
+  class="w-[300px]"
+/>
+
+<dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Inputs</h2>
 <dui-input placeholder="contact@dorvak.com" type="email" class="w-[300px]"/>
 <dui-input type="number" min="0" max="100" class="w-[300px]"/>
@@ -112,14 +125,39 @@
 <h2 class="font-bold text-2xl font-outfit">Modals</h2>
 <dui-button (click)="modal.open()" class="w-fit">Open Modal</dui-button>
 <dui-modal #modal>
-  <span slot="title">Modal Title</span>
-  <span slot="subtitle">Modal Subtitle</span>
-  <span slot="content">Modal Content</span>
-  <dui-button slot="footer" variant="secondary" (click)="modal.close()">Close</dui-button>
-  <dui-button slot="footer" (click)="modal.close()">Save</dui-button>
+  <span slot="title">Please Login</span>
+  <span slot="subtitle">You need to login to access this page</span>
+  <form [formGroup]="formCard" slot="content" class="flex gap-2 flex-col" (ngSubmit)="testAlert(formCard.value); modal.close()">
+    <dui-label for="email2" required>Email</dui-label>
+    <dui-input placeholder="contact@dorvak.com" type="email" id="email2" required formControlName="email"/>
+    <dui-label for="password2" required>Password</dui-label>
+    <dui-input placeholder="Enter password" type="password" id="password2" required formControlName="password"/>
+
+    <div class="flex-1"></div>
+    <dui-button variant="primary" class="w-full" icon="log-in" submit>Login</dui-button>
+  </form>
+</dui-modal>
+
+<dui-button (click)="modal2.open()" class="w-fit">Open Modal with a combobox inside</dui-button>
+<dui-modal #modal2>
+  <span slot="title">Please Select</span>
+  <span slot="subtitle">You need to select an item</span>
+
+  <div slot="content" class="flex flex-col gap-2 w-full">
+    <dui-label for="combobox" required>Combobox</dui-label>
+    <dui-combobox [items]="comboItems" id="combobox" class="w-full" required/>
+  </div>
 </dui-modal>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Pagination</h2>
 <dui-pagination [total]="100" [pageSize]="10"/>
 <dui-pagination [total]="100" [pageSize]="10" showItemsCount="false"/>
+
+<dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Selects</h2>
+<dui-select [items]="selectItems" (selectedChange)="testAlert($event)" class="w-[300px]"/>
+
+<dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Textareas</h2>
+<dui-textarea placeholder="Write something here"/>

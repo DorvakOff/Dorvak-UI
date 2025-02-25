@@ -9,7 +9,7 @@ import {NgOptimizedImage} from "@angular/common";
   template: `
     <div class="rounded-full h-10 w-10 shrink-0 overflow-hidden flex relative border border-border">
       @if (!this._imageError) {
-        <img [ngSrc]="src" [alt]="alt" (error)="handleImageError()" draggable="false" class="aspect-square w-full h-full" fill/>
+        <img [ngSrc]="src" [alt]="alt" priority (error)="handleImageError()" draggable="false" class="aspect-square w-full h-full" fill/>
       } @else if (fallback) {
         <span
           class="flex h-full w-full items-center justify-center rounded-full bg-muted select-none">{{ fallback }}</span>

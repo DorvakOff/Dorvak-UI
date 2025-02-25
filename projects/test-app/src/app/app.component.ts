@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ComboboxItem} from "dorvak-ui";
+import {SelectItem} from "../../../dorvak-ui/src/lib/components/select/select.component";
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class AppComponent {
 
   formCard: FormGroup;
+  comboItems: ComboboxItem[] = Array.from({length: 10}, (_, i) => ({value: i, label: `Item ${i}`}));
+  selectItems: SelectItem[] = Array.from({length: 10}, (_, i) => ({value: i, label: `Item ${i}`}));
 
   constructor(private fb: FormBuilder) {
     this.formCard = this.fb.group({

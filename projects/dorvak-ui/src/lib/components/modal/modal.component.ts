@@ -1,4 +1,12 @@
-import {Component, ElementRef, HostListener, Input, Renderer2, ViewChild} from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  ElementRef, EventEmitter,
+  HostListener,
+  Input, Output,
+  Renderer2,
+  ViewChild,
+} from '@angular/core';
 import {CardComponent} from "../card/card.component";
 import {ButtonComponent} from "../button/button.component";
 
@@ -15,7 +23,9 @@ import {ButtonComponent} from "../button/button.component";
         <ng-content select="[slot=subtitle]" slot="subtitle"/>
         <ng-content select="[slot=content]" slot="content"/>
 
-        <dui-button class="absolute top-2 right-2" (click)="close()" size="icon" icon="x" variant="ghost"></dui-button>
+        @if (closeable) {
+            <dui-button class="absolute top-2 right-2" (click)="close()" size="icon" icon="x" variant="ghost"></dui-button>
+        }
 
         <div slot="footer" class="flex justify-end w-full gap-2">
           <ng-content select="[slot=footer]"/>
@@ -27,8 +37,11 @@ import {ButtonComponent} from "../button/button.component";
 })
 export class ModalComponent {
 
-  @Input() allowClickOutside = true;
+  @Input({ transform: booleanAttribute }) closeable: boolean = true;
+  @Input({ transform: booleanAttribute }) allowClickOutside = true;
   @Input() allowClose: Function | null = () => true;
+
+  @Output() onClose: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild(CardComponent, { read: ElementRef }) modal!: ElementRef<HTMLElement>;
 
@@ -51,13 +64,19 @@ export class ModalComponent {
     this.dismissing = true;
 
     this.renderer.removeClass(document.body, 'overflow-hidden');
+    this.onClose.emit();
+
     setTimeout(() => {
       this.dismissing = false;
     }, 300);
   }
 
   @HostListener('document:click', ['$event'])
-  clickOutside(event: MouseEvent) {
+  private clickOutside(event: MouseEvent) {
+    if (!this.closeable || !this.isOpen) {
+      return;
+    }
+
     if (this.allowClose && !this.allowClose()) {
       return
     }
@@ -71,5 +90,12 @@ export class ModalComponent {
     }
 
     this.close();
+  }
+
+  @HostListener('document:keydown.escape')
+  private onEscape() {
+    if (this.isOpen) {
+      this.close();
+    }
   }
 }

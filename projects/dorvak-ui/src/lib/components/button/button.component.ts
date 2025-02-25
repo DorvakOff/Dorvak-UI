@@ -17,13 +17,14 @@ const buttonVariants = cva(
         warning: "bg-warning text-warning-foreground enabled:hover:bg-warning/80",
         info: "bg-info text-info-foreground enabled:hover:bg-info/80",
         link: "border-none shadow-none bg-transparent text-current enabled:hover:text-primary/80",
-        ghost: "bg-transparent text-current enabled:hover:bg-gray-200 border-none shadow-none disabled:bg-gray-300"
+        ghost: "bg-transparent text-current enabled:hover:bg-gray-200 border-none shadow-none disabled:bg-gray-300",
+        outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
       },
       size: {
         default: "!h-10 px-4 py-2",
         sm: "h-9 px-3",
         lg: "h-11 px-8",
-        icon: "h-10 w-10 enabled:hover:bg-transparent",
+        icon: "h-10 w-10",
       }
     },
     defaultVariants: {
@@ -63,7 +64,7 @@ export class ButtonComponent {
   buttonVariants = buttonVariants;
 
   @Input() size: 'default' | 'sm' | 'lg' | 'icon' = 'default';
-  @Input() variant: Variant | 'link' | 'ghost' = 'primary';
+  @Input() variant: Variant | 'link' | 'ghost' | 'outline' = 'primary';
   @Input() icon: string | LucideIconNode[] | undefined;
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
   @Input({ transform: booleanAttribute }) loading: boolean = false;
