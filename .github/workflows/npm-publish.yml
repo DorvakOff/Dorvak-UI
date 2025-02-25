@@ -4,8 +4,6 @@ name: Publish npm package
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches:
-      - main
     tags:
       - v*
 
