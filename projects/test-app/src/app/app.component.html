@@ -72,22 +72,18 @@
 
   <div slot="content" class="flex gap-2">
     <form [formGroup]="formCard" slot="content" class="flex gap-2 flex-col w-1/2" (ngSubmit)="testAlert(formCard.value)">
-      <dui-label for="email1" required>Email</dui-label>
-      <dui-input placeholder="contact@dorvak.com" type="email" id="email1" required formControlName="email"/>
-      <dui-label for="password1" required>Password</dui-label>
-      <dui-input placeholder="Enter password" type="password" id="password1" required formControlName="password"/>
+      <dui-input placeholder="contact@dorvak.com" type="email" label="Email" required formControlName="email"/>
+      <dui-input placeholder="Enter password" type="password" label="Password" required formControlName="password"/>
+      <dui-checkbox label="Remember me" formControlName="remember"/>
 
       <div class="flex-1"></div>
       <dui-button variant="primary" class="w-full" icon="log-in" submit>Login</dui-button>
     </form>
     <dui-separator vertical/>
     <form [formGroup]="formCard" slot="content" class="flex gap-2 flex-col w-1/2" (ngSubmit)="testAlert(formCard.value)">
-      <dui-label for="email" required>Email</dui-label>
-      <dui-input placeholder="contact@dorvak.com" type="email" id="email" required formControlName="email"/>
-      <dui-label for="username" required>Username</dui-label>
-      <dui-input placeholder="Dorvak" id="username" required formControlName="username"/>
-      <dui-label for="password" required>Password</dui-label>
-      <dui-input placeholder="Enter password" type="password" id="password" required formControlName="password"/>
+      <dui-input placeholder="contact@dorvak.com" type="email" label="Email" required formControlName="email"/>
+      <dui-input placeholder="Dorvak" label="Username" required formControlName="username"/>
+      <dui-input placeholder="Enter password" type="password" label="Password" required formControlName="password"/>
 
       <dui-button variant="primary" class="w-full" icon="log-in" submit>Register</dui-button>
     </form>
@@ -95,10 +91,16 @@
 </dui-card>
 
 <dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Checkboxes</h2>
+<dui-checkbox label="Checkbox"/>
+<dui-checkbox disabled checked label="Disabled Checkbox"/>
+
+<dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Combobox</h2>
 <dui-combobox
   [items]="comboItems"
   (selectedChange)="testAlert($event)"
+  label="Select an item"
   class="w-[300px]"
 />
 
@@ -111,8 +113,7 @@
 <dui-input readonly value="Valeur readonly" class="w-[300px]"/>
 
 <div class="flex gap-1.5 flex-col">
-  <dui-label for="test-input" required>Test Label</dui-label>
-  <dui-input value="value" id="test-input" required class="w-[300px]"/>
+  <dui-input value="value" required label="Test Label" class="w-[300px]"/>
 </div>
 
 <dui-input-otp (codeEntered)="testAlert($event)"/>
@@ -128,24 +129,29 @@
   <span slot="title">Please Login</span>
   <span slot="subtitle">You need to login to access this page</span>
   <form [formGroup]="formCard" slot="content" class="flex gap-2 flex-col" (ngSubmit)="testAlert(formCard.value); modal.close()">
-    <dui-label for="email2" required>Email</dui-label>
-    <dui-input placeholder="contact@dorvak.com" type="email" id="email2" required formControlName="email"/>
-    <dui-label for="password2" required>Password</dui-label>
-    <dui-input placeholder="Enter password" type="password" id="password2" required formControlName="password"/>
+    <dui-input placeholder="contact@dorvak.com" type="email" label="Email" required formControlName="email"/>
+    <dui-input placeholder="Enter password" type="password" label="Password" required formControlName="password"/>
 
     <div class="flex-1"></div>
-    <dui-button variant="primary" class="w-full" icon="log-in" submit>Login</dui-button>
+    <dui-button class="w-full" icon="log-in" submit>Login</dui-button>
   </form>
 </dui-modal>
 
-<dui-button (click)="modal2.open()" class="w-fit">Open Modal with a combobox inside</dui-button>
+<dui-button (click)="formModal.reset(); modal2.open()" class="w-fit">Open Modal with a combobox inside</dui-button>
 <dui-modal #modal2>
   <span slot="title">Please Select</span>
   <span slot="subtitle">You need to select an item</span>
 
   <div slot="content" class="flex flex-col gap-2 w-full">
-    <dui-label for="combobox" required>Combobox</dui-label>
-    <dui-combobox [items]="comboItems" id="combobox" class="w-full" required/>
+    <form [formGroup]="formModal" class="flex gap-2 flex-col" (ngSubmit)="testAlert(formModal.value); modal2.close()">
+      <dui-combobox [items]="comboItems" required label="Combobox" formControlName="combo"/>
+      <dui-select [items]="selectItems" required label="Select" formControlName="select"/>
+      <dui-textarea placeholder="Write something here" label="Write something here" required formControlName="textarea"/>
+
+      <div class="flex-1"></div>
+
+      <dui-button class="w-full" icon="check" submit>Confirm</dui-button>
+    </form>
   </div>
 </dui-modal>
 
@@ -156,21 +162,15 @@
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Selects</h2>
-<dui-select [items]="selectItems" (selectedChange)="testAlert($event)" class="w-[300px]"/>
+<dui-select [items]="selectItems" (selectedChange)="testAlert($event)" class="w-[300px]" label="Select an item"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Switches</h2>
-<div class="flex gap-2 items-center">
-  <dui-switch id="switch"/>
-  <dui-label for="switch">Switch</dui-label>
-</div>
-<div class="flex gap-2 items-center">
-  <dui-switch id="switch2" disabled checked/>
-  <dui-label for="switch2">Disabled switch</dui-label>
-</div>
+<dui-switch label="Switch"/>
+<dui-switch disabled checked label="Disabled Switch"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Textareas</h2>
-<dui-textarea placeholder="Write something here"/>
+<dui-textarea placeholder="Write something here" label="Write something here" required/>
 <dui-textarea placeholder="Disabled"/>
 <dui-textarea value="Readonly" readonly/>

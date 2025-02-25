@@ -1,45 +1,49 @@
 import {booleanAttribute, Component, EventEmitter, Input, Output} from '@angular/core';
-import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {cn, uniqueId} from "../../utils/utils";
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {LucideAngularModule} from "lucide-angular";
 
 @Component({
-  selector: 'dui-switch',
+  selector: 'dui-checkbox',
   imports: [
-    FormsModule
+    FormsModule,
+    LucideAngularModule
   ],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: SwitchComponent,
+      useExisting: CheckboxComponent,
       multi: true
     }
   ],
   template: `
     <div class="flex items-center gap-1 w-fit" [class.flex-row-reverse]="labelPosition === 'right'">
-      @if (label) {
-        <label [class]="cn('text-sm font-medium leading-none select-none', disabled && 'cursor-not-allowed opacity-70')"
-               [for]="id">
-          {{ label }}
-        </label>
-      }
+      <label [class]="cn('text-sm font-medium leading-none select-none', disabled && 'cursor-not-allowed opacity-70')"
+             [for]="id">
+        {{ label }}
+      </label>
       <div
-        [class]="cn('peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background bg-input', checked && 'bg-primary', disabled && 'cursor-not-allowed opacity-50')"
+        [class]="cn('peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring', disabled && 'cursor-not-allowed opacity-50', checked && 'bg-primary text-primary-foreground')"
         (click)="toggle()" (keydown.space)="toggle(); $event.preventDefault()" (keydown.enter)="toggle()"
-        [tabindex]="disabled ? -1 : 0">
+        [tabindex]="disabled ? -1 : 0"
+      >
         <input type="checkbox" [(ngModel)]="checked" [disabled]="disabled" [name]="name" [attr.id]="id" class="hidden">
-        <span
-          [class]="cn('block h-4 w-4 rounded-full bg-background shadow-lg ring-0 transition-transform translate-x-0', checked && 'translate-x-4')"></span>
+        @if (checked) {
+          <div class="flex items-center justify-center text-current">
+            <i-lucide name="check" class="w-4 h-4"/>
+          </div>
+        }
       </div>
     </div>
   `,
   styles: ``
 })
-export class SwitchComponent implements ControlValueAccessor {
+export class CheckboxComponent implements ControlValueAccessor {
 
   @Input() label: string = '';
   @Input() labelPosition: 'left' | 'right' = 'right';
   @Input() name: string = '';
-  @Input({ transform: booleanAttribute }) disabled: boolean = false;
+  @Input({transform: booleanAttribute}) disabled: boolean = false;
 
   private _checked: boolean = false;
   readonly id: string = uniqueId('dui-switch');
@@ -51,7 +55,7 @@ export class SwitchComponent implements ControlValueAccessor {
     return this._checked;
   }
 
-  @Input({ transform: booleanAttribute })
+  @Input({transform: booleanAttribute})
   set checked(value: boolean) {
     this.markAsTouched();
     this._checked = value;

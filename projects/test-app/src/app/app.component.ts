@@ -20,6 +20,8 @@ import {SelectItem} from "../../../dorvak-ui/src/lib/components/select/select.co
 export class AppComponent {
 
   formCard: FormGroup;
+  formModal: FormGroup;
+
   comboItems: ComboboxItem[] = Array.from({length: 10}, (_, i) => ({value: i, label: `Item ${i}`}));
   selectItems: SelectItem[] = Array.from({length: 10}, (_, i) => ({value: i, label: `Item ${i}`}));
 
@@ -27,7 +29,14 @@ export class AppComponent {
     this.formCard = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
-      username: ['', [Validators.required]]
+      username: ['', [Validators.required]],
+      remember: [false]
+    });
+
+    this.formModal = this.fb.group({
+      combo: [null, [Validators.required]],
+      select: [null, [Validators.required]],
+      textarea: ['', [Validators.required]],
     });
   }
 

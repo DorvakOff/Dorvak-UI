@@ -8,7 +8,7 @@ import {
   OnInit,
   Output, ViewChild,
 } from '@angular/core';
-import {cn} from "../../utils/utils";
+import {cn, uniqueId} from "../../utils/utils";
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {LucideAngularModule} from "lucide-angular";
 import {LucideIconNode} from "lucide-angular/icons/types";
@@ -30,44 +30,55 @@ import {LucideIconNode} from "lucide-angular/icons/types";
     class: 'group',
   },
   template: `
-    <div
-      [class]="cn(
-        'form-control flex items-center gap-1 h-9 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground md:text-sm focus-within:border-primary',
-        disabled && 'cursor-not-allowed bg-muted text-muted-foreground',
-        'group-[.ng-invalid:not(.ng-pristine)]:border-destructive group-[.ng-invalid:not(.ng-pristine)]:focus-within:border-destructive',
-        iconPosition === 'left' && 'flex-row-reverse'
-      )">
-      <input
-        #input
-        class="border-none bg-transparent w-full focus-visible:outline-none cursor-[inherit]"
-        [class.hide-arrows]="hideArrows"
-        [disabled]="disabled"
-        [type]="_type"
-        [placeholder]="placeholder"
-        [attr.id]="id"
-        [name]="name"
-        [autocomplete]="autocomplete"
-        [required]="required"
-        [min]="min"
-        [max]="max"
-        [(ngModel)]="value"
-        [readonly]="readonly"
-        (ngModelChange)="valueChange.emit($event)"
-      />
-      @if (icon) {
-        <button type="button" [disabled]="!iconClick" (click)="handleIconClick(); $event.stopPropagation()" class="enabled:hover:text-primary text-muted-foreground transition-colors duration-300 cursor-[inherit]">
-          <i-lucide [name]="icon" size="16"/>
-        </button>
+    <div class="flex flex-col gap-1">
+      @if (label) {
+        <label [class]="cn('text-sm font-medium leading-none flex gap-1 select-none', disabled && 'cursor-not-allowed opacity-70')" [for]="id">
+          {{ label }}
+          @if (required) {
+            <span class="text-red-500">*</span>
+          }
+        </label>
       }
+      <div
+        [class]="cn(
+          'form-control flex items-center gap-1 h-9 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground md:text-sm focus-within:border-primary',
+          disabled && 'cursor-not-allowed bg-muted text-muted-foreground',
+          !disableErrorBorder && 'group-[.ng-invalid:not(.ng-pristine)]:border-destructive group-[.ng-invalid:not(.ng-pristine)]:focus-within:border-destructive',
+          iconPosition === 'left' && 'flex-row-reverse'
+        )">
+        <input
+          #input
+          class="border-none bg-transparent w-full focus-visible:outline-none cursor-[inherit]"
+          [disabled]="disabled"
+          [type]="_type"
+          [placeholder]="placeholder"
+          [attr.id]="id"
+          [name]="name"
+          [autocomplete]="autocomplete"
+          [required]="required"
+          [min]="min"
+          [max]="max"
+          [(ngModel)]="value"
+          [readonly]="readonly"
+          (ngModelChange)="valueChange.emit($event)"
+        />
+        @if (icon) {
+          <button type="button" [disabled]="!iconClick" (click)="handleIconClick(); $event.stopPropagation()"
+                  class="enabled:hover:text-primary text-muted-foreground transition-colors duration-300 cursor-[inherit]">
+            <i-lucide [name]="icon" size="16"/>
+          </button>
+        }
+      </div>
     </div>
   `
 })
 export class InputComponent implements ControlValueAccessor, OnInit {
 
+  @Input() label: string = '';
   @Input() type: string = 'text';
   _type: string = 'text';
   @Input() placeholder: string = '';
-  @Input() id: string | null = null;
+  @Input() id: string = uniqueId('dui-input');
   @Input() name: string = '';
   @Input() icon: string | LucideIconNode[] | undefined;
   @Input() iconPosition: 'left' | 'right' = 'right';
@@ -78,7 +89,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input({transform: booleanAttribute}) disabled: boolean = false;
   @Input({transform: booleanAttribute}) required: boolean = false;
   @Input({transform: booleanAttribute}) readonly: boolean = false;
-  @Input({transform: booleanAttribute}) hideArrows: boolean = false;
+  @Input({transform: booleanAttribute}) disableErrorBorder: boolean = false;
 
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
 

@@ -8,33 +8,54 @@ import {
   Output,
   ViewChild
 } from '@angular/core';
-import {ControlValueAccessor, FormsModule} from "@angular/forms";
+import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
+import {cn, uniqueId} from "../../utils/utils";
 
 @Component({
   selector: 'dui-textarea',
   imports: [
     FormsModule
   ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: TextareaComponent
+    }
+  ],
+  host: {
+    class: 'group',
+  },
   template: `
-    <textarea #input
-      class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-      [placeholder]="placeholder"
-      [disabled]="disabled"
-      [attr.id]="id"
-      [name]="name"
-      [readonly]="readonly"
-      [required]="required"
-      [rows]="rows"
-      [cols]="cols"
-      [(ngModel)]="value"
-    ></textarea>
+    <div class="flex flex-col gap-1">
+      @if (label) {
+        <label [class]="cn('text-sm font-medium leading-none flex gap-1 select-none', disabled && 'cursor-not-allowed opacity-70')" [for]="id">
+          {{ label }}
+          @if (required) {
+            <span class="text-red-500">*</span>
+          }
+        </label>
+      }
+      <textarea #input
+        class="flex min-h-[60px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-base shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm group-[.ng-invalid:not(.ng-pristine)]:border-destructive group-[.ng-invalid:not(.ng-pristine)]:focus-within:border-destructive"
+        [placeholder]="placeholder"
+        [disabled]="disabled"
+        [attr.id]="id"
+        [name]="name"
+        [readonly]="readonly"
+        [required]="required"
+        [rows]="rows"
+        [cols]="cols"
+        [(ngModel)]="value"
+      ></textarea>
+    </div>
   `,
   styles: ``
 })
 export class TextareaComponent implements ControlValueAccessor {
 
+  @Input() label: string = '';
   @Input() placeholder: string = '';
-  @Input() id: string | null = null;
   @Input() name: string = '';
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
   @Input({ transform: booleanAttribute }) readonly: boolean = false;
@@ -44,6 +65,7 @@ export class TextareaComponent implements ControlValueAccessor {
 
   @ViewChild('input') input!: ElementRef<HTMLTextAreaElement>;
 
+  readonly id: string = uniqueId('dui-textarea');
   protected _touched: boolean = false;
   private onTouched = () => {
   };
@@ -90,4 +112,5 @@ export class TextareaComponent implements ControlValueAccessor {
     this.input.nativeElement.focus();
   }
 
+  protected readonly cn = cn;
 }

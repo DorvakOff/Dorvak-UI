@@ -9,9 +9,10 @@ import {
   ViewChild,
 } from '@angular/core';
 import {InputComponent} from '../input/input.component';
-import {cn} from "../../utils/utils";
+import {cn, uniqueId} from "../../utils/utils";
 import {Subject, throttleTime} from "rxjs";
 import {LucideAngularModule} from "lucide-angular";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 export interface ComboboxItem {
   value: any;
@@ -24,53 +25,77 @@ export interface ComboboxItem {
     InputComponent,
     LucideAngularModule,
   ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: ComboboxComponent,
+      multi: true
+    }
+  ],
+  host: {
+    class: 'group',
+  },
   template: `
-    <div class="relative">
-      <dui-input [id]="id" [required]="required" [placeholder]="placeholder" [value]="selected.label" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
-        <div [class]="cn(
-            'absolute top-10 left-0 w-full bg-popover text-popover-foreground border border-gray-300 rounded-md shadow-md p-2 duration-300',
-            showOnTop && 'bottom-10 top-auto'
-            )"
-             [class.hidden]="!visible && !dismissing"
-             [class.animate-in]="visible" [class.fade-in-0]="visible" [class.animate-out]="dismissing" [class.fade-out-0]="dismissing"
-             #combobox>
-          <dui-input class="w-full" placeholder="Search..." icon="search" iconPosition="left" [(value)]="_searchValue" #search/>
-          <ul class="mt-2 max-h-40 overflow-y-auto overscroll-contain">
-            @for (item of filteredItems; track item.value) {
-              <li [class]="cn('cursor-pointer flex justify-between items-center hover:bg-accent hover:text-accent-foreground focus-within:bg-accent focus-within:text-accent-foreground rounded-sm px-2 py-1 outline-none', item.value === selected.value && 'bg-accent text-accent-foreground')"
-                (click)="onSelect(item); $event.stopPropagation()" tabindex="0" (keydown.enter)="onSelect(item)"
-              >
-                <span>{{ item.label }}</span>
-                @if (item.value === selected.value) {
-                  <i-lucide name="check" size="20" />
-                }
-              </li>
-            }
-          </ul>
-        </div>
+    <div class="flex flex-col gap-1">
+      @if (label) {
+        <label [class]="cn('text-sm font-medium leading-none flex gap-1 select-none', disabled && 'cursor-not-allowed opacity-70')" [for]="id">
+          {{ label }}
+          @if (required) {
+            <span class="text-red-500">*</span>
+          }
+        </label>
+      }
+      <div class="relative">
+        <dui-input [id]="id" [required]="required" [placeholder]="placeholder" [value]="selected.label" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
+          <div [class]="cn(
+              'absolute top-10 left-0 w-full bg-popover text-popover-foreground border border-gray-300 rounded-md shadow-md p-2 duration-300 z-10',
+              showOnTop && 'bottom-10 top-auto'
+              )"
+               [class.hidden]="!visible && !dismissing"
+               [class.animate-in]="visible" [class.fade-in-0]="visible" [class.animate-out]="dismissing" [class.fade-out-0]="dismissing"
+               #combobox>
+            <dui-input class="w-full" placeholder="Search..." icon="search" iconPosition="left" [(value)]="_searchValue" #search disableErrorBorder/>
+            <ul class="mt-2 max-h-40 overflow-y-auto overscroll-contain">
+              @for (item of filteredItems; track item.value) {
+                <li [class]="cn('cursor-pointer flex justify-between items-center hover:bg-accent hover:text-accent-foreground focus-within:bg-accent focus-within:text-accent-foreground rounded-sm px-2 py-1 outline-none', item.value === selected.value && 'bg-accent text-accent-foreground')"
+                  (click)="onSelect(item); $event.stopPropagation()" tabindex="0" (keydown.enter)="onSelect(item)"
+                >
+                  <span>{{ item.label }}</span>
+                  @if (item.value === selected.value) {
+                    <i-lucide name="check" size="20" />
+                  }
+                </li>
+              }
+            </ul>
+          </div>
+      </div>
     </div>
   `,
   styles: ``
 })
-export class ComboboxComponent {
+export class ComboboxComponent implements ControlValueAccessor {
 
+  @Input() label: string = '';
   @Input() items: ComboboxItem[] = [];
   @Input() placeholder: string = 'Select...';
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
   @Input({ transform: booleanAttribute }) required: boolean = false;
-  @Input() id: string | null = null;
 
-  @Output() selectedChange: EventEmitter<ComboboxItem> = new EventEmitter<ComboboxItem>();
+  @Output() selectedChange: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild('combobox') combobox!: ElementRef<HTMLDivElement>;
   @ViewChild('search') search!: InputComponent;
   @ViewChild('input') input!: InputComponent;
 
+  readonly id: string = uniqueId('dui-combobox');
   private _selected: ComboboxItem = {value: null, label: ''};
   protected _searchValue: string = '';
   protected showOnTop: boolean = false;
   protected visible: boolean = false;
   protected dismissing: boolean = false
+  protected _touched: boolean = false;
+  private onTouched = () => {
+  };
 
   private scrollThrottle: Subject<boolean> = new Subject<boolean>();
 
@@ -81,8 +106,9 @@ export class ComboboxComponent {
   }
 
   set selected(value: ComboboxItem) {
+    this.markAsTouched();
     this._selected = value;
-    this.selectedChange.emit(value);
+    this.selectedChange.emit(value.value);
   }
 
   get selected(): ComboboxItem {
@@ -154,4 +180,28 @@ export class ComboboxComponent {
   }
 
   protected readonly cn = cn;
+
+  markAsTouched() {
+    if (!this._touched) {
+      this.onTouched();
+      this._touched = true;
+    }
+  }
+
+  writeValue(obj: any) {
+    this.selected = obj || {value: null, label: ''};
+    this._touched = false;
+  }
+
+  registerOnChange(fn: any) {
+    this.selectedChange.subscribe(fn);
+  }
+
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
+  }
 }

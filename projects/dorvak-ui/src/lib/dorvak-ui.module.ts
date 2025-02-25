@@ -7,7 +7,6 @@ import {PaginationComponent} from "./components/pagination/pagination.component"
 import {AvatarComponent} from "./components/avatar/avatar.component";
 import {SeparatorComponent} from "./components/separator/separator.component";
 import {InputComponent} from "./components/input/input.component";
-import {LabelComponent} from "./components/label/label.component";
 import {CardComponent} from "./components/card/card.component";
 import {InputOtpComponent} from "./components/input-otp/input-otp.component";
 import {BreadcrumbComponent} from "./components/breadcrumb/breadcrumb.component";
@@ -17,6 +16,7 @@ import {SelectComponent} from "./components/select/select.component";
 import {TextareaComponent} from "./components/textarea/textarea.component";
 import {AlertModalComponent} from "./components/alert-modal/alert-modal.component";
 import {SwitchComponent} from "./components/switch/switch.component";
+import {CheckboxComponent} from "./components/checkbox/checkbox.component";
 
 const components = [
   AlertComponent,
@@ -26,10 +26,10 @@ const components = [
   BreadcrumbComponent,
   ButtonComponent,
   CardComponent,
+  CheckboxComponent,
   ComboboxComponent,
   InputComponent,
   InputOtpComponent,
-  LabelComponent,
   LinkComponent,
   ModalComponent,
   PaginationComponent,
