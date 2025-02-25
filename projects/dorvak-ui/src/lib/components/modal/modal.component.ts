@@ -63,11 +63,11 @@ export class ModalComponent {
     this.isOpen = false;
     this.dismissing = true;
 
-    this.renderer.removeClass(document.body, 'overflow-hidden');
     this.onClose.emit();
 
     setTimeout(() => {
       this.dismissing = false;
+      this.renderer.removeClass(document.body, 'overflow-hidden');
     }, 300);
   }
 
