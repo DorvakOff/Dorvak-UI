@@ -16,7 +16,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Single deploy job since we're just deploying
+  # Single publish job since we're just publishing
   publish:
     runs-on: ubuntu-latest
     steps:
@@ -34,6 +34,7 @@ jobs:
         run: npm run build:lib
 
       - name: Publish to npm
+        working-directory: ./dist/dorvak-ui
         run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
