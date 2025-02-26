@@ -24,7 +24,7 @@ import {TitleCasePipe} from "@angular/common";
           <button
             [class]="cn('p-2 text-sm text-center rounded-md enabled:hover:bg-accent enabled:hover:text-accent-foreground disabled:cursor-not-allowed disabled:text-muted-foreground',
               day.date.getMonth() !== currentDate.getMonth() && 'text-muted-foreground',
-              day.date.getTime() === currentDate.getTime() && 'bg-primary text-primary-foreground enabled:hover:bg-primary enabled:hover:text-primary-foreground'
+              day.date.getTime() === value.getTime() && 'bg-primary text-primary-foreground enabled:hover:bg-primary enabled:hover:text-primary-foreground'
             )"
             [disabled]="(min && day.date < min) || (max && day.date > max)"
             (click)="value = day.date"
