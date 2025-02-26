@@ -12,7 +12,7 @@ import {Subject, throttleTime} from "rxjs";
   ],
   template: `
     <div class="relative">
-      <dui-button (click)="toggleMenu(); $event.stopPropagation()" [disabled]="disabled" icon="chevron-down" #button>
+      <dui-button (click)="toggleMenu(); $event.stopPropagation()" [disabled]="disabled" icon="chevron-down" [buttonClass]="buttonClass" #button>
         {{ label }}
       </dui-button>
       <div [class]="cn(
@@ -32,6 +32,7 @@ export class DropdownMenuComponent {
 
   @Input({ required: true }) label!: string;
   @Input() disabled: boolean = false;
+  @Input() buttonClass: string = '';
 
   @ViewChild('button') button!: ButtonComponent;
   @ViewChild('menu') menu!: ElementRef<HTMLDivElement>;

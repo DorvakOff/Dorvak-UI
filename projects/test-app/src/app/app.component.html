@@ -145,11 +145,27 @@
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Input Groups</h2>
-<div class="flex items-end">
-  <dui-input label="Input with button" inputClass="rounded-r-none" class="w-[300px]">
-    <dui-button icon="check" buttonClass="!h-9 rounded-l-none"/>
-  </dui-input>
-</div>
+<dui-input label="Input with button" inputClass="rounded-r-none" class="w-[300px]">
+  <dui-button icon="check" buttonClass="!h-9 rounded-l-none"/>
+</dui-input>
+<dui-input label="Input with span" placeholder="Enter an amount" type="number" inputClass="rounded-r-none" class="w-[300px]">
+  <span class="rounded-r-md py-2 flex items-center justify-center px-4 bg-muted h-9 text-muted-foreground select-none">
+    <i-lucide name="euro" size="16"/>
+  </span>
+</dui-input>
+<dui-input label="Input with dropdown menu" placeholder="Select an item" inputClass="rounded-r-none" class="w-[300px]">
+  <dui-dropdown-menu buttonClass="!h-9 rounded-l-none" label="Dropdown">
+    <dui-dropdown-item>
+        Item 1
+    </dui-dropdown-item>
+    <dui-dropdown-item>
+        Item 2
+    </dui-dropdown-item>
+  </dui-dropdown-menu>
+</dui-input>
+<dui-input label="Input with select" placeholder="Select a country" inputClass="rounded-l-none" class="w-[300px]">
+  <dui-select slot="before" inputClass="!h-9 rounded-r-none w-[100px]" [items]="selectItems"/>
+</dui-input>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Links</h2>

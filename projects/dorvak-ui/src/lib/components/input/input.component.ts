@@ -39,47 +39,48 @@ import {LucideIconNode} from "lucide-angular/icons/types";
           }
         </label>
       }
-      <div class="flex items-center">
-      <div
-        (click)="focus()"
-        [class.no-arrows]="hideArrows"
-        [class]="cn(
-          'form-control flex items-center gap-1 h-9 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground md:text-sm focus-within:border-primary',
-          disabled && 'cursor-not-allowed bg-muted text-muted-foreground',
-          !disableErrorBorder && 'group-[.ng-invalid:not(.ng-pristine)]:border-destructive group-[.ng-invalid:not(.ng-pristine)]:focus-within:border-destructive',
-          iconPosition === 'left' && 'flex-row-reverse',
-          inputClass
-        )">
-        <input
-          #input
-          class="border-none bg-transparent w-full focus-visible:outline-none cursor-[inherit]"
-          [disabled]="disabled"
-          [type]="_type"
-          [placeholder]="placeholder"
-          [attr.id]="id"
-          [name]="name"
-          [autocomplete]="autocomplete"
-          [required]="required"
-          [min]="min"
-          [pattern]="pattern"
-          [max]="max"
-          [maxlength]="maxlength"
-          [(ngModel)]="value"
-          [readonly]="readonly"
-          (ngModelChange)="valueChange.emit($event)"
-        />
-        @if (icon) {
-          @if (iconClick) {
-            <button type="button" (click)="handleIconClick($event)" class="hover:text-primary rounded-md text-muted-foreground duration-300 cursor-[inherit] focus-visible:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background transition-all outline-none">
-              <i-lucide [name]="icon" size="16"/>
-            </button>
-          } @else {
-            <span class="text-muted-foreground">
+      <div class="flex items-center w-full">
+        <ng-content select="[slot='before']"/>
+        <div
+          (click)="focus()"
+          [class.no-arrows]="hideArrows"
+          [class]="cn(
+            'w-full form-control flex items-center gap-1 h-9 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground md:text-sm focus-within:border-primary',
+            disabled && 'cursor-not-allowed bg-muted text-muted-foreground',
+            !disableErrorBorder && 'group-[.ng-invalid:not(.ng-pristine)]:border-destructive group-[.ng-invalid:not(.ng-pristine)]:focus-within:border-destructive',
+            iconPosition === 'left' && 'flex-row-reverse',
+            inputClass
+          )">
+          <input
+            #input
+            class="border-none bg-transparent w-full focus-visible:outline-none cursor-[inherit]"
+            [disabled]="disabled"
+            [type]="_type"
+            [placeholder]="placeholder"
+            [attr.id]="id"
+            [name]="name"
+            [autocomplete]="autocomplete"
+            [required]="required"
+            [min]="min"
+            [pattern]="pattern"
+            [max]="max"
+            [maxlength]="maxlength"
+            [(ngModel)]="value"
+            [readonly]="readonly"
+            (ngModelChange)="valueChange.emit($event)"
+          />
+          @if (icon) {
+            @if (iconClick) {
+              <button type="button" (click)="handleIconClick($event)" class="hover:text-primary rounded-md text-muted-foreground duration-300 cursor-[inherit] focus-visible:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background transition-all outline-none">
                 <i-lucide [name]="icon" size="16"/>
-            </span>
+              </button>
+            } @else {
+              <span class="text-muted-foreground">
+                  <i-lucide [name]="icon" size="16"/>
+              </span>
+            }
           }
-        }
-      </div>
+        </div>
         <ng-content/>
       </div>
     </div>

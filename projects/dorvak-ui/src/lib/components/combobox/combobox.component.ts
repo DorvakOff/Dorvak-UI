@@ -48,7 +48,7 @@ type SelectedType<Multi extends boolean> = Multi extends true ? ComboboxItem[] :
         </label>
       }
       <div class="relative">
-        <dui-input [id]="id" [disabled]="disabled" [required]="required" [placeholder]="placeholder" [value]="getValue()" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
+        <dui-input [id]="id" [inputClass]="inputClass" [disabled]="disabled" [required]="required" [placeholder]="placeholder" [value]="getValue()" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
           <div [class]="cn(
               'absolute top-10 left-0 w-full bg-popover text-popover-foreground border border-gray-300 rounded-md shadow-md p-2 duration-300 z-10',
               showOnTop && 'bottom-10 top-auto'
@@ -83,6 +83,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
   @Input({ transform: booleanAttribute }) required: boolean = false;
   @Input({ transform: booleanAttribute }) multi = false;
+  @Input() inputClass: string = '';
 
   @Output() selectedChange: EventEmitter<any> = new EventEmitter<any>();
 
