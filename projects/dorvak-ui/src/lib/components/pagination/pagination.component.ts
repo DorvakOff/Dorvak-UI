@@ -9,7 +9,7 @@ import {cn} from "../../utils/utils";
   ],
   template: `
     @if (total > pageSize) {
-      <div [class]="cn('flex items-center space-x-4 py-2 px-10', showItemsCount ? 'justify-between' : 'justify-center')">
+      <div [class]="cn('flex items-center gap-4 py-2 px-10 flex-wrap', showItemsCount ? 'md:justify-between justify-center' : 'justify-center')">
         @if (showItemsCount) {
           <div class="text-sm text-gray-500">
             Showing {{ currentPage * pageSize + 1 }} to {{ Math.min((currentPage + 1) * pageSize, total) }} of {{ total }} results
