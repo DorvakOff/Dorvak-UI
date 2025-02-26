@@ -184,7 +184,44 @@
 <dui-switch disabled checked label="Disabled Switch"/>
 
 <dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Tabs</h2>
+<dui-tabs class="w-[300px]">
+  <dui-tab title="Tab 1">
+    <dui-card class="w-full">
+      <span slot="title">Tab 1</span>
+      <span slot="subtitle">Tab 1 subtitle</span>
+      <span slot="content">Tab 1 content</span>
+    </dui-card>
+  </dui-tab>
+  <dui-tab title="Tab 2">
+    <dui-card class="w-full">
+      <span slot="title">Tab 2</span>
+      <span slot="subtitle">Tab 2 subtitle</span>
+      <span slot="content">Tab 2 content</span>
+    </dui-card>
+  </dui-tab>
+  <dui-tab title="Tab 3" disabled/>
+</dui-tabs>
+
+<dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Textareas</h2>
 <dui-textarea placeholder="Write something here" label="Write something here" required/>
 <dui-textarea placeholder="Disabled"/>
 <dui-textarea value="Readonly" readonly/>
+
+<dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Tooltip</h2>
+<div class="flex gap-2">
+  <dui-tooltip text="This is a tooltip" class="w-fit">
+    <span class="underline w-fit">Top tooltip</span>
+  </dui-tooltip>
+  <dui-tooltip text="This is a tooltip" class="w-fit" side="bottom">
+    <span class="underline w-fit">Bottom tooltip</span>
+  </dui-tooltip>
+  <dui-tooltip text="This is a tooltip" class="w-fit" side="left">
+    <span class="underline w-fit">Left tooltip</span>
+  </dui-tooltip>
+  <dui-tooltip text="This is a tooltip" class="w-fit" side="right">
+    <span class="underline w-fit">Right tooltip</span>
+  </dui-tooltip>
+</div>

@@ -64,7 +64,7 @@ import {LucideIconNode} from "lucide-angular/icons/types";
         />
         @if (icon) {
           <button type="button" [disabled]="!iconClick" (click)="handleIconClick(); $event.stopPropagation()"
-                  class="enabled:hover:text-primary text-muted-foreground transition-colors duration-300 cursor-[inherit]">
+                  class="enabled:hover:text-primary rounded-md text-muted-foreground duration-300 cursor-[inherit] focus-visible:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background transition-all outline-none">
             <i-lucide [name]="icon" size="16"/>
           </button>
         }

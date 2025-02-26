@@ -19,6 +19,9 @@ import {SwitchComponent} from "./components/switch/switch.component";
 import {CheckboxComponent} from "./components/checkbox/checkbox.component";
 import {CalendarComponent} from "./components/calendar/calendar.component";
 import {DatePickerComponent} from "./components/date-picker/date-picker.component";
+import {TabComponent} from "./components/tabs/tab/tab.component";
+import {TabsComponent} from "./components/tabs/tabs/tabs.component";
+import {TooltipComponent} from "./components/tooltip/tooltip.component";
 
 const components = [
   AlertComponent,
@@ -40,15 +43,18 @@ const components = [
   SelectComponent,
   SeparatorComponent,
   SwitchComponent,
-  TextareaComponent
+  TabComponent,
+  TabsComponent,
+  TextareaComponent,
+  TooltipComponent
 ];
 
 @NgModule({
   imports: [
-    ...components
+    ...components,
   ],
   exports: [
-    ...components
+    ...components,
   ]
 })
 export class DorvakUiModule { }

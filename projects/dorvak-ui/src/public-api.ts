@@ -24,4 +24,7 @@ export * from './lib/components/pagination/pagination.component';
 export * from './lib/components/select/select.component';
 export * from './lib/components/separator/separator.component';
 export * from './lib/components/switch/switch.component';
+export * from './lib/components/tabs/tab/tab.component';
+export * from './lib/components/tabs/tabs/tabs.component';
 export * from './lib/components/textarea/textarea.component';
+export * from './lib/components/tooltip/tooltip.component';
