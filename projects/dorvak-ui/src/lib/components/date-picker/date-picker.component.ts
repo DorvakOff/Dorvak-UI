@@ -13,7 +13,7 @@ import {LucideAngularModule} from "lucide-angular";
 import {cn, uniqueId} from "../../utils/utils";
 import {CalendarComponent} from "../calendar/calendar.component";
 import {ControlValueAccessor} from "@angular/forms";
-import {Subject} from "rxjs";
+import {Subject, throttleTime} from "rxjs";
 import {TitleCasePipe} from "@angular/common";
 
 @Component({
@@ -86,6 +86,12 @@ export class DatePickerComponent implements ControlValueAccessor {
     return this.value ? this.value.toLocaleDateString('default', {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'}) : '';
   }
 
+  constructor() {
+    this.scrollThrottle.pipe(
+      throttleTime(100)
+    ).subscribe(showOnTop => this.showOnTop = showOnTop);
+  }
+
   @Output() valueChange: EventEmitter<Date> = new EventEmitter<Date>();
 
   protected readonly cn = cn;
@@ -131,8 +137,10 @@ export class DatePickerComponent implements ControlValueAccessor {
     this.visible = true;
     this.dismissing = false;
     this.showOnTop = false;
-    this.recalculatePosition();
-    setTimeout(() => this.calendar.button.focus());
+    setTimeout(() => {
+      this.calendar.button.focus();
+      this.recalculatePosition();
+    });
   }
 
   closeCombobox() {

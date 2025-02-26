@@ -16,6 +16,8 @@ export * from './lib/components/card/card.component';
 export * from './lib/components/checkbox/checkbox.component';
 export * from './lib/components/combobox/combobox.component';
 export * from './lib/components/date-picker/date-picker.component';
+export * from './lib/components/dropdown-item/dropdown-item.component';
+export * from './lib/components/dropdown-menu/dropdown-menu.component';
 export * from './lib/components/input/input.component';
 export * from './lib/components/input-otp/input-otp.component';
 export * from './lib/components/link/link.component';

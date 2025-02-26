@@ -22,6 +22,8 @@ import {DatePickerComponent} from "./components/date-picker/date-picker.componen
 import {TabComponent} from "./components/tabs/tab/tab.component";
 import {TabsComponent} from "./components/tabs/tabs/tabs.component";
 import {TooltipComponent} from "./components/tooltip/tooltip.component";
+import {DropdownMenuComponent} from "./components/dropdown-menu/dropdown-menu.component";
+import {DropdownItemComponent} from "./components/dropdown-item/dropdown-item.component";
 
 const components = [
   AlertComponent,
@@ -35,6 +37,8 @@ const components = [
   CheckboxComponent,
   ComboboxComponent,
   DatePickerComponent,
+  DropdownItemComponent,
+  DropdownMenuComponent,
   InputComponent,
   InputOtpComponent,
   LinkComponent,

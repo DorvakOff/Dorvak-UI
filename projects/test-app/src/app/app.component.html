@@ -42,7 +42,7 @@
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Breadcrumbs</h2>
-<dui-breadcrumb [items]="[{label: 'Home', url: '/'}, {label: 'Menu', url: '/menu'}, {label: 'Submenu', url: '/menu/submenu'}]"/>
+<dui-breadcrumb [items]="[{label: 'Home', url: '/#home'}, {label: 'Menu', url: '/#home/menu'}, {label: 'Submenu', url: '/#home/menu/submenu'}]"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Buttons</h2>
@@ -117,6 +117,19 @@
 <h2 class="font-bold text-2xl font-outfit">Datepicker</h2>
 <dui-date-picker class="w-[300px]" placeholder="Select a date" label="Select a date" required/>
 <dui-date-picker class="w-[300px]" placeholder="Select a date" label="Disabled date picker" disabled/>
+
+<dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Dropdowns Menu</h2>
+<dui-dropdown-menu class="w-fit" label="Dropdown">
+  <dui-dropdown-item (click)="testAlert()">
+    <div class="flex items-center justify-between w-full">
+      Item 1
+      <i-lucide name="check" size="16"/>
+    </div>
+  </dui-dropdown-item>
+  <dui-dropdown-item (click)="testAlert()" disabled>Item 2</dui-dropdown-item>
+  <dui-dropdown-item (click)="testAlert()">Item 3</dui-dropdown-item>
+</dui-dropdown-menu>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Inputs</h2>

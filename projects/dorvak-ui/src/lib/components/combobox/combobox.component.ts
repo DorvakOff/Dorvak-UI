@@ -169,8 +169,10 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
     this.dismissing = false;
     this._searchValue = '';
     this.showOnTop = false;
-    setTimeout(() => this.search.focus());
-    this.recalculatePosition();
+    setTimeout(() => {
+      this.search.focus();
+      this.recalculatePosition();
+    });
   }
 
   closeCombobox() {

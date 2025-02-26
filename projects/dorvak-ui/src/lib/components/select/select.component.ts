@@ -153,7 +153,7 @@ export class SelectComponent implements ControlValueAccessor {
     this.visible = true;
     this.dismissing = false;
     this.showOnTop = false;
-    this.recalculatePosition();
+    setTimeout(() => this.recalculatePosition());
   }
 
   closeCombobox() {

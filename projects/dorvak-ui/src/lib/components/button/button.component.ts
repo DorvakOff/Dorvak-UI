@@ -70,7 +70,7 @@ export class ButtonComponent {
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
   @Input({ transform: booleanAttribute }) loading: boolean = false;
   @Input({ transform: booleanAttribute }) submit: boolean = false;
-  @Input() iconPosition: 'left' | 'right' = 'left';
+  @Input() iconPosition: 'left' | 'right' = 'right';
 
   @ViewChild('button') button!: ElementRef<HTMLButtonElement>;
 
