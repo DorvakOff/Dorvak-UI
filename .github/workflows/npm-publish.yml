@@ -38,6 +38,9 @@ jobs:
       - name: Build library
         run: npm run build:lib
 
+      - name: Copy README
+        run: cp README.md ./dist/dorvak-ui
+
       - name: Publish to npm
         working-directory: ./dist/dorvak-ui
         run: npm publish --provenance --access public

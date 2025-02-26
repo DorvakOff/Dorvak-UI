@@ -7,7 +7,7 @@
 Installez la librairie ainsi que ses dépendances nécessaires :
 
 ```sh
-npm install dorvak-ui tailwindcss@3 postcss class-variance-authority clsx lucide-angular tailwind-merge tailwindcss-animate
+npm install dorvak-ui
 ```
 
 ## Configuration de TailwindCSS
