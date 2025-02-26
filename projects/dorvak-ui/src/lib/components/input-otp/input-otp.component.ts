@@ -11,24 +11,24 @@ import {InputComponent} from "../input/input.component";
   template: `
     <div class="flex items-center">
       <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-             class="w-9 h-10 rounded-r-none" hideArrows
-             (valueChange)="onType(0)" type="number" min="0" max="9" maxlength="1"/>
+                 inputClass="w-9 h-10 rounded-r-none" hideArrows
+                 (input)="onType(0)" type="number" min="0" max="9" maxlength="1"/>
       <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-             class="w-9 h-10 rounded-none" (valueChange)="onType(1)"
-             type="number" min="0" max="9" maxlength="1" hideArrows/>
+                 inputClass="w-9 h-10 rounded-none" (input)="onType(1)"
+                 type="number" min="0" max="9" maxlength="1" hideArrows/>
       <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-             class="w-9 h-10 rounded-l-none" hideArrows
-             (valueChange)="onType(2)" type="number" min="0" max="9" maxlength="1"/>
+                 inputClass="w-9 h-10 rounded-l-none" hideArrows
+                 (input)="onType(2)" type="number" min="0" max="9" maxlength="1"/>
       <i-lucide name="minus" size="24" class="mx-1"/>
       <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-             class="w-9 h-10 rounded-r-none" hideArrows
-             (valueChange)="onType(3)" type="number" min="0" max="9" maxlength="1"/>
+                 inputClass="w-9 h-10 rounded-r-none" hideArrows
+                 (input)="onType(3)" type="number" min="0" max="9" maxlength="1"/>
       <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-             class="w-9 h-10 rounded-none" (valueChange)="onType(4)"
-             type="number" min="0" max="9" maxlength="1" hideArrows/>
+                 inputClass="w-9 h-10 rounded-none" (input)="onType(4)"
+                 type="number" min="0" max="9" maxlength="1" hideArrows/>
       <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-             class="w-9 h-10 rounded-l-none" hideArrows
-             (valueChange)="onType(5)" type="number" min="0" max="9" maxlength="1"/>
+                 inputClass="w-9 h-10 rounded-l-none" hideArrows
+                 (input)="onType(5)" type="number" min="0" max="9" maxlength="1"/>
     </div>
   `,
   styles: [`

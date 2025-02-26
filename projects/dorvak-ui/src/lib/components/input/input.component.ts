@@ -39,15 +39,16 @@ import {LucideIconNode} from "lucide-angular/icons/types";
           }
         </label>
       }
+      <div class="flex items-center">
       <div
         (click)="focus()"
+        [class.no-arrows]="hideArrows"
         [class]="cn(
           'form-control flex items-center gap-1 h-9 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground md:text-sm focus-within:border-primary',
           disabled && 'cursor-not-allowed bg-muted text-muted-foreground',
           !disableErrorBorder && 'group-[.ng-invalid:not(.ng-pristine)]:border-destructive group-[.ng-invalid:not(.ng-pristine)]:focus-within:border-destructive',
           iconPosition === 'left' && 'flex-row-reverse',
-          hideArrows && 'no-arrows',
-          class
+          inputClass
         )">
         <input
           #input
@@ -78,6 +79,8 @@ import {LucideIconNode} from "lucide-angular/icons/types";
             </span>
           }
         }
+      </div>
+        <ng-content/>
       </div>
     </div>
   `,
@@ -113,7 +116,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input({transform: booleanAttribute}) required: boolean = false;
   @Input({transform: booleanAttribute}) readonly: boolean = false;
   @Input({transform: booleanAttribute}) hideArrows: boolean = false;
-  @Input() class = '';
+  @Input() inputClass = '';
   @Input({transform: booleanAttribute}) disableErrorBorder: boolean = false;
 
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;

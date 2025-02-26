@@ -34,7 +34,9 @@ const alertVariants = cva(
     @if (!this._dismissed) {
       <div [class]="alertVariants({ variant })" #host>
         @if (closable) {
-          <dui-button variant="link" icon="x" size="icon" class="absolute top-2 right-2" (click)="dismiss()"/>
+          <div class="absolute top-2 right-2">
+            <dui-button variant="link" icon="x" size="icon" (click)="dismiss()"/>
+          </div>
         }
         @if (icon) {
           <i-lucide [name]="icon" [size]="28"/>

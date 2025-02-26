@@ -42,7 +42,7 @@ const buttonVariants = cva(
   template: `
     <button
       [disabled]="disabled || loading"
-      [class]="cn(buttonVariants({ variant, size }), iconPosition === 'right' ? 'flex-row-reverse' : 'flex-row')"
+      [class]="cn(buttonVariants({ variant, size }), iconPosition === 'right' ? 'flex-row-reverse' : 'flex-row', buttonClass)"
       [type]="submit ? 'submit' : 'button'"
       #button
     >
@@ -71,6 +71,7 @@ export class ButtonComponent {
   @Input({ transform: booleanAttribute }) loading: boolean = false;
   @Input({ transform: booleanAttribute }) submit: boolean = false;
   @Input() iconPosition: 'left' | 'right' = 'right';
+  @Input() buttonClass: string = '';
 
   @ViewChild('button') button!: ElementRef<HTMLButtonElement>;
 
