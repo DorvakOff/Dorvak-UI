@@ -7,7 +7,7 @@
 Installez la librairie ainsi que ses dépendances nécessaires :
 
 ```sh
-npm install dorvak-ui
+npm install dorvak-ui lucide-angular
 ```
 
 ## Configuration de TailwindCSS
@@ -15,7 +15,7 @@ npm install dorvak-ui
 Assurez-vous d'utiliser **TailwindCSS v3**. Si ce n'est pas déjà fait, initialisez TailwindCSS avec un fichier TypeScript :
 
 ```sh
-npx tailwindcss init -p --ts
+npx tailwindcss init --ts
 ```
 
 Ensuite, remplacez le contenu de `tailwind.config.ts` par :
@@ -92,7 +92,6 @@ const config: Config = {
   plugins: [tailwindcss_animate],
 };
 export default config;
-
 ```
 
 ## Modification du fichier `styles.css`
@@ -103,7 +102,7 @@ Ajoutez ces lignes dans votre fichier `src/styles.css` :
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
 
-@import "dorvak-ui/src/lib/themes/default.css";
+@import "dorvak-ui/themes/default.css";
 
 @tailwind base;
 @tailwind components;
@@ -122,7 +121,6 @@ body {
     @apply bg-background text-foreground;
   }
 }
-
 ```
 
 ## Utilisation
@@ -136,6 +134,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {DorvakUiModule} from 'dorvak-ui';
+import {icons, LucideAngularModule} from 'lucide-angular';
+
 
 @NgModule({
   declarations: [
@@ -144,13 +144,13 @@ import {DorvakUiModule} from 'dorvak-ui';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DorvakUiModule
+    DorvakUiModule,
+    LucideAngularModule.pick(icons)
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
 ```
 
 Vous pouvez maintenant utiliser les composants de **dorvak-ui** dans vos templates Angular.

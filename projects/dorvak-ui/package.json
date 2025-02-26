@@ -1,6 +1,6 @@
 {
   "name": "dorvak-ui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "peerDependencies": {
     "@angular/common": "^19.1.4",
     "@angular/core": "^19.1.4",
@@ -15,6 +15,9 @@
   },
   "dependencies": {
     "tslib": "^2.3.0"
+  },
+  "exports": {
+    "./themes/*.css": "./src/lib/themes/*.css"
   },
   "sideEffects": false,
   "repository": {
