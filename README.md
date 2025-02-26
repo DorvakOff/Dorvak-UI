@@ -1,8 +1,10 @@
-# dorvak-ui
+[![Use this template](https://img.shields.io/badge/-Use%20this%20template-brightgreen?style=for-the-badge)](https://github.com/DorvakOff/Dorvak-UI-Template)
+[![GitHub issues](https://img.shields.io/github/issues/DorvakOff/Dorvak-UI?style=for-the-badge)](https://github.com/DorvakOff/Dorvak-UI/issues)
 
 **dorvak-ui** est une librairie de composants Angular conçue pour être facilement personnalisable et optimisée avec TailwindCSS.
 
 ## Installation
+
 
 Installez la librairie ainsi que ses dépendances nécessaires :
 
