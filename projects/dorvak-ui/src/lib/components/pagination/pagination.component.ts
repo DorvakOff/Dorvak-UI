@@ -16,13 +16,13 @@ import {cn} from "../../utils/utils";
           </div>
         }
         <div class="flex items-center space-x-2">
-          <dui-button variant="ghost" size="icon" (click)="handlePageChange(0)" icon="chevron-left" [disabled]="currentPage === 0"/>
+          <dui-button variant="ghost" size="icon" (click)="handlePageChange(0)" icon="chevrons-left" [disabled]="currentPage === 0"/>
 
           @for (page of getPagesToShow(); track page) {
             <dui-button [variant]="currentPage === page ? 'primary' : 'ghost'" (click)="handlePageChange(page)" [disabled]="currentPage === page">{{ page + 1 }}</dui-button>
           }
 
-          <dui-button variant="ghost" size="icon" (click)="handlePageChange(countPages() - 1)" icon="chevron-right" [disabled]="currentPage === countPages() - 1"/>
+          <dui-button variant="ghost" size="icon" (click)="handlePageChange(countPages() - 1)" icon="chevrons-right" [disabled]="currentPage === countPages() - 1"/>
         </div>
       </div>
     }
