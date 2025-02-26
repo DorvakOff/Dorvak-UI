@@ -53,7 +53,7 @@ import {TitleCasePipe} from "@angular/common";
 export class DatePickerComponent implements ControlValueAccessor {
 
   @Input() label: string | undefined;
-  @Input() placeholder: string = '';
+  @Input() placeholder: string = 'Select a date';
   @Input({ transform: booleanAttribute }) required: boolean = false;
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
 
