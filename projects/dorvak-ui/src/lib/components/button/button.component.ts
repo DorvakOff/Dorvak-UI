@@ -1,4 +1,4 @@
-import {booleanAttribute, Component, Input} from '@angular/core';
+import {booleanAttribute, Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Variant} from "../../models/variant";
 import {LucideIconNode} from "lucide-angular/icons/types";
 import {LucideAngularModule} from "lucide-angular";
@@ -18,7 +18,7 @@ const buttonVariants = cva(
         info: "bg-info text-info-foreground enabled:hover:bg-info/80",
         link: "border-none shadow-none bg-transparent text-current enabled:hover:text-primary/80",
         ghost: "bg-transparent text-current enabled:hover:bg-gray-200 border-none shadow-none disabled:bg-gray-300",
-        outline: "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+        outline: "border border-input bg-background shadow-sm enabled:hover:bg-accent enabled:hover:text-accent-foreground",
       },
       size: {
         default: "!h-10 px-4 py-2",
@@ -44,6 +44,7 @@ const buttonVariants = cva(
       [disabled]="disabled || loading"
       [class]="cn(buttonVariants({ variant, size }), iconPosition === 'right' ? 'flex-row-reverse' : 'flex-row')"
       [type]="submit ? 'submit' : 'button'"
+      #button
     >
       @if (loading) {
         <i-lucide name="loader-circle" size="16" class="animate-spin"/>
@@ -52,7 +53,7 @@ const buttonVariants = cva(
         @if (icon) {
           <i-lucide [name]="icon" [size]="16"/>
         }
-        @if (size !== 'icon') {
+        @if (size !== 'icon' || !icon) {
           <ng-content/>
         }
       }
@@ -70,6 +71,12 @@ export class ButtonComponent {
   @Input({ transform: booleanAttribute }) loading: boolean = false;
   @Input({ transform: booleanAttribute }) submit: boolean = false;
   @Input() iconPosition: 'left' | 'right' = 'left';
+
+  @ViewChild('button') button!: ElementRef<HTMLButtonElement>;
+
+  focus() {
+    this.button.nativeElement.focus();
+  }
 
   protected readonly cn = cn;
 }

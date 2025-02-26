@@ -17,6 +17,8 @@ import {TextareaComponent} from "./components/textarea/textarea.component";
 import {AlertModalComponent} from "./components/alert-modal/alert-modal.component";
 import {SwitchComponent} from "./components/switch/switch.component";
 import {CheckboxComponent} from "./components/checkbox/checkbox.component";
+import {CalendarComponent} from "./components/calendar/calendar.component";
+import {DatePickerComponent} from "./components/date-picker/date-picker.component";
 
 const components = [
   AlertComponent,
@@ -25,9 +27,11 @@ const components = [
   BadgeComponent,
   BreadcrumbComponent,
   ButtonComponent,
+  CalendarComponent,
   CardComponent,
   CheckboxComponent,
   ComboboxComponent,
+  DatePickerComponent,
   InputComponent,
   InputOtpComponent,
   LinkComponent,

@@ -38,7 +38,7 @@ export interface SelectItem {
   template: `
     <div class="flex flex-col gap-1">
       @if (label) {
-        <label [class]="cn('text-sm font-medium leading-none flex gap-1 select-none', disabled && 'cursor-not-allowed opacity-70')" [for]="id">
+        <label [class]="cn('w-fit text-sm font-medium leading-none flex gap-1 select-none', disabled && 'cursor-not-allowed opacity-70')" [for]="id">
           {{ label }}
           @if (required) {
             <span class="text-red-500">*</span>
@@ -46,7 +46,7 @@ export interface SelectItem {
         </label>
       }
       <div class="relative">
-        <dui-input [id]="id" [required]="required" [placeholder]="placeholder" [value]="selected.label" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
+        <dui-input [id]="id" [disabled]="disabled" [required]="required" [placeholder]="placeholder" [value]="selected.label" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
           <div [class]="cn(
                 'absolute top-10 left-0 w-full bg-popover text-popover-foreground border border-gray-300 rounded-md shadow-md p-2 duration-300 z-10',
                 showOnTop && 'bottom-10 top-auto'

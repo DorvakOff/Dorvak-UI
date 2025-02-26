@@ -32,7 +32,7 @@ import {LucideIconNode} from "lucide-angular/icons/types";
   template: `
     <div class="flex flex-col gap-1">
       @if (label) {
-        <label [class]="cn('text-sm font-medium leading-none flex gap-1 select-none', disabled && 'cursor-not-allowed opacity-70')" [for]="id">
+        <label [class]="cn('w-fit text-sm font-medium leading-none flex gap-1 select-none', disabled && 'cursor-not-allowed opacity-70')" [for]="id">
           {{ label }}
           @if (required) {
             <span class="text-red-500">*</span>

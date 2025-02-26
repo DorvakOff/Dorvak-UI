@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ComboboxItem} from "dorvak-ui";
+import {ComboboxItem} from "../../../dorvak-ui/src/lib/components/combobox/combobox.component";
 import {SelectItem} from "../../../dorvak-ui/src/lib/components/select/select.component";
 
 @Component({
@@ -43,4 +43,8 @@ export class AppComponent {
   testAlert(args?: any) {
     alert(`Test alert: ${JSON.stringify(args)}`);
   }
+
+  date: Date = new Date();
+  dateMin: Date = new Date();
+
 }
