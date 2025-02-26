@@ -16,7 +16,7 @@ export interface BreadcrumbItem {
   template: `
     <nav aria-label="breadcrumb">
       <ol class="flex flex-wrap items-center gap-1.5 break-words text-sm text-muted-foreground sm:gap-2.5">
-        @for (item of items; track item.url; let last = $last) {
+        @for (item of items; track $index; let last = $last) {
           <li class="flex items-center">
             @if (!last) {
               <a [href]="item.url!" [target]="item.external ? '_blank' : '_self'" class="transition-colors hover:text-foreground">{{ item.label }}</a>

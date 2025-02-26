@@ -40,11 +40,14 @@ import {LucideIconNode} from "lucide-angular/icons/types";
         </label>
       }
       <div
+        (click)="focus()"
         [class]="cn(
           'form-control flex items-center gap-1 h-9 rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors placeholder:text-muted-foreground md:text-sm focus-within:border-primary',
           disabled && 'cursor-not-allowed bg-muted text-muted-foreground',
           !disableErrorBorder && 'group-[.ng-invalid:not(.ng-pristine)]:border-destructive group-[.ng-invalid:not(.ng-pristine)]:focus-within:border-destructive',
-          iconPosition === 'left' && 'flex-row-reverse'
+          iconPosition === 'left' && 'flex-row-reverse',
+          hideArrows && 'no-arrows',
+          class
         )">
         <input
           #input
@@ -57,7 +60,9 @@ import {LucideIconNode} from "lucide-angular/icons/types";
           [autocomplete]="autocomplete"
           [required]="required"
           [min]="min"
+          [pattern]="pattern"
           [max]="max"
+          [maxlength]="maxlength"
           [(ngModel)]="value"
           [readonly]="readonly"
           (ngModelChange)="valueChange.emit($event)"
@@ -75,7 +80,18 @@ import {LucideIconNode} from "lucide-angular/icons/types";
         }
       </div>
     </div>
-  `
+  `,
+  styles: [`
+    .no-arrows {
+      -moz-appearance: textfield;
+
+      ::-webkit-inner-spin-button,
+      ::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  `]
 })
 export class InputComponent implements ControlValueAccessor, OnInit {
 
@@ -84,6 +100,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   _type: string = 'text';
   @Input() placeholder: string = '';
   @Input() id: string = uniqueId('dui-input');
+  @Input() pattern: string = '';
+  @Input() maxlength: string | number | null = null;
   @Input() name: string = '';
   @Input() icon: string | LucideIconNode[] | undefined;
   @Input() iconPosition: 'left' | 'right' = 'right';
@@ -94,6 +112,8 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input({transform: booleanAttribute}) disabled: boolean = false;
   @Input({transform: booleanAttribute}) required: boolean = false;
   @Input({transform: booleanAttribute}) readonly: boolean = false;
+  @Input({transform: booleanAttribute}) hideArrows: boolean = false;
+  @Input() class = '';
   @Input({transform: booleanAttribute}) disableErrorBorder: boolean = false;
 
   @ViewChild('input') input!: ElementRef<HTMLInputElement>;
