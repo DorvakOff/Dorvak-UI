@@ -35,7 +35,7 @@ import {TitleCasePipe} from "@angular/common";
         </label>
       }
       <div class="relative">
-        <dui-input [id]="id" [disabled]="disabled" [required]="required" [placeholder]="placeholder" [value]="getInputLabel() | titlecase" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
+        <dui-input [id]="id" [disabled]="disabled" [required]="required" [placeholder]="placeholder" [value]="getInputLabel() | titlecase" readonly icon="calendar" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
         <div [class]="cn(
                 'absolute top-10 left-0 duration-300 z-10',
                 showOnTop && 'bottom-10 top-auto'
