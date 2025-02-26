@@ -63,10 +63,15 @@ import {LucideIconNode} from "lucide-angular/icons/types";
           (ngModelChange)="valueChange.emit($event)"
         />
         @if (icon) {
-          <button type="button" [disabled]="!iconClick" (click)="handleIconClick(); $event.stopPropagation()"
-                  class="enabled:hover:text-primary rounded-md text-muted-foreground duration-300 cursor-[inherit] focus-visible:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background transition-all outline-none">
-            <i-lucide [name]="icon" size="16"/>
-          </button>
+          @if (iconClick) {
+            <button type="button" (click)="handleIconClick($event)" class="hover:text-primary rounded-md text-muted-foreground duration-300 cursor-[inherit] focus-visible:text-primary focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background transition-all outline-none">
+              <i-lucide [name]="icon" size="16"/>
+            </button>
+          } @else {
+            <span class="text-muted-foreground">
+                <i-lucide [name]="icon" size="16"/>
+            </span>
+          }
         }
       </div>
     </div>
@@ -110,9 +115,10 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  handleIconClick() {
+  handleIconClick($event: MouseEvent) {
     if (this.iconClick) {
       this.iconClick();
+      $event.stopPropagation()
     }
   }
 
