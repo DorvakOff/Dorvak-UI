@@ -24,6 +24,7 @@ import {TabsComponent} from "./components/tabs/tabs/tabs.component";
 import {TooltipComponent} from "./components/tooltip/tooltip.component";
 import {DropdownMenuComponent} from "./components/dropdown/dropdown-menu/dropdown-menu.component";
 import {DropdownItemComponent} from "./components/dropdown/dropdown-item/dropdown-item.component";
+import {LucideAngularModule, icons} from "lucide-angular";
 
 const components = [
   AlertComponent,
@@ -56,6 +57,7 @@ const components = [
 @NgModule({
   imports: [
     ...components,
+    LucideAngularModule.pick(icons)
   ],
   exports: [
     ...components,

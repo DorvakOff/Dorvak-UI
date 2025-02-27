@@ -25,7 +25,6 @@ import {HttpClient, provideHttpClient, withFetch, withInterceptorsFromDi} from "
     BrowserModule,
     AppRoutingModule,
     DorvakUiModule,
-    LucideAngularModule.pick(icons),
     RouterLink,
     ReactiveFormsModule,
     FormsModule,

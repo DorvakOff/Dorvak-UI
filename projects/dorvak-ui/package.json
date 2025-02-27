@@ -8,16 +8,14 @@
     "clsx": "^2.1.1",
     "lucide-angular": "^0.474.0",
     "tailwind-merge": "^3.0.1",
+    "@tailwindcss/postcss": "^4",
     "postcss": "^8.5.1",
-    "tailwindcss": "^3.4.17",
+    "tailwindcss": "^4",
     "tailwindcss-animate": "^1.0.7",
     "autoprefixer": "^10.4.20"
   },
   "dependencies": {
     "tslib": "^2.3.0"
-  },
-  "exports": {
-    "./themes/*.css": "./src/lib/themes/*.css"
   },
   "sideEffects": false,
   "repository": {

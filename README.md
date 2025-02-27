@@ -14,86 +14,15 @@ npm install dorvak-ui lucide-angular
 
 ## Configuration de TailwindCSS
 
-Assurez-vous d'utiliser **TailwindCSS v3**. Si ce n'est pas déjà fait, initialisez TailwindCSS avec un fichier TypeScript :
 
-```sh
-npx tailwindcss init --ts
-```
+Créez ou modifiez le fichier `.postcssrc.json` à la racine de votre projet pour ajouter le plugin TailwindCSS :
 
-Ensuite, remplacez le contenu de `tailwind.config.ts` par :
-
-```ts
-import type { Config } from 'tailwindcss';
-
-import tailwindcss_animate from "tailwindcss-animate";
-
-const config: Config = {
-  darkMode: ["class"],
-  content: [
-    "./src/app/**/*.{html,ts}",
-    "node_modules/dorvak-ui/**/*",
-  ],
-  theme: {
-    extend: {
-      colors: {
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
-        primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))'
-        },
-        secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))'
-        },
-        muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))'
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))'
-        },
-        destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))'
-        },
-        success: {
-          DEFAULT: 'hsl(var(--success))',
-          foreground: 'hsl(var(--success-foreground))'
-        },
-        warning: {
-          DEFAULT: 'hsl(var(--warning))',
-          foreground: 'hsl(var(--warning-forground))'
-        },
-        info: {
-          DEFAULT: 'hsl(var(--info))',
-          foreground: 'hsl(var(--info-foreground))'
-        },
-        card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))'
-        },
-        popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))'
-        },
-        input: 'hsl(var(--input))',
-        border: 'hsl(var(--border))',
-      },
-      borderRadius: {
-        lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)'
-      },
-      fontFamily: {
-        outfit: ['Outfit', 'sans-serif'],
-      },
-    }
-  },
-  plugins: [tailwindcss_animate],
-};
-export default config;
+```json
+{
+  "plugins": {
+    "@tailwindcss/postcss": {}
+  }
+}
 ```
 
 ## Modification du fichier `styles.css`
@@ -104,14 +33,67 @@ Ajoutez ces lignes dans votre fichier `src/styles.css` :
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
 
-@import "dorvak-ui/themes/default.css";
+@import 'tailwindcss';
+@plugin 'tailwindcss-animate';
+@plugin '@tailwindcss/typography';
 
-@tailwind base;
-@tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: Roboto, sans-serif;
+/* Variables CSS */
+:root {
+  --background: hsl(0 0% 100%);
+  --foreground: hsl(222.2 84% 4.9%);
+  --primary: hsl(221.2 83.2% 53.3%);
+  --primary-foreground: hsl(210 40% 98%);
+  --secondary: hsl(200 83.2% 53.3%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --muted: hsl(0 0% 89.76%);
+  --muted-foreground: hsl(0 0% 45.1%);
+  --accent: hsl(0 0% 96.1%);
+  --accent-foreground: hsl(0 0% 9%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --info: hsl(221.2 83.2% 53.3%);
+  --info-foreground: hsl(210 40% 98%);
+  --warning: hsl(34.34 91.88% 55.42%);
+  --warning-foreground: hsl(60 9.1% 97.8%);
+  --success: hsl(142.1 76.2% 36.3%);
+  --success-foreground: hsl(355.7 100% 97.3%);
+  --border: hsl(0 0% 89.8%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(0 0% 3.9%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(222.2 84% 4.9%);
+  --input: hsl(214.3 31.8% 91.4%);
+  --radius: 0.5rem;
+}
+
+/* TailwindCSS custom theme */
+@theme {
+  --font-roboto: 'Roboto', sans-serif;
+  --font-outfit: 'Outfit', sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 @layer base {
@@ -127,17 +109,10 @@ body {
 
 ## Utilisation
 
-Importez les modules nécessaires dans votre module Angular :
+Importez le module `DorvakUiModule` dans votre module Angular :
 
-```ts
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import {DorvakUiModule} from 'dorvak-ui';
-import {icons, LucideAngularModule} from 'lucide-angular';
-
+```typescript
+import { DorvakUiModule } from 'dorvak-ui';
 
 @NgModule({
   declarations: [
@@ -145,9 +120,7 @@ import {icons, LucideAngularModule} from 'lucide-angular';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
-    DorvakUiModule,
-    LucideAngularModule.pick(icons)
+    DorvakUiModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -155,7 +128,7 @@ import {icons, LucideAngularModule} from 'lucide-angular';
 export class AppModule { }
 ```
 
-Vous pouvez maintenant utiliser les composants de **dorvak-ui** dans vos templates Angular.
+Vous pouvez maintenant utiliser les composants de **dorvak-ui** dans vos applications Angular
 
 ---
 
