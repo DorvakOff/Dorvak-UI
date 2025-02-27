@@ -1,0 +1,21 @@
+<div>
+  <div class="h-16 border-b flex items-center justify-between px-4 lg:px-8 shadow">
+    <nav class="flex items-center space-x-4 lg:space-x-6">
+      @for (link of links; track $index) {
+        <a [routerLink]="link.url" class="text-sm font-medium transition-colors hover:text-primary"
+           routerLinkActive="text-primary" [routerLinkActiveOptions]="{exact: true}">
+          {{ link.text }}
+        </a>
+      }
+    </nav>
+
+    <div class="flex items-center space-x-4 lg:space-x-6">
+      <dui-input placeholder="Search..." class="w-48 focus-within:w-64 transition-all" icon="search"/>
+      <dui-button role="link" icon="github" size="icon" variant="outline" buttonClass="h-9" (click)="open('https://github.com/DorvakOff/Dorvak-UI')">
+        <span class="sr-only">GitHub</span>
+      </dui-button>
+    </div>
+  </div>
+
+  <router-outlet/>
+</div>

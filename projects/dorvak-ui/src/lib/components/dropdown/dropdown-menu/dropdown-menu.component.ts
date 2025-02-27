@@ -1,7 +1,7 @@
 import {Component, ElementRef, HostListener, Input, ViewChild} from '@angular/core';
-import {ButtonComponent} from "../button/button.component";
+import {ButtonComponent} from "../../button/button.component";
 import {LucideAngularModule} from "lucide-angular";
-import {cn} from "../../utils/utils";
+import {cn} from "../../../utils/utils";
 import {Subject, throttleTime} from "rxjs";
 
 @Component({
