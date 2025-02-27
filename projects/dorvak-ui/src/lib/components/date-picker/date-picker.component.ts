@@ -6,7 +6,7 @@ import {
   HostListener,
   Input,
   Output,
-  ViewChild
+  ViewChild, ViewEncapsulation
 } from '@angular/core';
 import {InputComponent} from "../input/input.component";
 import {LucideAngularModule} from "lucide-angular";
@@ -18,6 +18,7 @@ import {TitleCasePipe} from "@angular/common";
 
 @Component({
   selector: 'dui-date-picker',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     InputComponent,
     LucideAngularModule,

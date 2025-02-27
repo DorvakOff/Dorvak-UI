@@ -1,8 +1,9 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'dui-avatar',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     NgOptimizedImage
   ],

@@ -1,9 +1,9 @@
-import {booleanAttribute, Component, Input } from '@angular/core';
+import {booleanAttribute, Component, Input, ViewEncapsulation} from '@angular/core';
 import {cn} from "../../utils/utils";
 
 @Component({
   selector: 'dui-separator',
-  imports: [],
+  encapsulation: ViewEncapsulation.None,
   template: `
     <div [class]="cn('bg-border shrink-0', vertical ? 'w-[1px] h-full mx-2' : 'w-full h-[1px] my-2')"></div>
   `

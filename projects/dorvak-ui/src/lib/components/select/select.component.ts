@@ -6,7 +6,7 @@ import {
   HostListener,
   Input,
   Output,
-  ViewChild,
+  ViewChild, ViewEncapsulation,
 } from '@angular/core';
 import {InputComponent} from '../input/input.component';
 import {cn, uniqueId} from "../../utils/utils";
@@ -21,6 +21,7 @@ export interface SelectItem {
 
 @Component({
   selector: 'dui-select',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     InputComponent,
     LucideAngularModule,

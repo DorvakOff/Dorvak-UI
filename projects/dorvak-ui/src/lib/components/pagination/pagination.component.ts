@@ -1,9 +1,10 @@
-import {booleanAttribute, Component, EventEmitter, Input, Output} from '@angular/core';
+import {booleanAttribute, Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {ButtonComponent} from "../button/button.component";
 import {cn} from "../../utils/utils";
 
 @Component({
   selector: 'dui-pagination',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     ButtonComponent
   ],

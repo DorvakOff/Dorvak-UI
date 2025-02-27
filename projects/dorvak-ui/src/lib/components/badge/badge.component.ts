@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {LucideAngularModule} from "lucide-angular";
 import {LucideIconNode} from "lucide-angular/icons/types";
 import {Variant} from "../../models/variant";
@@ -26,6 +26,7 @@ const badgeVariants = cva(
 
 @Component({
   selector: 'dui-badge',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     LucideAngularModule
   ],

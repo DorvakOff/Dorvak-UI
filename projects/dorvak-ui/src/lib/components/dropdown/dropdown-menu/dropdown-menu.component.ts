@@ -1,4 +1,4 @@
-import {Component, ElementRef, HostListener, Input, ViewChild} from '@angular/core';
+import {Component, ElementRef, HostListener, Input, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ButtonComponent} from "../../button/button.component";
 import {LucideAngularModule} from "lucide-angular";
 import {cn} from "../../../utils/utils";
@@ -6,6 +6,7 @@ import {Subject, throttleTime} from "rxjs";
 
 @Component({
   selector: 'dui-dropdown-menu',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     ButtonComponent,
     LucideAngularModule

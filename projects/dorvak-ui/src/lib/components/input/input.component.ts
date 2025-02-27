@@ -6,7 +6,7 @@ import {
   Input,
   numberAttribute,
   OnInit,
-  Output, ViewChild,
+  Output, ViewChild, ViewEncapsulation,
 } from '@angular/core';
 import {cn, uniqueId} from "../../utils/utils";
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
@@ -15,6 +15,7 @@ import {LucideIconNode} from "lucide-angular/icons/types";
 
 @Component({
   selector: 'dui-input',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     FormsModule,
     LucideAngularModule

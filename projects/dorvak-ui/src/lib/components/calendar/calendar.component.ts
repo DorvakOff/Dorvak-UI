@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {ButtonComponent} from "../button/button.component";
 import {cn} from "../../utils/utils";
 import {TitleCasePipe} from "@angular/common";
 
 @Component({
   selector: 'dui-calendar',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     ButtonComponent,
     TitleCasePipe

@@ -6,7 +6,7 @@ import {
   HostListener,
   Input, OnInit,
   Output,
-  ViewChild,
+  ViewChild, ViewEncapsulation,
 } from '@angular/core';
 import {InputComponent} from '../input/input.component';
 import {cn, uniqueId} from "../../utils/utils";
@@ -23,6 +23,7 @@ type SelectedType<Multi extends boolean> = Multi extends true ? ComboboxItem[] :
 
 @Component({
   selector: 'dui-combobox',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     InputComponent,
     LucideAngularModule,

@@ -1,10 +1,10 @@
-import {AfterContentInit, Component, ContentChildren, QueryList} from '@angular/core';
+import {AfterContentInit, Component, ContentChildren, QueryList, ViewEncapsulation} from '@angular/core';
 import {TabComponent} from "../tab/tab.component";
 import {cn} from "../../../utils/utils";
 
 @Component({
   selector: 'dui-tabs',
-  imports: [],
+  encapsulation: ViewEncapsulation.None,
   template: `
     <div class="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground w-full">
       @for (tab of tabs; track $index) {
@@ -20,8 +20,7 @@ import {cn} from "../../../utils/utils";
       class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
       <ng-content/>
     </div>
-  `,
-  styles: ``
+  `
 })
 export class TabsComponent implements AfterContentInit {
 

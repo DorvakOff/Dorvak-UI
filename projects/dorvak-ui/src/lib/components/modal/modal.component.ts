@@ -5,13 +5,14 @@ import {
   HostListener,
   Input, Output,
   Renderer2,
-  ViewChild,
+  ViewChild, ViewEncapsulation,
 } from '@angular/core';
 import {CardComponent} from "../card/card.component";
 import {ButtonComponent} from "../button/button.component";
 
 @Component({
   selector: 'dui-modal',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     CardComponent,
     ButtonComponent

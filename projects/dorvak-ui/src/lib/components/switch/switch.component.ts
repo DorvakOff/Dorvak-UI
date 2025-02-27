@@ -1,9 +1,10 @@
-import {booleanAttribute, Component, EventEmitter, Input, Output} from '@angular/core';
+import {booleanAttribute, Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {cn, uniqueId} from "../../utils/utils";
 
 @Component({
   selector: 'dui-switch',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     FormsModule
   ],

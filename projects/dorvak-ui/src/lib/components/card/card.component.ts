@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'dui-card',
-  imports: [],
+  encapsulation: ViewEncapsulation.None,
   template: `
     <div class="rounded-xl border bg-card text-card-foreground shadow">
       <span class="leading-none tracking-tight flex flex-col p-6">

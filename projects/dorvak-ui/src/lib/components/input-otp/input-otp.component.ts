@@ -1,9 +1,10 @@
-import {Component, EventEmitter, Output, QueryList, ViewChildren} from '@angular/core';
+import {Component, EventEmitter, Output, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {LucideAngularModule} from "lucide-angular";
 import {InputComponent} from "../input/input.component";
 
 @Component({
   selector: 'dui-input-otp',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     LucideAngularModule,
     InputComponent
@@ -31,12 +32,6 @@ import {InputComponent} from "../input/input.component";
                  (input)="onType(5)" type="number" min="0" max="9" maxlength="1"/>
     </div>
   `,
-  styles: [`
-    input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
-  `]
 })
 export class InputOtpComponent {
 

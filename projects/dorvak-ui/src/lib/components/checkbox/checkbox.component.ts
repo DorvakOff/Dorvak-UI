@@ -1,10 +1,11 @@
-import {booleanAttribute, Component, EventEmitter, Input, Output} from '@angular/core';
+import {booleanAttribute, Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
 import {cn, uniqueId} from "../../utils/utils";
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {LucideAngularModule} from "lucide-angular";
 
 @Component({
   selector: 'dui-checkbox',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     FormsModule,
     LucideAngularModule

@@ -1,14 +1,13 @@
-import {booleanAttribute, Component, Input} from '@angular/core';
+import {booleanAttribute, Component, Input, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'dui-tab',
-  imports: [],
+  encapsulation: ViewEncapsulation.None,
   template: `
     @if (selected) {
      <ng-content/>
     }
-  `,
-  styles: ``
+  `
 })
 export class TabComponent {
 

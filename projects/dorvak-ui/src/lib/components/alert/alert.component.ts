@@ -1,4 +1,4 @@
-import {booleanAttribute, Component, Input} from '@angular/core';
+import {booleanAttribute, Component, Input, ViewEncapsulation} from '@angular/core';
 import {Variant} from "../../models/variant";
 import {LucideIconNode} from "lucide-angular/icons/types";
 import {LucideAngularModule} from "lucide-angular";
@@ -26,6 +26,7 @@ const alertVariants = cva(
 
 @Component({
   selector: 'dui-alert',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     LucideAngularModule,
     ButtonComponent

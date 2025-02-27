@@ -6,13 +6,14 @@ import {
   Input,
   numberAttribute,
   Output,
-  ViewChild
+  ViewChild, ViewEncapsulation
 } from '@angular/core';
 import {ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {cn, uniqueId} from "../../utils/utils";
 
 @Component({
   selector: 'dui-textarea',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     FormsModule
   ],

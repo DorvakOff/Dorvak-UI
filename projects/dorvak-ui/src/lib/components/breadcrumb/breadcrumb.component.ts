@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 import {LinkComponent} from "../link/link.component";
 import {LucideAngularModule} from "lucide-angular";
 
@@ -10,6 +10,7 @@ export interface BreadcrumbItem {
 
 @Component({
   selector: 'dui-breadcrumb',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     LucideAngularModule
   ],

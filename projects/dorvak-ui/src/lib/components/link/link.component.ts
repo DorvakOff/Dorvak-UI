@@ -1,8 +1,8 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'dui-link',
-  imports: [],
+  encapsulation: ViewEncapsulation.None,
   template: `
     <a [href]="href" [target]="target" class="text-primary hover:underline transition-colors duration-300 inline">
       <ng-content/>

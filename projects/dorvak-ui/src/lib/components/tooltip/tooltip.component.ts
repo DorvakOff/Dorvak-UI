@@ -1,9 +1,9 @@
-import {Component, HostListener, Input} from '@angular/core';
+import {Component, HostListener, Input, ViewEncapsulation} from '@angular/core';
 import {cn} from "../../utils/utils";
 
 @Component({
   selector: 'dui-tooltip',
-  imports: [],
+  encapsulation: ViewEncapsulation.None,
   template: `
       <div class="relative">
           @if (!_hiding) {

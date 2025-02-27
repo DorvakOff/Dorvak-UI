@@ -1,9 +1,10 @@
-import {AfterViewInit, Component, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import { ButtonComponent } from '../button/button.component';
 import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'dui-alert-modal',
+  encapsulation: ViewEncapsulation.None,
   imports: [
     ButtonComponent,
     ModalComponent
