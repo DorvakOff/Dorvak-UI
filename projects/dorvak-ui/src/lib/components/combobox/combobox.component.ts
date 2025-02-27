@@ -113,6 +113,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
     this.selected = (this.multi ? [] : { value: null, label: '' }) as SelectedType<this['multi']>;
   }
 
+  @Input()
   set selected(value: SelectedType<this['multi']>) {
     this.markAsTouched();
     this._selected = value;
