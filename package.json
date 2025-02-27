@@ -6,7 +6,7 @@
     "start:test-app": "ng serve test-app",
     "start:www": "ng serve www",
     "build:lib": "ng build dorvak-ui",
-    "build:test-app": "ng build test-app --base-href /Dorvak-UI/",
+    "build:www": "ng build www",
     "watch:lib": "ng build dorvak-ui --watch --configuration development",
     "test": "ng test"
   },

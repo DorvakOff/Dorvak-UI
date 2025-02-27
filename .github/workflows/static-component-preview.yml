@@ -45,13 +45,13 @@ jobs:
         run: npm run build:lib
 
       - name: Build test app
-        run: npm run build:test-app
+        run: npm run build:www
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload the build directory to GitHub Pages
-          path: 'dist/test-app/browser'
+          path: 'dist/www/browser'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

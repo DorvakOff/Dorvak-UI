@@ -1,5 +1,6 @@
-import {Component, Input} from '@angular/core';
+import {ChangeDetectorRef, Component, Input} from '@angular/core';
 import {SlugifyPipe} from "../../pipes/slugify.pipe";
+import {BreadcrumbItem} from "../../../../../dorvak-ui/src/lib/components/breadcrumb/breadcrumb.component";
 
 @Component({
   selector: 'app-docs-page',
@@ -50,6 +51,9 @@ export class DocsPageComponent {
   activeGroup: {name: string, items: string[]} = this.groups[0];
   activeItem: string = this.activeGroup.items[0];
 
+  constructor(private cdr: ChangeDetectorRef) {
+  }
+
   @Input()
   set group(value: string) {
     let slugify = new SlugifyPipe();
@@ -61,9 +65,18 @@ export class DocsPageComponent {
   set item(value: string) {
     let slugify = new SlugifyPipe();
     this.activeItem = this.activeGroup.items.find(item => slugify.transform(item) === value) || this.activeGroup.items[0];
+    this.cdr.detectChanges();
   }
 
   get content() {
     return `/assets/docs/${this.activeGroup.name.toLowerCase().replace(/ /g, '-')}/${this.activeItem.toLowerCase().replace(/ /g, '-')}.md`;
+  }
+
+  get breadcrumbs(): BreadcrumbItem[] {
+    return [
+      {label: 'Docs', url: '/docs'},
+      {label: this.activeGroup.name, url: `/docs/${new SlugifyPipe().transform(this.activeGroup.name)}`},
+      {label: this.activeItem, url: `/docs/${new SlugifyPipe().transform(this.activeGroup.name)}/${new SlugifyPipe().transform(this.activeItem)}`}
+    ];
   }
 }

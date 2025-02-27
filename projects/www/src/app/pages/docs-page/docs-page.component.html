@@ -6,14 +6,16 @@
         <ul class="flex flex-col">
           @for (item of group.items; track $index) {
             <li class="flex">
-              <a [routerLink]="['/docs/', group.name | slugify, item | slugify ]" class="w-full rounded-sm hover:bg-accent hover:text-accent-foreground font-normal text-foreground px-2 py-1">{{ item }}</a>
+              <a [routerLink]="['/docs/', group.name | slugify, item | slugify ]" routerLinkActive="font-semibold bg-accent text-accent-foreground" class="w-full rounded-sm hover:bg-accent hover:text-accent-foreground font-normal text-foreground px-2 py-1">{{ item }}</a>
             </li>
           }
         </ul>
       </div>
     }
   </div>
-  <div class="prose w-full max-w-full overflow-y-auto p-4">
-    <markdown [src]="content"/>
+  <div class="flex flex-col flex-1 p-4 gap-4 overflow-y-auto w-full max-w-full">
+    <dui-breadcrumb [items]="breadcrumbs"/>
+    <dui-separator/>
+    <markdown [src]="content" class="prose prose-code:bg-accent prose-code:p-1 prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none w-full max-w-full"/>
   </div>
 </div>
