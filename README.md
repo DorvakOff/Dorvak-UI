@@ -9,7 +9,7 @@
 Installez la librairie ainsi que ses dépendances nécessaires :
 
 ```sh
-npm install dorvak-ui lucide-angular
+npm install dorvak-ui
 ```
 
 ## Configuration de TailwindCSS
@@ -35,7 +35,8 @@ Ajoutez ces lignes dans votre fichier `src/styles.css` :
 
 @import 'tailwindcss';
 @plugin 'tailwindcss-animate';
-@plugin '@tailwindcss/typography';
+
+@source "../node_modules/dorvak-ui";
 
 @tailwind utilities;
 
@@ -82,6 +83,12 @@ Ajoutez ces lignes dans votre fichier `src/styles.css` :
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
