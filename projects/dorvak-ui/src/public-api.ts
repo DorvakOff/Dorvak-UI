@@ -26,7 +26,14 @@ export * from './lib/components/pagination/pagination.component';
 export * from './lib/components/select/select.component';
 export * from './lib/components/separator/separator.component';
 export * from './lib/components/switch/switch.component';
+export * from './lib/components/table/table/table.component';
+export * from './lib/components/table/table-row/table-row.component';
+export * from './lib/components/table/table-row-cell/table-row-cell.component';
 export * from './lib/components/tabs/tab/tab.component';
 export * from './lib/components/tabs/tabs/tabs.component';
 export * from './lib/components/textarea/textarea.component';
 export * from './lib/components/tooltip/tooltip.component';
+
+// Models
+export * from './lib/models/table/cell-renderer';
+export * from './lib/models/table/column-definition';

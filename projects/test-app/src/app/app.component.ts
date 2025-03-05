@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ComboboxItem} from "../../../dorvak-ui/src/lib/components/combobox/combobox.component";
-import {SelectItem} from "../../../dorvak-ui/src/lib/components/select/select.component";
+import {ColumnDefinition, ComboboxItem, SelectItem} from "dorvak-ui";
+import {StatusCellRendererComponent} from "./components/status-cell-renderer/status-cell-renderer.component";
 
 @Component({
   selector: 'app-root',
@@ -45,6 +45,22 @@ export class AppComponent {
   }
 
   date: Date = new Date();
-  dateMin: Date = new Date();
+
+  columnDefinitions: ColumnDefinition[] = [
+    {field: 'name', headerName: 'Name'},
+    {field: 'age', headerName: 'Age', cellRenderer: (params: any) => `${params.value} years old`},
+    {field: 'address', headerName: 'Address'},
+    {field: 'status', headerName: 'Account Status', cellRenderer: StatusCellRendererComponent},
+  ]
+
+  tableData = [
+    {name: 'John', age: 25, address: '123 Main St', status: 'active'},
+    {name: 'Jane', age: 30, address: '456 Elm St', status: 'inactive'},
+    {name: 'Bob', age: 35, address: '789 Oak St', status: 'need-verification'},
+    {name: 'Alice', age: 28, address: '101 Pine St', status: 'active'},
+    {name: 'Charlie', age: 22, address: '202 Maple St', status: 'inactive'},
+    {name: 'David', age: 40, address: '303 Birch St', status: 'active'},
+    {name: 'Eve', age: 29, address: '404 Cedar St', status: 'need-verification'}
+  ]
 
 }
