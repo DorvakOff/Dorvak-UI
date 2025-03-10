@@ -12,4 +12,5 @@ export type BaseColumnDefinition = {
 export type ColumnDefinition = BaseColumnDefinition & {
   field: string;
   headerName?: string;
+  filterPlaceholder?: string;
 }

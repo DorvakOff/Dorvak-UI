@@ -1,4 +1,4 @@
-import {Component, ComponentRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
 import {CellHostDirective} from "../../../directives/cell-host.directive";
 import {NgIf} from "@angular/common";
 import {ColumnDefinition} from "../../../models/table/column-definition";
@@ -10,6 +10,7 @@ import {ICellRenderer} from "../../../models/table/cell-renderer";
     CellHostDirective,
     NgIf
   ],
+  encapsulation: ViewEncapsulation.None,
   template: `
     <ng-container *ngIf="isComponent(column.cellRenderer); else defaultCell">
       <ng-container duiCellHost></ng-container>
@@ -55,7 +56,10 @@ export class TableRowCellComponent implements OnInit {
 
     const componentRef: ComponentRef<ICellRenderer> = viewContainerRef.createComponent(component);
     componentRef.instance.duiInit({
+      data: this.rowData,
       value: this.rowData[this.column.field],
+      column: this.column,
+      field: this.column.field
     });
   }
 }

@@ -58,7 +58,7 @@ type SelectedType<Multi extends boolean> = Multi extends true ? ComboboxItem[] :
                [class.animate-in]="visible" [class.fade-in-0]="visible" [class.animate-out]="dismissing" [class.fade-out-0]="dismissing"
                #combobox>
             <dui-input class="w-full" placeholder="Search..." icon="search" iconPosition="left" [(value)]="_searchValue" #search disableErrorBorder/>
-            <ul class="mt-2 max-h-40 overflow-y-auto overscroll-contain">
+            <ul class="mt-2 max-h-40 overflow-y-auto overscroll-contain [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border">
               @for (item of filteredItems; track item.value) {
                 <li [class]="cn('cursor-pointer flex justify-between items-center hover:bg-accent hover:text-accent-foreground focus-within:bg-accent focus-within:text-accent-foreground rounded-sm px-2 py-1 outline-none', isSelected(item) && 'bg-accent text-accent-foreground')"
                   (click)="onSelect(item); $event.stopPropagation()" tabindex="0" (keydown.enter)="onSelect(item)"
