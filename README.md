@@ -1,21 +1,23 @@
+<p align="center">
+  A simple and customizable UI library for Angular. Written in TypeScript and TailwindCSS.
+</p>
+
+---
+
 [![Use this template](https://img.shields.io/badge/-Use%20this%20template-brightgreen?style=for-the-badge)](https://github.com/DorvakOff/Dorvak-UI-Template)
 [![GitHub issues](https://img.shields.io/github/issues/DorvakOff/Dorvak-UI?style=for-the-badge)](https://github.com/DorvakOff/Dorvak-UI/issues)
 
-**dorvak-ui** est une librairie de composants Angular conçue pour être facilement personnalisable et optimisée avec TailwindCSS.
-
 ## Installation
 
-
-Installez la librairie ainsi que ses dépendances nécessaires :
+Install the library and its necessary dependencies:
 
 ```sh
 npm install dorvak-ui
 ```
 
-## Configuration de TailwindCSS
+## TailwindCSS Configuration
 
-
-Créez ou modifiez le fichier `.postcssrc.json` à la racine de votre projet pour ajouter le plugin TailwindCSS :
+Create or modify the `.postcssrc.json` file at the root of your project to add the TailwindCSS plugin:
 
 ```json
 {
@@ -25,9 +27,9 @@ Créez ou modifiez le fichier `.postcssrc.json` à la racine de votre projet pou
 }
 ```
 
-## Modification du fichier `styles.css`
+## Modification of the `styles.css` file
 
-Ajoutez ces lignes dans votre fichier `src/styles.css` :
+Add these lines to your `src/styles.css` file:
 
 ```css
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
@@ -40,7 +42,7 @@ Ajoutez ces lignes dans votre fichier `src/styles.css` :
 
 @tailwind utilities;
 
-/* Variables CSS */
+/* CSS Variables */
 :root {
   --background: hsl(0 0% 100%);
   --foreground: hsl(222.2 84% 4.9%);
@@ -67,6 +69,7 @@ Ajoutez ces lignes dans votre fichier `src/styles.css` :
   --popover-foreground: hsl(222.2 84% 4.9%);
   --input: hsl(214.3 31.8% 91.4%);
   --radius: 0.5rem;
+  --ring: hsl(221.2 83.2% 53.3%);
 }
 
 /* TailwindCSS custom theme */
@@ -97,6 +100,7 @@ Ajoutez ces lignes dans votre fichier `src/styles.css` :
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
+  --color-ring: var(--ring);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -114,9 +118,9 @@ Ajoutez ces lignes dans votre fichier `src/styles.css` :
 }
 ```
 
-## Utilisation
+## Usage
 
-Importez le module `DorvakUiModule` dans votre module Angular :
+Import the `DorvakUiModule` in your Angular module:
 
 ```typescript
 import { DorvakUiModule } from 'dorvak-ui';
@@ -135,9 +139,8 @@ import { DorvakUiModule } from 'dorvak-ui';
 export class AppModule { }
 ```
 
-Vous pouvez maintenant utiliser les composants de **dorvak-ui** dans vos applications Angular
+You can now use the **dorvak-ui** components in your Angular applications.
 
 ---
 
-Besoin d'aide ou d'améliorations ? N'hésitez pas à ouvrir une issue ou une PR sur le repository GitHub ! 🎉
-
+Need help or improvements? Feel free to open an issue or a PR on the GitHub repository! 🎉
