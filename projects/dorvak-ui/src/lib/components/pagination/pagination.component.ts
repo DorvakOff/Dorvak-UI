@@ -1,4 +1,12 @@
-import {booleanAttribute, Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  EventEmitter,
+  Input,
+  numberAttribute,
+  Output,
+  ViewEncapsulation
+} from '@angular/core';
 import {ButtonComponent} from "../button/button.component";
 import {cn} from "../../utils/utils";
 
@@ -18,11 +26,13 @@ import {cn} from "../../utils/utils";
         }
         <div class="flex items-center space-x-2">
           <dui-button variant="ghost" size="icon" (click)="handlePageChange(0)" icon="chevrons-left" [disabled]="currentPage === 0"/>
+          <dui-button variant="ghost" size="icon" (click)="handlePageChange(this.currentPage - 1)" icon="chevron-left" [disabled]="currentPage === 0"/>
 
           @for (page of getPagesToShow(); track page) {
             <dui-button [variant]="currentPage === page ? 'primary' : 'ghost'" (click)="handlePageChange(page)" [disabled]="currentPage === page">{{ page + 1 }}</dui-button>
           }
 
+          <dui-button variant="ghost" size="icon" (click)="handlePageChange(this.currentPage + 1)" icon="chevron-right" [disabled]="currentPage === countPages() - 1"/>
           <dui-button variant="ghost" size="icon" (click)="handlePageChange(countPages() - 1)" icon="chevrons-right" [disabled]="currentPage === countPages() - 1"/>
         </div>
       </div>
@@ -31,9 +41,9 @@ import {cn} from "../../utils/utils";
 })
 export class PaginationComponent {
 
-  @Input() total: number = 0;
-  @Input() pageSize: number = 10;
-  @Input() currentPage: number = 0;
+  @Input({ transform: numberAttribute }) total: number = 0;
+  @Input({ transform: numberAttribute }) pageSize: number = 10;
+  @Input({ transform: numberAttribute }) currentPage: number = 0;
   @Input({ transform: booleanAttribute }) showItemsCount: boolean = true;
 
   @Output() pageChange = new EventEmitter<number>();

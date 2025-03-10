@@ -18,7 +18,7 @@ const buttonVariants = cva(
         info: "bg-info text-info-foreground enabled:hover:bg-info/80",
         link: "border-none shadow-none bg-transparent text-current enabled:hover:text-primary/80",
         ghost: "bg-transparent text-current enabled:hover:bg-gray-200 border-none shadow-none disabled:bg-gray-300",
-        outline: "border border-input bg-background shadow-sm enabled:hover:bg-accent enabled:hover:text-accent-foreground",
+        outline: "border border-primary text-primary border-2 bg-background shadow-sm enabled:hover:bg-accent enabled:hover:text-accent-foreground",
       },
       size: {
         default: "!h-10 px-4 py-2",
@@ -71,7 +71,7 @@ export class ButtonComponent {
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
   @Input({ transform: booleanAttribute }) loading: boolean = false;
   @Input({ transform: booleanAttribute }) submit: boolean = false;
-  @Input() iconPosition: 'left' | 'right' = 'right';
+  @Input() iconPosition: 'left' | 'right' = 'left';
   @Input() buttonClass: string = '';
 
   @ViewChild('button') button!: ElementRef<HTMLButtonElement>;

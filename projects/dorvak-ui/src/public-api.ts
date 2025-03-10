@@ -23,10 +23,16 @@ export * from './lib/components/input-otp/input-otp.component';
 export * from './lib/components/link/link.component';
 export * from './lib/components/modal/modal.component';
 export * from './lib/components/pagination/pagination.component';
+export * from './lib/components/radio/radio.component';
 export * from './lib/components/select/select.component';
 export * from './lib/components/separator/separator.component';
 export * from './lib/components/switch/switch.component';
+export * from './lib/components/table/table/table.component';
 export * from './lib/components/tabs/tab/tab.component';
 export * from './lib/components/tabs/tabs/tabs.component';
 export * from './lib/components/textarea/textarea.component';
 export * from './lib/components/tooltip/tooltip.component';
+
+// Models
+export * from './lib/models/table/cell-renderer';
+export * from './lib/models/table/column-definition';

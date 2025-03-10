@@ -23,9 +23,9 @@ import {LucideAngularModule} from "lucide-angular";
              [for]="id">
         {{ label }}
       </label>
-      <div
-        [class]="cn('peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring', disabled && 'cursor-not-allowed opacity-50', checked && 'bg-primary text-primary-foreground')"
-        (click)="toggle()" (keydown.space)="toggle(); $event.preventDefault()" (keydown.enter)="toggle()"
+      <button
+        [class]="cn('peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-white text-primary', disabled && 'cursor-not-allowed opacity-50', checked && 'bg-primary text-primary-foreground')"
+        (click)="toggle(); $event.stopPropagation()"
         [tabindex]="disabled ? -1 : 0"
       >
         <input type="checkbox" [(ngModel)]="checked" [disabled]="disabled" [name]="name" [attr.id]="id" class="hidden">
@@ -34,7 +34,7 @@ import {LucideAngularModule} from "lucide-angular";
             <i-lucide name="check" class="w-4 h-4"/>
           </div>
         }
-      </div>
+      </button>
     </div>
   `,
   styles: ``

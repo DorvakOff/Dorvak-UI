@@ -13,9 +13,9 @@ import {TitleCasePipe} from "@angular/common";
   template: `
     <div class="p-4 gap-2 rounded-xl border bg-card text-card-foreground shadow flex flex-col w-fit">
       <div class="flex justify-between items-center">
-        <dui-button variant="outline" size="icon" icon="chevron-left" (click)="currentDate.setMonth(currentDate.getMonth() - 1)" [disabled]="isPrevDisabled()" #button/>
+        <dui-button variant="ghost" size="icon" icon="chevron-left" (click)="currentDate.setMonth(currentDate.getMonth() - 1)" [disabled]="isPrevDisabled()" #button/>
         <span class="font-bold capitalize">{{ monthName }} {{ currentDate.getFullYear() }}</span>
-        <dui-button variant="outline" size="icon" icon="chevron-right" (click)="currentDate.setMonth(currentDate.getMonth() + 1)" [disabled]="isNextDisabled()"/>
+        <dui-button variant="ghost" size="icon" icon="chevron-right" (click)="currentDate.setMonth(currentDate.getMonth() + 1)" [disabled]="isNextDisabled()"/>
       </div>
       <div class="grid grid-cols-7 gap-2">
         @for (day of days; track day) {

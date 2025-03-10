@@ -10,7 +10,7 @@
   <span slot="title">Non</span>
   ça marche pas
 </dui-alert>
-<dui-alert icon="triangle-alert" variant="warning" closable>
+<dui-alert closable icon="triangle-alert" variant="warning">
   <span slot="title">Je sais pas</span>
   ça marche peut être
 </dui-alert>
@@ -18,14 +18,15 @@
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Alert modal</h2>
 <dui-button (click)="alert.open()" class="w-fit">Open Alert</dui-button>
-<dui-alert-modal #alert (confirm)="testAlert('confirm')" (cancel)="testAlert('cancel')" title="Are you sure?" message="Do you really want to do this?"/>
+<dui-alert-modal #alert (cancel)="testAlert('cancel')" (confirm)="testAlert('confirm')" message="Do you really want to do this?"
+                 title="Are you sure?"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Avatars</h2>
 <div class="flex gap-2">
-  <dui-avatar src="https://github.com/DorvakOff.png" alt="@DorvakOff" fallback="DVK"/>
+  <dui-avatar alt="@DorvakOff" fallback="DVK" src="https://github.com/DorvakOff.png"/>
   <dui-separator vertical/>
-  <dui-avatar src="brokenlink" alt="@DorvakOff" fallback="DVK"/>
+  <dui-avatar alt="@DorvakOff" fallback="DVK" src="brokenlink"/>
 </div>
 
 <dui-separator/>
@@ -48,16 +49,16 @@
 <h2 class="font-bold text-2xl font-outfit">Buttons</h2>
 
 <div class="flex gap-2 flex-wrap">
-  <dui-button icon="check" (click)="testAlert()">Primary</dui-button>
-  <dui-button variant="primary" size="icon" icon="check" (click)="testAlert()"/>
-  <dui-button variant="secondary" (click)="testAlert()">Secondary</dui-button>
-  <dui-button variant="destructive" (click)="testAlert()">Danger</dui-button>
-  <dui-button variant="info" (click)="testAlert()">Info</dui-button>
-  <dui-button variant="warning" (click)="testAlert()">Warning</dui-button>
-  <dui-button variant="success" (click)="testAlert()">Success</dui-button>
-  <dui-button variant="ghost" (click)="testAlert()">Ghost</dui-button>
-  <dui-button disabled (click)="testAlert()">Disabled</dui-button>
-  <dui-button loading (click)="testAlert()">Loading</dui-button>
+  <dui-button (click)="testAlert()" icon="check">Primary</dui-button>
+  <dui-button (click)="testAlert()" icon="check" size="icon" variant="primary"/>
+  <dui-button (click)="testAlert()" variant="secondary">Secondary</dui-button>
+  <dui-button (click)="testAlert()" variant="destructive">Danger</dui-button>
+  <dui-button (click)="testAlert()" variant="info">Info</dui-button>
+  <dui-button (click)="testAlert()" variant="warning">Warning</dui-button>
+  <dui-button (click)="testAlert()" variant="success">Success</dui-button>
+  <dui-button (click)="testAlert()" variant="ghost">Ghost</dui-button>
+  <dui-button (click)="testAlert()" disabled>Disabled</dui-button>
+  <dui-button (click)="testAlert()" loading>Loading</dui-button>
 </div>
 
 <dui-separator/>
@@ -70,23 +71,25 @@
   <span slot="title">Authentification</span>
   <span slot="subtitle">You need to login to access this page</span>
 
-  <div slot="content" class="flex gap-2 flex-col md:flex-row">
-    <form [formGroup]="formCard" slot="content" class="flex w-full gap-2 flex-col md:w-1/2" (ngSubmit)="testAlert(formCard.value)">
-      <dui-input placeholder="contact@dorvak.com" type="email" label="Email" required formControlName="email"/>
-      <dui-input placeholder="Enter password" type="password" label="Password" required formControlName="password"/>
-      <dui-checkbox label="Remember me" formControlName="remember"/>
+  <div class="flex gap-2 flex-col md:flex-row" slot="content">
+    <form (ngSubmit)="testAlert(formCard.value)" [formGroup]="formCard" class="flex w-full gap-2 flex-col md:w-1/2"
+          slot="content">
+      <dui-input formControlName="email" label="Email" placeholder="contact@dorvak.com" required type="email"/>
+      <dui-input formControlName="password" label="Password" placeholder="Enter password" required type="password"/>
+      <dui-checkbox formControlName="remember" label="Remember me"/>
 
       <div class="flex-1"></div>
-      <dui-button variant="primary" class="w-full" icon="log-in" submit>Login</dui-button>
+      <dui-button class="w-full" icon="log-in" submit variant="primary">Login</dui-button>
     </form>
-    <dui-separator vertical class="hidden md:block"/>
+    <dui-separator class="hidden md:block" vertical/>
     <dui-separator class="md:hidden visible"/>
-    <form [formGroup]="formCard" slot="content" class="flex w-full gap-2 flex-col md:w-1/2" (ngSubmit)="testAlert(formCard.value)">
-      <dui-input placeholder="contact@dorvak.com" type="email" label="Email" required formControlName="email"/>
-      <dui-input placeholder="Dorvak" label="Username" required formControlName="username"/>
-      <dui-input placeholder="Enter password" type="password" label="Password" required formControlName="password"/>
+    <form (ngSubmit)="testAlert(formCard.value)" [formGroup]="formCard" class="flex w-full gap-2 flex-col md:w-1/2"
+          slot="content">
+      <dui-input formControlName="email" label="Email" placeholder="contact@dorvak.com" required type="email"/>
+      <dui-input formControlName="username" label="Username" placeholder="Dorvak" required/>
+      <dui-input formControlName="password" label="Password" placeholder="Enter password" required type="password"/>
 
-      <dui-button variant="primary" class="w-full" icon="log-in" submit>Register</dui-button>
+      <dui-button class="w-full" icon="log-in" submit variant="primary">Register</dui-button>
     </form>
   </div>
 </dui-card>
@@ -94,26 +97,26 @@
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Checkboxes</h2>
 <dui-checkbox label="Checkbox"/>
-<dui-checkbox disabled checked label="Disabled Checkbox"/>
+<dui-checkbox checked disabled label="Disabled Checkbox"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Combobox</h2>
 <dui-combobox
   [items]="comboItems"
-  label="Select an item"
   class="w-[300px]"
+  label="Select an item"
 />
 <dui-combobox
   [items]="comboItems"
-  label="Select multiple items"
   class="w-[300px]"
+  label="Select multiple items"
   multi
 />
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Datepicker</h2>
-<dui-date-picker class="w-[300px]" placeholder="Select a date" label="Select a date" required/>
-<dui-date-picker class="w-[300px]" placeholder="Select a date" label="Disabled date picker" disabled/>
+<dui-date-picker class="w-[300px]" label="Select a date" placeholder="Select a date" required/>
+<dui-date-picker class="w-[300px]" disabled label="Disabled date picker" placeholder="Select a date"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Dropdowns Menu</h2>
@@ -130,38 +133,39 @@
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Inputs</h2>
-<dui-input placeholder="contact@dorvak.com" type="email" class="w-[300px]"/>
-<dui-input type="number" min="0" max="100" class="w-[300px]"/>
-<dui-input disabled placeholder="placeholder" class="w-[300px]"/>
-<dui-input placeholder="Input with icon" icon="circle-x" class="w-[300px]"/>
-<dui-input readonly value="Valeur readonly" class="w-[300px]"/>
+<dui-input class="w-[300px]" placeholder="contact@dorvak.com" type="email"/>
+<dui-input class="w-[300px]" max="100" min="0" type="number"/>
+<dui-input class="w-[300px]" disabled placeholder="placeholder"/>
+<dui-input class="w-[300px]" icon="circle-x" placeholder="Input with icon"/>
+<dui-input class="w-[300px]" readonly value="Valeur readonly"/>
 
 <div class="flex gap-1.5 flex-col">
-  <dui-input value="value" required label="Test Label" class="w-[300px]"/>
+  <dui-input class="w-[300px]" label="Test Label" required value="value"/>
 </div>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Input Groups</h2>
-<dui-input label="Input with button" inputClass="rounded-r-none" class="w-[300px]">
-  <dui-button icon="check" buttonClass="!h-9 rounded-l-none"/>
+<dui-input class="w-[300px]" inputClass="rounded-r-none" label="Input with button">
+  <dui-button buttonClass="!h-9 rounded-l-none" icon="check"/>
 </dui-input>
-<dui-input label="Input with span" placeholder="Enter an amount" type="number" inputClass="rounded-r-none" class="w-[300px]">
+<dui-input class="w-[300px]" inputClass="rounded-r-none" label="Input with span" placeholder="Enter an amount"
+           type="number">
   <span class="rounded-r-md py-2 flex items-center justify-center px-4 bg-muted h-9 text-muted-foreground select-none">
     <i-lucide name="euro" size="16"/>
   </span>
 </dui-input>
-<dui-input label="Input with dropdown menu" placeholder="Select an item" inputClass="rounded-r-none" class="w-[300px]">
+<dui-input class="w-[300px]" inputClass="rounded-r-none" label="Input with dropdown menu" placeholder="Select an item">
   <dui-dropdown-menu buttonClass="!h-9 rounded-l-none" label="Dropdown">
     <dui-dropdown-item>
-        Item 1
+      Item 1
     </dui-dropdown-item>
     <dui-dropdown-item>
-        Item 2
+      Item 2
     </dui-dropdown-item>
   </dui-dropdown-menu>
 </dui-input>
-<dui-input label="Input with select" placeholder="Select a country" inputClass="rounded-l-none" class="w-[300px]">
-  <dui-select slot="before" inputClass="!h-9 rounded-r-none w-[100px]" [items]="selectItems"/>
+<dui-input class="w-[300px]" inputClass="rounded-l-none" label="Input with select" placeholder="Select a country">
+  <dui-select [items]="selectItems" inputClass="!h-9 rounded-r-none w-[100px]" slot="before"/>
 </dui-input>
 
 <dui-separator/>
@@ -174,9 +178,10 @@
 <dui-modal #modal>
   <span slot="title">Please Login</span>
   <span slot="subtitle">You need to login to access this page</span>
-  <form [formGroup]="formCard" slot="content" class="flex gap-2 flex-col" (ngSubmit)="testAlert(formCard.value); modal.close()">
-    <dui-input placeholder="contact@dorvak.com" type="email" label="Email" required formControlName="email"/>
-    <dui-input placeholder="Enter password" type="password" label="Password" required formControlName="password"/>
+  <form (ngSubmit)="testAlert(formCard.value); modal.close()" [formGroup]="formCard" class="flex gap-2 flex-col"
+        slot="content">
+    <dui-input formControlName="email" label="Email" placeholder="contact@dorvak.com" required type="email"/>
+    <dui-input formControlName="password" label="Password" placeholder="Enter password" required type="password"/>
 
     <div class="flex-1"></div>
     <dui-button class="w-full" icon="log-in" submit>Login</dui-button>
@@ -188,11 +193,12 @@
   <span slot="title">Please Select</span>
   <span slot="subtitle">You need to select an item</span>
 
-  <div slot="content" class="flex flex-col gap-2 w-full">
-    <form [formGroup]="formModal" class="flex gap-2 flex-col" (ngSubmit)="testAlert(formModal.value); modal2.close()">
-      <dui-combobox [items]="comboItems" required label="Combobox" formControlName="combo" multi/>
-      <dui-select [items]="selectItems" required label="Select" formControlName="select"/>
-      <dui-textarea placeholder="Write something here" label="Write something here" required formControlName="textarea"/>
+  <div class="flex flex-col gap-2 w-full" slot="content">
+    <form (ngSubmit)="testAlert(formModal.value); modal2.close()" [formGroup]="formModal" class="flex gap-2 flex-col">
+      <dui-combobox [items]="comboItems" formControlName="combo" label="Combobox" multi required/>
+      <dui-select [items]="selectItems" formControlName="select" label="Select" required/>
+      <dui-textarea formControlName="textarea" label="Write something here" placeholder="Write something here"
+                    required/>
 
       <div class="flex-1"></div>
 
@@ -207,17 +213,43 @@
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Pagination</h2>
-<dui-pagination [total]="100" [pageSize]="10"/>
-<dui-pagination [total]="100" [pageSize]="10" showItemsCount="false"/>
+<dui-pagination [pageSize]="10" [total]="100"/>
+<dui-pagination [pageSize]="10" [total]="100" showItemsCount="false"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Selects</h2>
-<dui-select [items]="selectItems" (selectedChange)="testAlert($event)" class="w-[300px]" label="Select an item"/>
+<dui-select (selectedChange)="testAlert($event)" [items]="selectItems" class="w-[300px]" label="Select an item"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Switches</h2>
 <dui-switch label="Switch"/>
-<dui-switch disabled checked label="Disabled Switch"/>
+<dui-switch checked disabled label="Disabled Switch"/>
+
+<dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Tables</h2>
+
+<h3 class="font-bold text-xl font-outfit">Table with selectable rows and action on selected rows</h3>
+<dui-switch [(ngModel)]="multipleSelection" label="Toggle multiple selection"/>
+
+<dui-table #table (rowClick)="testAlert($event)" [columnDefinitions]="columnDefinitions"
+           [data]="tableData"
+           enableRowClick selectable
+           [selectMode]="multipleSelection ? 'multiple' : 'single'"
+>
+  <dui-button (click)="testAlert('add')" icon="plus" slot="actions">
+    Add
+  </dui-button>
+  <dui-button (click)="testAlert(table.selectedRows)" [disabled]="table.selectedRows.length === 0" icon="pencil" slot="actions"
+              variant="outline">
+    Edit a row
+  </dui-button>
+</dui-table>
+
+<h3 class="font-bold text-xl font-outfit">Loading table</h3>
+<dui-table [columnDefinitions]="columnDefinitions" loading/>
+
+<h2 class="font-bold text-xl font-outfit">Table with no data</h2>
+<dui-table [columnDefinitions]="columnDefinitions"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Tabs</h2>
@@ -236,28 +268,28 @@
       <span slot="content">Tab 2 content</span>
     </dui-card>
   </dui-tab>
-  <dui-tab title="Tab 3" disabled/>
+  <dui-tab disabled title="Tab 3"/>
 </dui-tabs>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Textareas</h2>
-<dui-textarea placeholder="Write something here" label="Write something here" required/>
+<dui-textarea label="Write something here" placeholder="Write something here" required/>
 <dui-textarea placeholder="Disabled"/>
-<dui-textarea value="Readonly" readonly/>
+<dui-textarea readonly value="Readonly"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Tooltip</h2>
 <div class="flex gap-2">
-  <dui-tooltip text="This is a tooltip" class="w-fit">
+  <dui-tooltip class="w-fit" text="This is a tooltip">
     <span class="underline w-fit">Top tooltip</span>
   </dui-tooltip>
-  <dui-tooltip text="This is a tooltip" class="w-fit" side="bottom">
+  <dui-tooltip class="w-fit" side="bottom" text="This is a tooltip">
     <span class="underline w-fit">Bottom tooltip</span>
   </dui-tooltip>
-  <dui-tooltip text="This is a tooltip" class="w-fit" side="left">
+  <dui-tooltip class="w-fit" side="left" text="This is a tooltip">
     <span class="underline w-fit">Left tooltip</span>
   </dui-tooltip>
-  <dui-tooltip text="This is a tooltip" class="w-fit" side="right">
+  <dui-tooltip class="w-fit" side="right" text="This is a tooltip">
     <span class="underline w-fit">Right tooltip</span>
   </dui-tooltip>
 </div>
