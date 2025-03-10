@@ -14,10 +14,11 @@ import {RadioComponent} from "../../radio/radio.component";
   template: `
     <tr
       class="select-none flex w-full hover:text-accent-foreground hover:bg-accent transition-colors duration-300 border-b-border border-b-2"
+      [style.height.px]="rowHeight"
     >
       @if (selectable) {
         <td>
-          <div class="flex items-center justify-center w-12 h-full">
+          <div class="flex items-center justify-center w-14 h-full">
             @if (selectMode === 'multiple') {
               <dui-checkbox [(checked)]="checked"/>
             } @else {
@@ -30,7 +31,6 @@ import {RadioComponent} from "../../radio/radio.component";
         <td [ngClass]="column.cellClass"
             class="flex items-center w-full px-4 py-2"
             [class.cursor-pointer]="$first && enableRowClick"
-            [style.height.px]="rowHeight"
             (click)="enableRowClick ? rowClick.emit(rowData) : null"
         >
           <dui-table-row-cell [column]="column" [rowData]="rowData"

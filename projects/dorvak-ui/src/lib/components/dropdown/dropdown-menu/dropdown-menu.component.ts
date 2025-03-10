@@ -1,4 +1,12 @@
-import {Component, ElementRef, HostListener, Input, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {ButtonComponent} from "../../button/button.component";
 import {LucideAngularModule} from "lucide-angular";
 import {cn} from "../../../utils/utils";
@@ -13,11 +21,11 @@ import {Subject, throttleTime} from "rxjs";
   ],
   template: `
     <div class="relative">
-      <dui-button (click)="toggleMenu(); $event.stopPropagation()" [disabled]="disabled" icon="chevron-down" [buttonClass]="buttonClass" #button>
+      <dui-button (click)="toggleMenu(); $event.stopPropagation()" [size]="size" [disabled]="disabled" [icon]="icon" [buttonClass]="buttonClass" #button>
         {{ label }}
       </dui-button>
       <div [class]="cn(
-                'absolute w-full top-11 bg-popover text-popover-foreground border border-gray-300 rounded-md shadow-md p-2 duration-300 z-10',
+                'absolute min-w-50 top-11 right-0 bg-popover text-popover-foreground border border-gray-300 rounded-md shadow-md p-2 duration-300 z-10',
                 showOnTop && 'bottom-11 top-auto'
               )"
            [class.hidden]="!visible && !dismissing"
@@ -31,8 +39,10 @@ import {Subject, throttleTime} from "rxjs";
 })
 export class DropdownMenuComponent {
 
-  @Input({ required: true }) label!: string;
-  @Input() disabled: boolean = false;
+  @Input() label: string = '';
+  @Input() icon: string = 'chevron-down';
+  @Input() size: 'sm' | 'default' | 'lg' | 'icon' = 'default';
+  @Input({transform: booleanAttribute}) disabled: boolean = false;
   @Input() buttonClass: string = '';
 
   @ViewChild('button') button!: ButtonComponent;

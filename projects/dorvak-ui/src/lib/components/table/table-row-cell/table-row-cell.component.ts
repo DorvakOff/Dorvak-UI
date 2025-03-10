@@ -1,4 +1,13 @@
-import {Component, ComponentRef, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  Component,
+  ComponentRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {CellHostDirective} from "../../../directives/cell-host.directive";
 import {NgIf} from "@angular/common";
 import {ColumnDefinition} from "../../../models/table/column-definition";
@@ -23,7 +32,7 @@ import {ICellRenderer} from "../../../models/table/cell-renderer";
   `,
   styles: ``
 })
-export class TableRowCellComponent implements OnInit {
+export class TableRowCellComponent implements OnInit, OnChanges {
 
   @ViewChild(CellHostDirective, {static: false}) cellHost!: CellHostDirective;
 
@@ -36,6 +45,14 @@ export class TableRowCellComponent implements OnInit {
         this.loadComponent(this.column.cellRenderer);
       }
     });
+  }
+
+  ngOnChanges() {
+    setTimeout(() => {
+      if (this.isComponent(this.column.cellRenderer)) {
+        this.loadComponent(this.column.cellRenderer);
+      }
+    })
   }
 
   renderCell(column: ColumnDefinition): any {

@@ -62,9 +62,9 @@ import {LucideIconNode} from "lucide-angular/icons/types";
             [name]="name"
             [autocomplete]="autocomplete"
             [required]="required"
-            [min]="min"
-            [pattern]="pattern"
-            [max]="max"
+            [attr.min]="min"
+            [attr.pattern]="pattern"
+            [attr.max]="max"
             [maxlength]="maxlength"
             [(ngModel)]="value"
             [readonly]="readonly"
@@ -105,15 +105,15 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   _type: string = 'text';
   @Input() placeholder: string = '';
   @Input() id: string = uniqueId('dui-input');
-  @Input() pattern: string = '';
+  @Input() pattern: string | null = null;
   @Input() maxlength: string | number | null = null;
   @Input() name: string = '';
   @Input() icon: string | LucideIconNode[] | undefined;
   @Input() iconPosition: 'left' | 'right' = 'right';
   @Input() autocomplete: string = 'off';
   @Input({transform: booleanAttribute}) valid: boolean = true;
-  @Input({transform: numberAttribute}) min: number | undefined;
-  @Input({transform: numberAttribute}) max: number | undefined;
+  @Input({transform: numberAttribute}) min: number | null = null;
+  @Input({transform: numberAttribute}) max: number | null = null;
   @Input({transform: booleanAttribute}) disabled: boolean = false;
   @Input({transform: booleanAttribute}) required: boolean = false;
   @Input({transform: booleanAttribute}) readonly: boolean = false;

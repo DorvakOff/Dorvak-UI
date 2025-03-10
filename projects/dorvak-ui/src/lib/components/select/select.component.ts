@@ -47,7 +47,7 @@ export interface SelectItem {
         </label>
       }
       <div class="relative">
-        <dui-input [id]="id" [inputClass]="inputClass" [disabled]="disabled" [required]="required" [placeholder]="placeholder" [value]="selected.label" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
+        <dui-input [id]="id" [inputClass]="inputClass" [disabled]="disabled" [required]="required" [placeholder]="placeholder" [value]="getLabel(selected)" readonly icon="chevron-down" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
           <div [class]="cn(
                 'absolute top-10 left-0 w-full bg-popover text-popover-foreground border border-gray-300 rounded-md shadow-md p-2 duration-300 z-10',
                 showOnTop && 'bottom-10 top-auto'
@@ -57,11 +57,11 @@ export interface SelectItem {
                #combobox>
             <ul class="max-h-40 overflow-y-auto overscroll-contain [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border">
               @for (item of items; track item.value) {
-                <li [class]="cn('cursor-pointer flex justify-between items-center hover:bg-accent hover:text-accent-foreground focus-within:bg-accent focus-within:text-accent-foreground rounded-sm px-2 py-1 outline-none', item.value === selected.value && 'bg-accent text-accent-foreground')"
+                <li [class]="cn('cursor-pointer flex justify-between items-center hover:bg-accent hover:text-accent-foreground focus-within:bg-accent focus-within:text-accent-foreground rounded-sm px-2 py-1 outline-none', item.value === selected && 'bg-accent text-accent-foreground')"
                   (click)="onSelect(item); $event.stopPropagation()" tabindex="0" (keydown.enter)="onSelect(item)"
                 >
                   <span>{{ item.label }}</span>
-                  @if (item.value === selected.value) {
+                  @if (item.value === selected) {
                     <i-lucide name="check" size="20" />
                   }
                 </li>
@@ -90,7 +90,7 @@ export class SelectComponent implements ControlValueAccessor {
   @ViewChild('input') input!: InputComponent;
 
   readonly id: string = uniqueId('dui-select');
-  protected _selected: SelectItem = {value: null, label: ''};
+  protected _selected: any;
   protected showOnTop: boolean = false;
   protected visible: boolean = false;
   protected dismissing: boolean = false
@@ -106,13 +106,14 @@ export class SelectComponent implements ControlValueAccessor {
     ).subscribe(showOnTop => this.showOnTop = showOnTop);
   }
 
-  set selected(value: SelectItem) {
+  @Input()
+  set selected(value: any) {
     this.markAsTouched();
     this._selected = value;
-    this.selectedChange.emit(value.value);
+    this.selectedChange.emit(value);
   }
 
-  get selected(): SelectItem {
+  get selected(): any {
     return this._selected;
   }
 
@@ -139,6 +140,11 @@ export class SelectComponent implements ControlValueAccessor {
       this.closeCombobox();
       $event.stopPropagation();
     }
+  }
+
+  getLabel(value: any) {
+    const item = this.items.find(item => item.value === value);
+    return item ? item.label : '';
   }
 
   handleInputClick($event: Event) {
@@ -170,7 +176,7 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   protected onSelect(item: SelectItem) {
-    this.selected = item;
+    this.selected = item.value;
     this.closeCombobox();
   }
 
@@ -184,7 +190,7 @@ export class SelectComponent implements ControlValueAccessor {
   }
 
   writeValue(obj: any) {
-    this.selected = obj || {value: null, label: ''};
+    this.selected = obj || null;
     this._touched = false;
   }
 
