@@ -213,8 +213,8 @@
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Pagination</h2>
-<dui-pagination [pageSize]="10" [total]="100"/>
-<dui-pagination [pageSize]="10" [total]="100" showItemsCount="false"/>
+<dui-pagination [pageSize]="10" [totalItems]="100" [totalPages]="10"/>
+<dui-pagination [pageSize]="10" [totalItems]="100" [totalPages]="10" showItemsCount="false"/>
 
 <dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Selects</h2>
@@ -244,9 +244,6 @@
     Edit a row
   </dui-button>
 </dui-table>
-
-<h3 class="font-bold text-xl font-outfit">Loading table</h3>
-<dui-table [columnDefinitions]="columnDefinitions" loading/>
 
 <h2 class="font-bold text-xl font-outfit">Table with no data</h2>
 <dui-table [columnDefinitions]="columnDefinitions"/>

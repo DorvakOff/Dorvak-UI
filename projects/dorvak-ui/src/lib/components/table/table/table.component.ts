@@ -1,4 +1,4 @@
-import {booleanAttribute, Component, EventEmitter, Input, Output, ViewChild,} from '@angular/core';
+import {booleanAttribute, Component, EventEmitter, Input, OnInit, Output, ViewChild,} from '@angular/core';
 import {BaseColumnDefinition, ColumnDefinition} from '../../../models/table/column-definition';
 import {TableRowComponent} from '../table-row/table-row.component';
 import {LucideAngularModule} from 'lucide-angular';
@@ -11,12 +11,11 @@ import {DropdownItemComponent} from "../../dropdown/dropdown-item/dropdown-item.
 import {ModalComponent} from "../../modal/modal.component";
 import {SelectComponent, SelectItem} from "../../select/select.component";
 import {InputComponent} from "../../input/input.component";
-
-interface FilterDefinition {
-  column: string | undefined;
-  operator: string;
-  value: string;
-}
+import {FilterDefinition} from "../../../models/table/filter-definition";
+import {SortDefinition} from "../../../models/table/sort-definition";
+import {TableDataAccessor} from "../../../models/table/table-data-accessor";
+import {TableLocalDataAccessor} from "../../../models/table/table-local-data-accessor";
+import {PaginatedResponse} from "../../../models/table/paginated-response";
 
 @Component({
   selector: 'dui-table',
@@ -84,7 +83,7 @@ interface FilterDefinition {
               </td>
             </tr>
           } @else {
-            @for (row of filteredAndSortedData; track $index) {
+            @for (row of _loadedRows; track $index) {
               <dui-table-row [rowData]="row" [columnDefinitions]="_visibleColumns"
                              [rowHeight]="rowHeight" [selectable]="selectable" [selectMode]="selectMode"
                              (checkedChange)="handleChange($event, row)" [checked]="isChecked(row)"
@@ -136,11 +135,11 @@ interface FilterDefinition {
         </div>
       </dui-modal>
       <dui-pagination (pageChange)="handlePageChange($event)" [currentPage]="currentPage" [pageSize]="pageSize"
-                      [total]="data.length"/>
+                      [totalItems]="totalItems" [totalPages]="totalPages"/>
     </div>
   `,
 })
-export class TableComponent {
+export class TableComponent implements OnInit {
 
   @ViewChild('filtersModal') filtersModal!: ModalComponent;
 
@@ -153,14 +152,20 @@ export class TableComponent {
     this._visibleColumns = [...value];
   }
 
+  @Input()
+  private dataAccessor: TableDataAccessor = new TableLocalDataAccessor([]);
+
   @Input() rowHeight: number = 50;
-  @Input() data: any[] = [];
+  @Input()
+  set data(data: any[]) {
+    this._data = data;
+    this.dataAccessor = new TableLocalDataAccessor(data);
+  }
+
   @Input({transform: booleanAttribute}) selectable: boolean = false;
   @Input() selectMode: 'single' | 'multiple' = 'single';
   @Input({transform: booleanAttribute}) enableRowClick: boolean = false;
   @Input() pageSize: number = 10;
-  @Input() queryMode: 'local' /*| 'remote'*/ = 'local';
-  @Input({transform: booleanAttribute}) loading: boolean = false;
 
   @Input()
   set defaultColumnDefinition(value: BaseColumnDefinition) {
@@ -179,6 +184,11 @@ export class TableComponent {
     this.selectedRowsChange.emit(distinct);
   }
 
+  protected loading: boolean = false;
+  protected _loadedRows: any[] = [];
+  protected totalPages: number = 0;
+  protected totalItems: number = 0;
+  private _data: any[] = [];
   private _selectedRows: any[] = [];
   private _columnDefinitions: ColumnDefinition[] = [];
   protected _visibleColumns: ColumnDefinition[] = [];
@@ -191,6 +201,10 @@ export class TableComponent {
     {label: 'Starts with', value: 'startsWith'},
     {label: 'Ends with', value: 'endsWith'},
   ];
+
+  get data(): any[] {
+    return this._data;
+  }
 
   get columnDefinitions(): ColumnDefinition[] {
     return this._columnDefinitions;
@@ -209,54 +223,28 @@ export class TableComponent {
     return this._defaultColumnDefinition;
   }
 
-  protected _sortColumn: { field: string; direction: 'asc' | 'desc' } | null = null;
-
-  get filteredData(): any[] {
-    let filteredData = [...this.data];
-
-    if (this._filters.length) {
-      filteredData = filteredData.filter(row => {
-        return this._filters.every(filter => {
-          const value = `${row[filter.column!]}`;
-          switch (filter.operator) {
-            case 'equals':
-              return value === filter.value;
-            case 'contains':
-              return value.includes(filter.value);
-            case 'startsWith':
-              return value.startsWith(filter.value);
-            case 'endsWith':
-              return value.endsWith(filter.value);
-            default:
-              return true;
-          }
-        });
-      });
-    }
-
-    return filteredData;
-  }
-
-  get filteredAndSortedData(): any[] {
-    let filteredData = this.filteredData;
-    let sort = this._sortColumn;
-
-    if (sort) {
-      filteredData = filteredData.sort((a, b) => {
-        const aValue = a[sort.field];
-        const bValue = b[sort.field];
-
-        if (aValue < bValue) return sort.direction === 'asc' ? -1 : 1;
-        if (aValue > bValue) return sort.direction === 'asc' ? 1 : -1;
-        return 0;
-      });
-    }
-
-    return filteredData.slice(this.currentPage * this.pageSize, (this.currentPage + 1) * this.pageSize);
-  }
+  protected _sortColumn: SortDefinition | null = null;
 
   handlePageChange(page: number): void {
     this.currentPage = page;
+    this.loadRows();
+  }
+
+  loadRows(): void {
+    this._loadedRows = [];
+    this.loading = true;
+    this.dataAccessor.loadRows(this.currentPage, this.pageSize, this._filters, this._sortColumn).subscribe((paginatedResponse: PaginatedResponse) => {
+      this._loadedRows = paginatedResponse.items;
+      this.currentPage = paginatedResponse.currentPage;
+      this.pageSize = paginatedResponse.pageSize;
+      this.totalPages = paginatedResponse.totalPages;
+      this.totalItems = paginatedResponse.totalItems;
+      this.loading = false;
+    })
+  }
+
+  ngOnInit() {
+    this.loadRows();
   }
 
   get sortIcon(): string {
@@ -282,6 +270,7 @@ export class TableComponent {
     } else {
       this._sortColumn = {field: column.field, direction: 'asc'};
     }
+    this.loadRows()
   }
 
   handleChange(checked: boolean, row: any): void {
@@ -379,5 +368,6 @@ export class TableComponent {
       value: filter.value,
     }))];
     this.filtersModal.close();
+    this.loadRows();
   }
 }
