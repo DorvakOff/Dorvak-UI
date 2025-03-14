@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import {provideRouter, RouterModule, Routes, withComponentInputBinding} from '@angular/router';
+import {provideRouter, RouterModule, Routes, withComponentInputBinding, withHashLocation} from '@angular/router';
 import {HomePageComponent} from "./pages/home-page/home-page.component";
 import {DocsPageComponent} from "./pages/docs-page/docs-page.component";
 
@@ -13,7 +13,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   providers: [
-    provideRouter(routes, withComponentInputBinding())
+    provideRouter(routes, withComponentInputBinding(), withHashLocation())
   ],
   exports: [RouterModule]
 })
