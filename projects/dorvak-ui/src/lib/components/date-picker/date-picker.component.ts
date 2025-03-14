@@ -14,7 +14,7 @@ import {cn, uniqueId} from "../../utils/utils";
 import {CalendarComponent} from "../calendar/calendar.component";
 import {ControlValueAccessor} from "@angular/forms";
 import {Subject, throttleTime} from "rxjs";
-import {TitleCasePipe} from "@angular/common";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'dui-date-picker',
@@ -23,7 +23,7 @@ import {TitleCasePipe} from "@angular/common";
     InputComponent,
     LucideAngularModule,
     CalendarComponent,
-    TitleCasePipe
+    DatePipe
   ],
   template: `
     <div class="flex flex-col gap-1">
@@ -36,7 +36,7 @@ import {TitleCasePipe} from "@angular/common";
         </label>
       }
       <div class="relative">
-        <dui-input [id]="id" [disabled]="disabled" [required]="required" [placeholder]="placeholder" [value]="getInputLabel() | titlecase" readonly icon="calendar" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
+        <dui-input [id]="id" [disabled]="disabled" [required]="required" [placeholder]="placeholder" [value]="(value | date: dateFormat) || ''" readonly icon="calendar" class="cursor-pointer" (click)="handleInputClick($event)" (keydown.enter)="handleInputClick($event)" #input/>
         <div [class]="cn(
                 'absolute top-10 left-0 duration-300 z-10',
                 showOnTop && 'bottom-10 top-auto'
@@ -57,6 +57,7 @@ export class DatePickerComponent implements ControlValueAccessor {
   @Input() placeholder: string = 'Select a date';
   @Input({ transform: booleanAttribute }) required: boolean = false;
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
+  @Input() dateFormat: string = 'fullDate';
 
   @ViewChild('popup') popup!: ElementRef<HTMLDivElement>;
   @ViewChild('calendar') calendar!: CalendarComponent;
@@ -81,10 +82,6 @@ export class DatePickerComponent implements ControlValueAccessor {
 
   get value(): Date | undefined {
     return this._value;
-  }
-
-  getInputLabel(): string {
-    return this.value ? this.value.toLocaleDateString('default', {weekday: 'short', day: 'numeric', month: 'short', year: 'numeric'}) : '';
   }
 
   constructor() {

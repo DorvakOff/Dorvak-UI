@@ -11,7 +11,7 @@ import {TitleCasePipe} from "@angular/common";
     TitleCasePipe
   ],
   template: `
-    <div class="p-4 gap-2 rounded-xl border bg-card text-card-foreground shadow flex flex-col w-fit">
+    <div class="p-4 gap-2 rounded-xl border bg-card text-card-foreground shadow flex flex-col w-[300px]">
       <div class="flex justify-between items-center">
         <dui-button variant="ghost" size="icon" icon="chevron-left" (click)="currentDate.setMonth(currentDate.getMonth() - 1)" [disabled]="isPrevDisabled()" #button/>
         <span class="font-bold capitalize">{{ monthName }} {{ currentDate.getFullYear() }}</span>
@@ -23,7 +23,8 @@ import {TitleCasePipe} from "@angular/common";
         }
         @for (day of daysToDisplay; track $index) {
           <button
-            [class]="cn('p-2 text-sm text-center rounded-md enabled:hover:bg-accent enabled:hover:text-accent-foreground disabled:cursor-not-allowed disabled:text-muted-foreground',
+            [class]="cn('p-2 h-10 w-10 text-sm text-center rounded-md enabled:hover:bg-accent enabled:hover:text-accent-foreground disabled:cursor-not-allowed disabled:text-muted-foreground',
+              isToday(day.date) && 'bg-accent text-accent-foreground',
               day.date.getMonth() !== currentDate.getMonth() && 'text-muted-foreground',
               day.date.getTime() === value.getTime() && 'bg-primary text-primary-foreground enabled:hover:bg-primary enabled:hover:text-primary-foreground'
             )"
@@ -112,6 +113,12 @@ export class CalendarComponent implements OnInit {
 
   isNextDisabled() {
     return this.max && this.currentDate.getFullYear() === this.max.getFullYear() && this.currentDate.getMonth() >= this.max.getMonth();
+  }
+
+  isToday(date: Date) {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return date.getTime() === today.getTime();
   }
 
   protected readonly cn = cn;

@@ -1,4 +1,13 @@
-import {AfterContentInit, Component, ContentChildren, QueryList, ViewEncapsulation} from '@angular/core';
+import {
+  AfterContentInit,
+  Component,
+  ContentChildren,
+  EventEmitter,
+  Input,
+  Output,
+  QueryList,
+  ViewEncapsulation
+} from '@angular/core';
 import {TabComponent} from "../tab/tab.component";
 import {cn} from "../../../utils/utils";
 
@@ -6,18 +15,25 @@ import {cn} from "../../../utils/utils";
   selector: 'dui-tabs',
   encapsulation: ViewEncapsulation.None,
   template: `
-    <div class="inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground w-full">
-      @for (tab of tabs; track $index) {
-        <button (click)="selectTab(tab)"
-                [class]="cn('select-none inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 w-full', tab.selected && 'bg-background text-foreground shadow')"
-                [disabled]="tab.disabled"
-        >
-          <span>{{ tab.title }}</span>
-        </button>
-      }
+    <div class="flex flex-col w-full">
+      <div
+        class="flex flex-row gap-1 border-b-4 border-b-muted w-full"
+        [class.justify-start]="align === 'left'"
+        [class.justify-center]="align === 'center'"
+        [class.justify-end]="align === 'right'"
+      >
+        @for (tab of tabs; track $index) {
+          <button (click)="selectTab(tab)"
+                  [class]="cn('relative px-4 py-2 cursor-pointer rounded-t-md disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground font-semibold', 'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background outline-none transition-all', 'after:content-[\\' \\'] after:h-1 after:w-full after:absolute after:-bottom-1 after:left-0 after:right-0 after:rounded-full enabled:hover:after:bg-primary', tab.selected && 'after:bg-primary')"
+                  [disabled]="tab.disabled"
+          >
+            {{ tab.title }}
+          </button>
+        }
+      </div>
     </div>
     <div
-      class="mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+      class="mt-4 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
       <ng-content/>
     </div>
   `
@@ -26,6 +42,16 @@ export class TabsComponent implements AfterContentInit {
 
   @ContentChildren(TabComponent) tabs!: QueryList<TabComponent>;
 
+  @Input() align: 'left' | 'center' | 'right' = 'left';
+
+  @Input()
+  set selected(selected: string | undefined) {
+    this.selectedTabTitle = selected;
+  }
+
+  @Output() tabChange: EventEmitter<string> = new EventEmitter<string>();
+
+  selectedTabTitle: string | undefined = undefined;
   selectedTab: TabComponent | null = null;
 
   selectTab(tab: TabComponent) {
@@ -34,13 +60,12 @@ export class TabsComponent implements AfterContentInit {
       tab.selected = false;
     });
     tab.selected = true;
+    this.tabChange.emit(tab.title);
   }
 
-  ngAfterContentInit() {
-    this.selectedTab = this.tabs.first;
-    if (this.selectedTab) {
-      this.selectedTab.selected = true;
-    }
+  ngAfterContentInit()  {
+    const selectedTab = this.tabs.find(tab => tab.title.toLowerCase() === this.selectedTabTitle?.toLowerCase()) ?? this.tabs.first;
+    this.selectTab(selectedTab);
   }
 
   protected readonly cn = cn;

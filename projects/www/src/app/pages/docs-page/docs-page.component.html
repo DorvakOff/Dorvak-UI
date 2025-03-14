@@ -1,21 +1,61 @@
 <div class="flex h-[calc(100dvh-4rem)] w-full">
   <div class="border-r shadow w-64 overflow-y-auto flex flex-col p-4 gap-2">
-    @for (group of groups; track $index) {
-      <div class="flex flex-col">
-        <h3 class="font-bold">{{ group.name }}</h3>
-        <ul class="flex flex-col">
-          @for (item of group.items; track $index) {
-            <li class="flex">
-              <a [routerLink]="['/docs/', group.name | slugify, item | slugify ]" routerLinkActive="font-semibold bg-accent text-accent-foreground" class="w-full rounded-sm hover:bg-accent hover:text-accent-foreground font-normal text-foreground px-2 py-1">{{ item }}</a>
-            </li>
-          }
-        </ul>
-      </div>
-    }
+    <ul class="flex flex-col">
+      @for (item of items; track $index) {
+        <li class="flex">
+          <a [routerLink]="['/docs/', 'components', item.id ]"
+             routerLinkActive="font-semibold bg-accent text-accent-foreground"
+             class="w-full rounded-sm hover:bg-accent hover:text-accent-foreground font-normal text-foreground px-2 py-1">
+            {{ item.name }}
+          </a>
+        </li>
+      }
+    </ul>
   </div>
   <div class="flex flex-col flex-1 p-4 gap-4 overflow-y-auto w-full max-w-full">
-    <dui-breadcrumb [items]="breadcrumbs"/>
-    <dui-separator/>
-    <markdown [src]="content" class="prose prose-code:bg-accent prose-code:p-1 prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none w-full max-w-full"/>
+    <h1 class="text-4xl font-bold font-outfit">
+      {{ activeItem.name }}
+    </h1>
+    <div class="flex flex-row gap-2">
+      <dui-badge>{{ activeItem.since }}</dui-badge>
+    </div>
+    <dui-tabs (tabChange)="onTabChange($event)" [selected]="activeTab">
+      @if (activeItem.previewComponent) {
+        <dui-tab title="Usage">
+          <app-component-showcase [component]="activeItem"/>
+        </dui-tab>
+      }
+      <dui-tab title="Code">
+        <markdown [src]="content"
+                  clipboard
+                  class="prose prose-code:bg-transparent prose-code:p-1 prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none w-full max-w-full"/>
+      </dui-tab>
+      <!--      <dui-tab title="Changelog"></dui-tab>-->
+    </dui-tabs>
+
+    <div class="gap-2 grid grid-cols-2">
+      @if (items.indexOf(activeItem) > 0) {
+        <button
+          class="cursor-pointer flex gap-2 justify-center items-center rounded-sm px-4 py-2 hover:bg-accent hover:text-accent-foreground transition-colors duration-200 ease-in-out border h-20"
+          (click)="onPrevious()"
+        >
+          <i-lucide name="ArrowLeft" size="30"/>
+          Previous
+        </button>
+      } @else {
+        <div></div>
+      }
+      @if (items.indexOf(activeItem) < items.length - 1) {
+        <button
+          class="cursor-pointer flex gap-2 justify-center items-center rounded-sm px-4 py-2 hover:bg-accent hover:text-accent-foreground transition-colors duration-200 ease-in-out border h-20"
+          (click)="onNext()"
+        >
+          Next
+          <i-lucide name="ArrowRight" size="30"/>
+        </button>
+      } @else {
+        <div></div>
+      }
+    </div>
   </div>
 </div>

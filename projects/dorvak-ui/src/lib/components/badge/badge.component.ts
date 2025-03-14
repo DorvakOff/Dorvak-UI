@@ -6,10 +6,11 @@ import {cva} from "class-variance-authority";
 import {cn} from "../../utils/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center gap-1 px-2 py-1 rounded-full text-xs transition-colors duration-300 ",
+  "inline-flex items-center gap-1 px-4 py-2 rounded-full transition-colors duration-300 text-sm",
   {
     variants: {
       variant: {
+        default: "bg-accent text-accent-foreground hover:bg-accent/80",
         primary: "bg-primary text-primary-foreground hover:bg-primary/80",
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         success: "bg-success text-success-foreground hover:bg-success/80",
@@ -19,7 +20,7 @@ const badgeVariants = cva(
       }
     },
     defaultVariants: {
-      variant: "primary"
+      variant: "default"
     }
   }
 )
@@ -43,7 +44,7 @@ export class BadgeComponent {
 
   badgeVariants = badgeVariants;
 
-  @Input() variant: Variant = 'primary';
+  @Input() variant: Variant | 'default' = 'default';
   @Input() icon: string | readonly LucideIconNode[] | undefined;
   @Input() iconPosition: 'left' | 'right' = 'left';
 

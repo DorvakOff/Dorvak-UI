@@ -4,20 +4,21 @@ import {
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges,
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
 import {CellHostDirective} from "../../../directives/cell-host.directive";
-import {NgIf} from "@angular/common";
-import {ColumnDefinition} from "../../../models/table/column-definition";
+import {DatePipe, DecimalPipe, NgIf} from "@angular/common";
+import {BaseColumnDefinition, ColumnDefinition} from "../../../models/table/column-definition";
 import {ICellRenderer} from "../../../models/table/cell-renderer";
 
 @Component({
   selector: 'dui-table-row-cell',
   imports: [
     CellHostDirective,
-    NgIf
+    NgIf,
+    DecimalPipe,
+    DatePipe
   ],
   encapsulation: ViewEncapsulation.None,
   template: `
@@ -26,7 +27,23 @@ import {ICellRenderer} from "../../../models/table/cell-renderer";
     </ng-container>
 
     <ng-template #defaultCell>
-      <div [innerHTML]="renderCell(column)"></div>
+      @if (column.cellRenderer) {
+        <div [innerHTML]="renderCell(column)"></div>
+      } @else {
+        <div>
+          @switch (column.dataType ?? defaultColumnDefinition.dataType ?? 'string') {
+            @case ('string') {
+              {{ rowData[column.field] }}
+            }
+            @case ('number') {
+              {{ rowData[column.field] | number }}
+            }
+            @case ('date') {
+              {{ rowData[column.field] | date: (column.dateFormat ?? defaultColumnDefinition.dateFormat ?? 'dd/MM/YYYY') }}
+            }
+          }
+        </div>
+      }
     </ng-template>
 
   `,
@@ -38,6 +55,7 @@ export class TableRowCellComponent implements OnInit, OnChanges {
 
   @Input() column!: ColumnDefinition;
   @Input() rowData: any;
+  @Input() defaultColumnDefinition!: BaseColumnDefinition;
 
   ngOnInit(): void {
     setTimeout(() => {

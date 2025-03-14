@@ -24,5 +24,15 @@
   },
   "author": "Dorvak",
   "homepage": "https://dorvak-ui.dorvak.com",
-  "license": "MIT"
+  "license": "MIT",
+  "keywords": [
+    "angular",
+    "ui",
+    "component",
+    "library",
+    "design",
+    "system",
+    "tailwindcss",
+    "dorvak"
+  ]
 }

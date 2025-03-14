@@ -18,7 +18,7 @@ import {cn} from "../../utils/utils";
   ],
   template: `
     @if (totalPages > 1) {
-      <div [class]="cn('flex items-center gap-4 py-2 px-10 flex-wrap', showItemsCount ? 'md:justify-between justify-center' : 'justify-center')">
+      <div [class]="cn('flex items-center gap-4 py-2 px-10 flex-wrap', showItemsCount ? 'lg:justify-between justify-center' : 'justify-center')">
         @if (showItemsCount) {
           <div class="text-sm text-gray-500">
             Showing {{ currentPage * pageSize + 1 }} to {{ Math.min((currentPage + 1) * pageSize, totalItems) }} of {{ totalItems }} results

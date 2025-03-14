@@ -93,7 +93,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
   @ViewChild('input') input!: InputComponent;
 
   readonly id: string = uniqueId('dui-combobox');
-  private _selected!: SelectedType<this['multi']>;
+  private _selectedInternal!: SelectedType<this['multi']>;
   protected _searchValue: string = '';
   protected showOnTop: boolean = false;
   protected visible: boolean = false;
@@ -111,13 +111,24 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
   }
 
   ngOnInit() {
-    this.selected = (this.multi ? [] : { value: null, label: '' }) as SelectedType<this['multi']>;
   }
 
   @Input()
-  set selected(value: SelectedType<this['multi']>) {
+  set selected(value: any | any[]) {
+    if (this.multi) {
+      let selected = Array.isArray(value) ? value : [];
+      this.selectedInternal = selected.map(item => ({
+        value: item,
+        label: item
+      })) as SelectedType<this['multi']>;
+    } else {
+      this.selectedInternal = (value ? { value, label: value } : { value: null, label: '' }) as SelectedType<this['multi']>;
+    }
+  }
+
+  set selectedInternal(value: SelectedType<this['multi']>) {
     this.markAsTouched();
-    this._selected = value;
+    this._selectedInternal = value;
     if (this.multi) {
       let selected = Array.isArray(value) ? value : [];
       this.selectedChange.emit(selected.map(item => item.value));
@@ -126,8 +137,8 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  get selected(): SelectedType<this['multi']> {
-    return this._selected;
+  get selectedInternal(): SelectedType<this['multi']> {
+    return this._selectedInternal;
   }
 
   @HostListener('document:click', ['$event'])
@@ -193,20 +204,20 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
 
   protected onSelect(item: ComboboxItem) {
     if (this.multi) {
-      let selected = Array.isArray(this.selected) ? this.selected : [];
+      let selected = Array.isArray(this.selectedInternal) ? this.selectedInternal : [];
       if (selected.some(selectedItem => selectedItem.value === item.value)) {
-        this.selected = selected.filter(selectedItem => selectedItem.value !== item.value) as SelectedType<this['multi']>;
+        this.selectedInternal = selected.filter(selectedItem => selectedItem.value !== item.value) as SelectedType<this['multi']>;
       } else {
-        this.selected = [...selected, item] as SelectedType<this['multi']>;
+        this.selectedInternal = [...selected, item] as SelectedType<this['multi']>;
       }
     } else {
-      this.selected = item as SelectedType<this['multi']>;
+      this.selectedInternal = item as SelectedType<this['multi']>;
       this.closeCombobox();
     }
   }
 
   isSelected(item: ComboboxItem): boolean {
-    return this.multi && Array.isArray(this.selected) ? this.selected.some(selectedItem => selectedItem.value === item.value) : (this.selected as ComboboxItem).value === item.value;
+    return this.multi && Array.isArray(this.selectedInternal) ? this.selectedInternal.some(selectedItem => selectedItem.value === item.value) : (this.selectedInternal as ComboboxItem).value === item.value;
   }
 
   protected readonly cn = cn;
@@ -219,7 +230,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
   }
 
   writeValue(obj: any) {
-    this.selected = obj || {value: null, label: ''};
+    this.selected = obj || null;
     this._touched = false;
   }
 
@@ -237,7 +248,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
 
   getValue() {
     if (this.multi) {
-      let selected = this.selected as ComboboxItem[] | undefined;
+      let selected = this.selectedInternal as ComboboxItem[] | undefined;
       if (selected && selected.length > 1) {
         return `${selected.length} items selected`;
       } else if (selected && selected.length === 1) {
@@ -246,7 +257,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
         return '';
       }
     } else {
-      return (this.selected as ComboboxItem).label;
+      return (this.selectedInternal as ComboboxItem).label;
     }
   }
 }

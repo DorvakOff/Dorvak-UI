@@ -1,6 +1,9 @@
-import {ChangeDetectorRef, Component, Input} from '@angular/core';
-import {SlugifyPipe} from "../../pipes/slugify.pipe";
-import {BreadcrumbItem} from "../../../../../dorvak-ui/src/lib/components/breadcrumb/breadcrumb.component";
+import {Component, Input} from '@angular/core';
+import {Router} from "@angular/router";
+import {AlertPreviewComponent} from "../../components/previews/alert/alert-preview.component";
+import {AlertModalPreviewComponent} from "../../components/previews/alert-modal-preview/alert-modal-preview.component";
+import {AvatarPreviewComponent} from "../../components/previews/avatar-preview/avatar-preview.component";
+import {AccordionPreviewComponent} from "../../components/previews/accordion-preview/accordion-preview.component";
 
 @Component({
   selector: 'app-docs-page',
@@ -10,73 +13,75 @@ import {BreadcrumbItem} from "../../../../../dorvak-ui/src/lib/components/breadc
 })
 export class DocsPageComponent {
 
-  groups = [
+  items: {
+    name: string;
+    previewComponent: any;
+    id: string;
+    since: string;
+  }[] = [
     {
-      name: 'Getting Started',
-      items: [
-        'Installation',
-      ]
+      name: "Accordion",
+      previewComponent: AccordionPreviewComponent,
+      id: 'accordion',
+      since: 'v1.0.0'
     },
     {
-      name: 'Components',
-      id: 'components',
-      items: [
-        'Alert',
-        'Alert Modal',
-        'Avatar',
-        'Badge',
-        'Breadcrumb',
-        'Button',
-        'Calendar',
-        'Card',
-        'Checkbox',
-        'Combobox',
-        'Date Picker',
-        'Dropdown Menu',
-        'Input',
-        'Input OTP',
-        'Link',
-        'Modal',
-        'Pagination',
-        'Select',
-        'Separator',
-        'Switch',
-        'Tabs',
-        'Textarea',
-        'Tooltip'
-      ]
+      name: "Alert",
+      previewComponent: AlertPreviewComponent,
+      id: 'alert',
+      since: 'v1.0.0',
+    },
+    {
+      name: "Alert Modal",
+      previewComponent: AlertModalPreviewComponent,
+      id: 'alert-modal',
+      since: 'v1.0.0'
+    },
+    {
+      name: "Avatar",
+      previewComponent: AvatarPreviewComponent,
+      id: 'avatar',
+      since: 'v1.0.0'
     }
   ]
 
-  activeGroup: {name: string, items: string[]} = this.groups[0];
-  activeItem: string = this.activeGroup.items[0];
+  activeItem = this.items[0];
+  activeTab: string | undefined
 
-  constructor(private cdr: ChangeDetectorRef) {
-  }
-
-  @Input()
-  set group(value: string) {
-    let slugify = new SlugifyPipe();
-    this.activeGroup = this.groups.find(group => slugify.transform(group.name) === value) || this.groups[0];
-    this.activeItem = this.activeGroup.items[0];
+  constructor(private router: Router) {
   }
 
   @Input()
   set item(value: string) {
-    let slugify = new SlugifyPipe();
-    this.activeItem = this.activeGroup.items.find(item => slugify.transform(item) === value) || this.activeGroup.items[0];
-    this.cdr.detectChanges();
+    this.activeItem = this.items.find((item) => item.id === value) || this.items[0];
+  }
+
+  @Input()
+  set selectedTab(value: string) {
+    this.activeTab = value;
   }
 
   get content() {
-    return `/assets/docs/${this.activeGroup.name.toLowerCase().replace(/ /g, '-')}/${this.activeItem.toLowerCase().replace(/ /g, '-')}.md`;
+    return `/assets/docs/components/${this.activeItem.id}.md`;
   }
 
-  get breadcrumbs(): BreadcrumbItem[] {
-    return [
-      {label: 'Docs', url: '/docs'},
-      {label: this.activeGroup.name, url: `/docs/${new SlugifyPipe().transform(this.activeGroup.name)}`},
-      {label: this.activeItem, url: `/docs/${new SlugifyPipe().transform(this.activeGroup.name)}/${new SlugifyPipe().transform(this.activeItem)}`}
-    ];
+  onTabChange(tabName: string) {
+    this.router.navigate(['docs', 'components', this.activeItem.id, tabName.toLowerCase()]);
+  }
+
+  onPrevious() {
+    const currentIndex = this.items.findIndex(item => item.id === this.activeItem.id);
+    if (currentIndex > 0) {
+      this.activeItem = this.items[currentIndex - 1];
+      this.router.navigate(['docs', 'components', this.activeItem.id]);
+    }
+  }
+
+  onNext() {
+    const currentIndex = this.items.findIndex(item => item.id === this.activeItem.id);
+    if (currentIndex < this.items.length - 1) {
+      let activeItem = this.items[currentIndex + 1];
+      this.router.navigate(['docs', 'components', activeItem.id]);
+    }
   }
 }

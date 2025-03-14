@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output, ViewEncapsulation} from '@angular/core';
-import {ColumnDefinition} from '../../../models/table/column-definition';
+import {BaseColumnDefinition, ColumnDefinition} from '../../../models/table/column-definition';
 import {NgClass} from '@angular/common';
 import {TableRowCellComponent} from "../table-row-cell/table-row-cell.component";
 import {CheckboxComponent} from "../../checkbox/checkbox.component";
@@ -35,6 +35,7 @@ import {RadioComponent} from "../../radio/radio.component";
         >
           <dui-table-row-cell [column]="column" [rowData]="rowData"
                               [class]="cn($first && enableRowClick && 'text-primary')"
+                              [defaultColumnDefinition]="defaultColumnDefinition"
           />
         </td>
       }
@@ -47,6 +48,7 @@ export class TableRowComponent {
   @Output() rowClick: EventEmitter<any> = new EventEmitter<any>();
 
   @Input() rowData: any;
+  @Input() defaultColumnDefinition!: BaseColumnDefinition;
   @Input() columnDefinitions: ColumnDefinition[] = [];
   @Input() rowHeight: number = 50;
   @Input() selectable: boolean = false;

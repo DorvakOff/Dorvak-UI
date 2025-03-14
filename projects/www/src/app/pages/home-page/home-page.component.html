@@ -2,7 +2,7 @@
   <div>
     <h1 class="text-4xl font-bold font-outfit">Welcome to Dorvak UI</h1>
     <p class="text-lg mt-2">Get started with your new project in minutes</p>
-    <dui-button buttonClass="w-fit" size="sm" routerLink="/docs/installation" role="link" icon="book">Documentation
+    <dui-button buttonClass="w-fit" size="sm" routerLink="/docs/components" role="link" icon="book">Documentation
     </dui-button>
   </div>
 
@@ -35,6 +35,25 @@
           </div>
         </div>
       </dui-card>
+    </dui-tab>
+    <dui-tab title="Table">
+      <div class="flex flex-col gap-4">
+        <dui-switch [(ngModel)]="multipleSelection" label="Toggle multiple selection"/>
+
+        <dui-table #table [columnDefinitions]="columnDefinitions"
+                   [data]="tableData"
+                   enableRowClick selectable
+                   [selectMode]="multipleSelection ? 'multiple' : 'single'"
+        >
+          <dui-button icon="plus" slot="actions">
+            Add
+          </dui-button>
+          <dui-button [disabled]="table.selectedRows.length === 0" icon="pencil" slot="actions"
+                      variant="outline">
+            Edit a row
+          </dui-button>
+        </dui-table>
+      </div>
     </dui-tab>
   </dui-tabs>
 </main>

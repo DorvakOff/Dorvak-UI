@@ -1,54 +1,33 @@
-# Alert
-
-Le composant `dui-alert` affiche un message d'alerte avec des variantes, une icône optionnelle et un bouton de fermeture.
-
-## Utilisation
+# dui-alert
 
 ```html
-<dui-alert variant="success" icon="check" closable>
-  <span slot="title">Succès !</span>
-  Votre action a été réalisée avec succès.
-</dui-alert>
+<dui-alert></dui-alert>
 ```
 
-## Propriétés
+## Overview
+The `dui-alert` component is used to display alerts or notifications to the user. It can be customized with different styles and icons.
 
-| Nom       | Type                                          | Description                                      | Valeur par défaut |
-|-----------|-----------------------------------------------|--------------------------------------------------|-------------------|
-| `variant` | `"primary" \| "secondary" \| "success" \| "destructive" \| "warning" \| "info"` | Définit le style de l'alerte. | `"primary"` |
-| `icon`    | `string \| readonly LucideIconNode[] \| undefined` | Icône affichée à gauche du message. | `undefined` |
-| `closable` | `boolean`                                   | Affiche un bouton pour fermer l'alerte. | `false` |
+## Properties
+
+| Property   | Type                                                                            | Description                                | Default     |
+|------------|---------------------------------------------------------------------------------|--------------------------------------------|-------------|
+| `variant`  | `"primary" \| "secondary" \| "success" \| "destructive" \| "warning" \| "info"` | Defines the alert style.                   | `primary`   |
+| `icon`     | `string \| readonly LucideIconNode[] \| undefined`                              | Icon displayed on the left of the message. | `undefined` |
+| `closable` | `boolean`                                                                       | Shows a button to close the alert.         | `false`     |
+
+## Methods
+| Name      | Description                            |
+|-----------|----------------------------------------|
+| `dismiss` | Closes the alert.                      |
+
+## Events
+_None_
 
 ## Slots
 
-| Nom      | Description |
-|----------|-------------|
-| `title`  | Titre affiché en gras dans l'alerte. |
+| Name    | Description                           |
+|---------|---------------------------------------|
+| `title` | Title displayed in bold in the alert. |
 
-## Comportement
-
-- Si `closable` est activé, un bouton permettant de fermer l'alerte apparaît en haut à droite.
-- Si `icon` est défini, une icône est affichée à gauche du contenu.
-- Le style de l'alerte change en fonction de la variante sélectionnée.
-
-## Variantes disponibles
-
-Les variantes définissent les couleurs de l'alerte :
-
-- `primary` : Couleur principale.
-- `secondary` : Couleur secondaire.
-- `success` : Vert (succès).
-- `destructive` : Rouge (erreur).
-- `warning` : Jaune (avertissement).
-- `info` : Bleu (information).
-
----
-
-### Exemple avec une alerte destructrice
-
-```html
-<dui-alert variant="destructive" icon="alert-triangle" closable>
-  <span slot="title">Erreur</span>
-  Une erreur s'est produite lors du traitement de votre demande.
-</dui-alert>
-```
+## Dependencies
+* [dui-button](./docs/components/button)

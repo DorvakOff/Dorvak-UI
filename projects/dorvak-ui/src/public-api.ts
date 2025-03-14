@@ -5,6 +5,8 @@
 export * from './lib/dorvak-ui.module';
 
 // Components
+export * from './lib/components/accordion/accordion/accordion.component';
+export * from './lib/components/accordion/accordion-item/accordion-item.component';
 export * from './lib/components/alert/alert.component';
 export * from './lib/components/alert-modal/alert-modal.component';
 export * from './lib/components/avatar/avatar.component';
@@ -36,3 +38,11 @@ export * from './lib/components/tooltip/tooltip.component';
 // Models
 export * from './lib/models/table/cell-renderer';
 export * from './lib/models/table/column-definition';
+export * from './lib/models/table/filter-definition';
+export * from './lib/models/table/get-data-params';
+export * from './lib/models/table/paginated-response';
+export * from './lib/models/table/sort-definition';
+export * from './lib/models/table/table-data-accessor';
+export * from './lib/models/table/table-local-data-accessor';
+
+export * from './lib/models/variant';

@@ -21,13 +21,23 @@ import {NgOptimizedImage} from "@angular/common";
 })
 export class AvatarComponent {
 
-  @Input({ required: true }) src!: string;
+  private _src: string = '';
+
+  @Input({ required: true }) set src(value: string) {
+    this._imageError = false;
+    this._src = value;
+  }
+
+  get src(): string {
+    return this._src;
+  }
+
   @Input() alt: string = 'avatar';
   @Input() fallback: string = '';
 
   protected _imageError: boolean = false;
 
-  handleImageError() {
+  protected handleImageError() {
     this._imageError = true;
   }
 

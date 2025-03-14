@@ -1,53 +1,38 @@
-# Alert Modal
-
-Le composant `dui-alert-modal` affiche une boîte de dialogue modale avec un message d'alerte et des boutons d'action.
-
-## Utilisation
+# dui-alert-modal
 
 ```html
-<dui-alert-modal 
-  title="Suppression" 
-  message="Voulez-vous vraiment supprimer cet élément ?"
-  confirmText="Oui, supprimer" 
-  cancelText="Annuler"
-  (confirm)="onConfirm()" 
-  (cancel)="onCancel()">
-</dui-alert-modal>
+<dui-alert-modal></dui-alert-modal>
 ```
 
-## Propriétés
+## Overview
+The `dui-alert-modal` component is used to display a confirmation modal dialog with customizable title, message, and action buttons.
 
-| Nom          | Type      | Description                                      | Valeur par défaut |
-|--------------|----------|--------------------------------------------------|-------------------|
-| `title`      | `string` | Titre affiché en haut de la boîte de dialogue.  | `'Are you sure?'` |
-| `message`    | `string` | Message principal affiché dans la boîte.        | `'You are about to delete this item, are you sure?'` |
-| `confirmText` | `string` | Texte du bouton de confirmation.                | `'Continue'` |
-| `cancelText` | `string` | Texte du bouton d'annulation.                   | `'Cancel'` |
+## Properties
 
-## Événements
+| Property      | Type     | Description                                              | Default                                              |
+|---------------|----------|----------------------------------------------------------|------------------------------------------------------|
+| `title`       | `string` | Title displayed in the modal header.                     | `'Are you sure?'`                                    |
+| `message`     | `string` | Message displayed in the modal body.                     | `'You are about to delete this item, are you sure?'` |
+| `confirmText` | `string` | Text for the confirm button.                             | `'Continue'`                                         |
+| `cancelText`  | `string` | Text for the cancel button.                              | `'Cancel'`                                           |
 
-| Nom       | Description |
-|-----------|-------------|
-| `confirm` | Émis lorsque l'utilisateur clique sur le bouton de confirmation. |
-| `cancel`  | Émis lorsque l'utilisateur clique sur le bouton d'annulation. |
+## Methods
 
-## Comportement
+| Name    | Description                           |
+|---------|---------------------------------------|
+| `open`  | Opens the modal.                      |
+| `close` | Closes the modal.                     |
 
-- La boîte de dialogue est non fermable via un bouton `X`.
-- Le bouton "Annuler" annule l'action et ferme la boîte de dialogue.
-- Le bouton "Confirmer" valide l'action et déclenche l'événement `confirm`.
+## Events
 
----
+| Name      | Description                                                       |
+|-----------|-------------------------------------------------------------------|
+| `confirm` | Emitted when the confirm button is clicked.                       |
+| `cancel`  | Emitted when the cancel button is clicked or the modal is closed. |
 
-### Exemple avec suppression d'un élément
+## Slots
+_None_
 
-```html
-<dui-alert-modal 
-  title="Supprimer cet élément ?" 
-  message="Cette action est irréversible."
-  confirmText="Supprimer" 
-  cancelText="Annuler"
-  (confirm)="handleDelete()" 
-  (cancel)="handleCancel()"/>
-```
-
+## Dependencies
+* [dui-button](./docs/components/button)
+* [dui-modal](./docs/components/modal)

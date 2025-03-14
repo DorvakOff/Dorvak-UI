@@ -27,8 +27,12 @@ import {DropdownItemComponent} from "./components/dropdown/dropdown-item/dropdow
 import {LucideAngularModule, icons} from "lucide-angular";
 import {TableComponent} from "./components/table/table/table.component";
 import {RadioComponent} from "./components/radio/radio.component";
+import {AccordionComponent} from "./components/accordion/accordion/accordion.component";
+import {AccordionItemComponent} from "./components/accordion/accordion-item/accordion-item.component";
 
 const components = [
+  AccordionComponent,
+  AccordionItemComponent,
   AlertComponent,
   AlertModalComponent,
   AvatarComponent,

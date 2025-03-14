@@ -16,11 +16,13 @@ import {SortDefinition} from "../../../models/table/sort-definition";
 import {TableDataAccessor} from "../../../models/table/table-data-accessor";
 import {TableLocalDataAccessor} from "../../../models/table/table-local-data-accessor";
 import {PaginatedResponse} from "../../../models/table/paginated-response";
+import {DatePickerComponent} from "../../date-picker/date-picker.component";
+import {GetDataParams} from "../../../models/table/get-data-params";
 
 @Component({
   selector: 'dui-table',
   standalone: true,
-  imports: [LucideAngularModule, TableRowComponent, CheckboxComponent, PaginationComponent, TableHeaderComponent, ButtonComponent, DropdownMenuComponent, DropdownItemComponent, ModalComponent, SelectComponent, InputComponent],
+  imports: [LucideAngularModule, TableRowComponent, CheckboxComponent, PaginationComponent, TableHeaderComponent, ButtonComponent, DropdownMenuComponent, DropdownItemComponent, ModalComponent, SelectComponent, InputComponent, DatePickerComponent],
   template: `
     <div class="flex flex-col w-full h-full gap-2">
       <div class="flex items-center justify-between gap-2 w-full">
@@ -89,9 +91,10 @@ import {PaginatedResponse} from "../../../models/table/paginated-response";
                              (checkedChange)="handleChange($event, row)" [checked]="isChecked(row)"
                              [enableRowClick]="enableRowClick"
                              (rowClick)="rowClick.emit(row)"
+                             [defaultColumnDefinition]="defaultColumnDefinition"
               />
             }
-            @if (!data.length) {
+            @if (!totalItems) {
               <tr class="flex w-full text-accent-foreground bg-accent">
                 <td class="flex items-center justify-center w-full px-4 py-2 gap-2"
                     [colSpan]="_visibleColumns.length"
@@ -116,9 +119,13 @@ import {PaginatedResponse} from "../../../models/table/paginated-response";
           <div class="flex flex-col items center gap-2">
             @for (column of _filtersInPopup; track $index) {
               <div class="flex items-center gap-2">
-                <dui-select placeholder="Column" [items]="filterableColumns()" [(selected)]="column.column" class="w-full"/>
-                <dui-select [items]="filterOperators" [(selected)]="column.operator" class="w-full"/>
-                <dui-input placeholder="Value" [(value)]="column.value" class="w-full"/>
+                <dui-select placeholder="Column" [items]="filterableColumns()" [(selected)]="column.column" class="w-full" (selectedChange)="column.value = undefined; column.operator = ''"/>
+                <dui-select [items]="getFiltersFor(column.column)" [(selected)]="column.operator" class="w-full"/>
+                @if (getColumnDataType(column.column) === 'date') {
+                  <dui-date-picker [(value)]="column.value" placeholder="Value" class="w-full" dateFormat="dd/MM/yyyy"/>
+                } @else {
+                  <dui-input placeholder="Value" [(value)]="column.value" class="w-full"/>
+                }
                 <dui-button variant="destructive" icon="trash-2" size="sm" (click)="removeFilter($index); $event.stopPropagation()"/>
               </div>
             }
@@ -195,12 +202,24 @@ export class TableComponent implements OnInit {
   protected currentPage: number = 0;
   protected _filters: FilterDefinition[] = [];
   protected _filtersInPopup: FilterDefinition[] = [];
-  protected filterOperators: SelectItem[] = [
-    {label: 'Equals', value: 'equals'},
-    {label: 'Contains', value: 'contains'},
-    {label: 'Starts with', value: 'startsWith'},
-    {label: 'Ends with', value: 'endsWith'},
-  ];
+  protected filterOperators: {[key: string]: SelectItem[]} = {
+    string: [
+      {label: 'Equals', value: 'equals'},
+      {label: 'Contains', value: 'contains'},
+      {label: 'Starts with', value: 'startsWith'},
+      {label: 'Ends with', value: 'endsWith'},
+    ],
+    number: [
+      {label: 'Equals', value: 'equals'},
+      {label: 'Greater than', value: 'greaterThan'},
+      {label: 'Less than', value: 'lessThan'},
+    ],
+    date: [
+      {label: 'Equals', value: 'equals'},
+      {label: 'Before', value: 'before'},
+      {label: 'After', value: 'after'},
+    ],
+  };
 
   get data(): any[] {
     return this._data;
@@ -233,13 +252,23 @@ export class TableComponent implements OnInit {
   loadRows(): void {
     this._loadedRows = [];
     this.loading = true;
-    this.dataAccessor.loadRows(this.currentPage, this.pageSize, this._filters, this._sortColumn).subscribe((paginatedResponse: PaginatedResponse) => {
+
+    const params: GetDataParams = {
+      page: this.currentPage,
+      pageSize: this.pageSize,
+      filters: this._filters,
+      columns: this.columnDefinitions,
+      sort: this._sortColumn,
+    }
+
+    this.dataAccessor.loadRows(params).subscribe((paginatedResponse: PaginatedResponse) => {
       this._loadedRows = paginatedResponse.items;
       this.currentPage = paginatedResponse.currentPage;
       this.pageSize = paginatedResponse.pageSize;
       this.totalPages = paginatedResponse.totalPages;
       this.totalItems = paginatedResponse.totalItems;
       this.loading = false;
+      this.selectedRows = []
     })
   }
 
@@ -299,14 +328,14 @@ export class TableComponent implements OnInit {
 
   selectAll(checked: boolean): void {
     if (checked) {
-      this.selectedRows = [...this.data];
+      this.selectedRows = [...this._loadedRows];
     } else {
       this.selectedRows = [];
     }
   }
 
   isAllChecked(): boolean {
-    return this.data.length > 0 && this.data.every(row => this.isChecked(row));
+    return this._loadedRows.length > 0 && this._loadedRows.every(row => this.isChecked(row));
   }
 
   toggleColumnVisibility(column: ColumnDefinition): void {
@@ -369,5 +398,16 @@ export class TableComponent implements OnInit {
     }))];
     this.filtersModal.close();
     this.loadRows();
+  }
+
+  getColumnDataType(column: string | undefined) {
+    if (!column) return 'string';
+
+    const columnDefinition = this.columnDefinitions.find(col => col.field === column);
+    return columnDefinition?.dataType ?? 'string';
+  }
+
+  getFiltersFor(column: string | undefined) {
+    return this.filterOperators[this.getColumnDataType(column)] ?? [];
   }
 }

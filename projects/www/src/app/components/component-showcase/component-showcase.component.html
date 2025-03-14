@@ -1,0 +1,35 @@
+<div class="flex-col border-input border-2 p-4 rounded-md">
+  <div class="flex flex-row gap-2">
+    <div class="w-2/3 h-80 overflow-auto p-2 flex items-center justify-center">
+      <ng-container #preview></ng-container>
+    </div>
+    <dui-separator vertical/>
+    <form class="w-1/3 flex flex-col gap-4 h-80 overflow-y-auto p-2" [formGroup]="form">
+      @for (field of formFields; track $index) {
+        @switch (field.type) {
+          @case ('input') {
+            <dui-input [label]="field.label ?? field.name | titlecase" [formControlName]="field.name"/>
+          }
+          @case ('textarea') {
+            <dui-textarea [label]="field.label ?? field.name | titlecase" [formControlName]="field.name"/>
+          }
+          @case ('select') {
+            <dui-select [label]="field.label ?? field.name | titlecase" [formControlName]="field.name" [items]="asAny(field.items)"/>
+          }
+          @case ('combobox') {
+            <dui-combobox [label]="field.label ?? field.name | titlecase" [formControlName]="field.name" [items]="asAny(field.items)"/>
+          }
+          @case ('checkbox') {
+            <dui-checkbox [label]="field.label ?? field.name | titlecase" [formControlName]="field.name"/>
+          }
+        }
+      }
+    </form>
+  </div>
+  <dui-separator/>
+  <dui-accordion>
+    <dui-accordion-item title="Code Snippet">
+      <markdown [data]="getCodeSnippet()" class="prose prose-code:bg-accent prose-code:p-1 prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none w-full max-w-full"/>
+    </dui-accordion-item>
+  </dui-accordion>
+</div>

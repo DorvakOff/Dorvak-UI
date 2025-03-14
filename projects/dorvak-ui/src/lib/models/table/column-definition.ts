@@ -6,6 +6,8 @@ export type BaseColumnDefinition = {
   cellClass?: string;
   width?: number;
   filterable?: boolean;
+  dataType?: 'string' | 'number' | 'date';
+  dateFormat?: string;
   cellRenderer?: (new (...args: any[]) => ICellRenderer) | ((params: any) => string | boolean);
 }
 

@@ -3,4 +3,5 @@ export interface DemoTableData {
   age: number;
   address: string;
   status: 'active' | 'inactive' | 'need-verification';
+  createdAt: Date;
 }

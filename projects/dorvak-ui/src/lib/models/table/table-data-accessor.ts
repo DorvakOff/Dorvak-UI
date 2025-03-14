@@ -1,10 +1,9 @@
 import {Observable} from "rxjs";
-import {FilterDefinition} from "./filter-definition";
-import {SortDefinition} from "./sort-definition";
 import {PaginatedResponse} from "./paginated-response";
+import {GetDataParams} from "./get-data-params";
 
 export interface TableDataAccessor {
 
-  loadRows: (page: number, pageSize: number, filters: FilterDefinition[], sort: SortDefinition | null) => Observable<PaginatedResponse>;
+  loadRows: (params: GetDataParams) => Observable<PaginatedResponse>;
 
 }
