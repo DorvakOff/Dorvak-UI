@@ -1,9 +1,10 @@
 import {Component, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {icons} from 'lucide-angular';
 import {ComboboxItem} from "../../../../../dorvak-ui/src/lib/components/combobox/combobox.component";
 import {FormField} from "../../models/form-field";
 import {SelectItem} from "../../../../../dorvak-ui/src/lib/components/select/select.component";
+import {PreviewComponent} from "../../models/preview-component";
+import {debounceTime, Subject} from "rxjs";
 
 @Component({
   selector: 'app-component-showcase',
@@ -16,8 +17,10 @@ export class ComponentShowcaseComponent implements OnInit {
   @ViewChild('preview', {static: true, read: ViewContainerRef})
   preview!: ViewContainerRef;
 
-  generatedComponent: ComponentRef<any> | undefined;
+  generatedComponent: ComponentRef<PreviewComponent> | undefined;
   formFields: FormField[] = [];
+  copied: boolean = false;
+  copyMessageDelay: Subject<void> = new Subject<void>();
 
   @Input() component!: {
     name: string;
@@ -34,6 +37,12 @@ export class ComponentShowcaseComponent implements OnInit {
   ngOnInit() {
     this.preview.clear();
     this.renderPreview();
+
+    this.copyMessageDelay.pipe(
+      debounceTime(2000),
+    ).subscribe(() => {
+      this.copied = false;
+    });
   }
 
   renderPreview() {
@@ -72,19 +81,21 @@ export class ComponentShowcaseComponent implements OnInit {
     return  `\`\`\`html\n${this.generatedComponent.instance.codeSnippet}`;
   }
 
-  getAvailableIcons(): ComboboxItem[] {
-    return Object.keys(icons).map(icon => {
-      return {
-        label: icon,
-        value: icon
-      }
-    });
-  }
-
   asAny(items: ComboboxItem[] | SelectItem[] | undefined): any[] {
     if (!items) {
       return [];
     }
     return items as any[];
+  }
+
+  copyCodeSnippet() {
+    const codeSnippet = this.generatedComponent?.instance.codeSnippet ?? '';
+    this.copied = true;
+    this.copyMessageDelay.next();
+    navigator.clipboard.writeText(codeSnippet).then(() => {
+      console.log('Code snippet copied to clipboard');
+    }).catch(err => {
+      console.error('Could not copy code snippet: ', err);
+    });
   }
 }

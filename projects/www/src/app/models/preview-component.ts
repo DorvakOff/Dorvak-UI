@@ -6,4 +6,6 @@ export interface PreviewComponent {
 
   get codeSnippet (): string;
 
+  [key: string]: any;
+
 }
