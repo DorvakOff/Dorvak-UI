@@ -35,21 +35,31 @@
     <div class="gap-2 grid grid-cols-2">
       @if (items.indexOf(activeItem) > 0) {
         <button
-          class="cursor-pointer flex gap-2 justify-center items-center rounded-sm px-4 py-2 hover:bg-accent hover:text-accent-foreground transition-colors duration-200 ease-in-out border h-20"
+          class="cursor-pointer flex gap-2 justify-center items-center rounded-sm px-4 py-2 hover:bg-accent hover:text-accent-foreground duration-200 ease-in-out border h-20 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background transition-all outline-none"
           (click)="onPrevious()"
         >
           <i-lucide name="ArrowLeft" size="30"/>
-          Previous
+          <div class="flex flex-col">
+            <span>Previous</span>
+            <span class="text-sm text-primary">
+              {{ items[items.indexOf(activeItem) - 1].name }}
+            </span>
+          </div>
         </button>
       } @else {
         <div></div>
       }
       @if (items.indexOf(activeItem) < items.length - 1) {
         <button
-          class="cursor-pointer flex gap-2 justify-center items-center rounded-sm px-4 py-2 hover:bg-accent hover:text-accent-foreground transition-colors duration-200 ease-in-out border h-20"
+          class="cursor-pointer flex gap-2 justify-center items-center rounded-sm px-4 py-2 hover:bg-accent hover:text-accent-foreground duration-200 ease-in-out border h-20 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background transition-all outline-none"
           (click)="onNext()"
         >
-          Next
+          <div class="flex flex-col">
+            <span>Next</span>
+            <span class="text-sm text-primary">
+              {{ items[items.indexOf(activeItem) + 1].name }}
+            </span>
+          </div>
           <i-lucide name="ArrowRight" size="30"/>
         </button>
       } @else {

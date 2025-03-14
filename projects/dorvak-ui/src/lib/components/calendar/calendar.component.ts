@@ -60,9 +60,9 @@ export class CalendarComponent implements OnInit {
   }
 
   @Output()
-  valueChange: EventEmitter<Date> = new EventEmitter<Date>();
+  private valueChange: EventEmitter<Date> = new EventEmitter<Date>();
 
-  currentDate = new Date();
+  protected currentDate = new Date();
 
   ngOnInit() {
     this.currentDate = this.value;
@@ -107,15 +107,15 @@ export class CalendarComponent implements OnInit {
     return days;
   }
 
-  isPrevDisabled() {
+  protected isPrevDisabled() {
     return this.min && this.currentDate.getFullYear() === this.min.getFullYear() && this.currentDate.getMonth() <= this.min.getMonth();
   }
 
-  isNextDisabled() {
+  protected isNextDisabled() {
     return this.max && this.currentDate.getFullYear() === this.max.getFullYear() && this.currentDate.getMonth() >= this.max.getMonth();
   }
 
-  isToday(date: Date) {
+  protected isToday(date: Date) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     return date.getTime() === today.getTime();

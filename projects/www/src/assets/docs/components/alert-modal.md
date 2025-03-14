@@ -8,7 +8,6 @@
 The `dui-alert-modal` component is used to display a confirmation modal dialog with customizable title, message, and action buttons.
 
 ## Properties
-
 | Property      | Type     | Description                                              | Default                                              |
 |---------------|----------|----------------------------------------------------------|------------------------------------------------------|
 | `title`       | `string` | Title displayed in the modal header.                     | `'Are you sure?'`                                    |
@@ -17,14 +16,12 @@ The `dui-alert-modal` component is used to display a confirmation modal dialog w
 | `cancelText`  | `string` | Text for the cancel button.                              | `'Cancel'`                                           |
 
 ## Methods
-
 | Name    | Description                           |
 |---------|---------------------------------------|
 | `open`  | Opens the modal.                      |
 | `close` | Closes the modal.                     |
 
 ## Events
-
 | Name      | Description                                                       |
 |-----------|-------------------------------------------------------------------|
 | `confirm` | Emitted when the confirm button is clicked.                       |
@@ -34,5 +31,5 @@ The `dui-alert-modal` component is used to display a confirmation modal dialog w
 _None_
 
 ## Dependencies
-* [dui-button](./docs/components/button)
-* [dui-modal](./docs/components/modal)
+* [dui-button](#/docs/components/button)
+* [dui-modal](#/docs/components/modal)

@@ -65,7 +65,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   @Output() checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  toggle() {
+  protected toggle() {
     if (this.disabled) {
       return;
     }
@@ -75,7 +75,7 @@ export class CheckboxComponent implements ControlValueAccessor {
 
   protected readonly cn = cn;
 
-  markAsTouched() {
+  protected markAsTouched() {
     if (!this._touched) {
       this.onTouched();
       this._touched = true;

@@ -24,10 +24,10 @@ The `dui-alert` component is used to display alerts or notifications to the user
 _None_
 
 ## Slots
-
-| Name    | Description                           |
-|---------|---------------------------------------|
-| `title` | Title displayed in bold in the alert. |
+| Name      | Description                           |
+|-----------|---------------------------------------|
+| `title`   | Title displayed in bold in the alert. |
+| `default` | The alert message.                    |
 
 ## Dependencies
-* [dui-button](./docs/components/button)
+* [dui-button](#/docs/components/button)

@@ -17,21 +17,24 @@ _None_
 _None_
 
 ## Slots
-_None_
+| Name      | Description                                  |
+|-----------|----------------------------------------------|
+| `default` | The list of `dui-accordion-item` components. |
 
 ## Dependencies
-* [dui-accordion-item](./docs/components/accordion)
+* [dui-accordion-item](#/docs/components/accordion)
 
-# dui-accordion
+---
+
+# dui-accordion-item
 
 ```html
-<dui-accordion></dui-accordion>
+<dui-accordion-item></dui-accordion-item>
 ```
 
 ## Overview
 
 ## Properties
-
 | Property   | Type                                          | Description                                | Default   |
 |------------|-----------------------------------------------|--------------------------------------------|-----------|
 | `expanded` | `boolean`                                     | Indicates if the accordion is expanded.    | `false`   |
@@ -46,7 +49,9 @@ _None_
 _None_
 
 ## Slots
-_None_
+| Name      | Description                            |
+|-----------|----------------------------------------|
+| `default` | The content of the accordion item.     |
 
 ## Dependencies
 _None_

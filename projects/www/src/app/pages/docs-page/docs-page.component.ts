@@ -1,9 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
-import {AlertPreviewComponent} from "../../components/previews/alert/alert-preview.component";
-import {AlertModalPreviewComponent} from "../../components/previews/alert-modal-preview/alert-modal-preview.component";
-import {AvatarPreviewComponent} from "../../components/previews/avatar-preview/avatar-preview.component";
-import {AccordionPreviewComponent} from "../../components/previews/accordion-preview/accordion-preview.component";
+import { componentList } from "../../component-list";
 
 @Component({
   selector: 'app-docs-page',
@@ -13,38 +10,7 @@ import {AccordionPreviewComponent} from "../../components/previews/accordion-pre
 })
 export class DocsPageComponent {
 
-  items: {
-    name: string;
-    previewComponent: any;
-    id: string;
-    since: string;
-  }[] = [
-    {
-      name: "Accordion",
-      previewComponent: AccordionPreviewComponent,
-      id: 'accordion',
-      since: 'v1.0.0'
-    },
-    {
-      name: "Alert",
-      previewComponent: AlertPreviewComponent,
-      id: 'alert',
-      since: 'v1.0.0',
-    },
-    {
-      name: "Alert Modal",
-      previewComponent: AlertModalPreviewComponent,
-      id: 'alert-modal',
-      since: 'v1.0.0'
-    },
-    {
-      name: "Avatar",
-      previewComponent: AvatarPreviewComponent,
-      id: 'avatar',
-      since: 'v1.0.0'
-    }
-  ]
-
+  items = componentList;
   activeItem = this.items[0];
   activeTab: string | undefined
 
