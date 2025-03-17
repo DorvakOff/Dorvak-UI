@@ -1,14 +1,16 @@
 import {booleanAttribute, Component, ElementRef, Input, ViewChild, ViewEncapsulation} from '@angular/core';
 import {cn} from "../../../utils/utils";
 import {LucideAngularModule} from "lucide-angular";
+import {SeparatorComponent} from "../../separator/separator.component";
 
 @Component({
   selector: 'dui-accordion-item',
   imports: [
-    LucideAngularModule
+    LucideAngularModule,
+    SeparatorComponent
   ],
   template: `
-    <div class="flex flex-col px-2 py-1 w-full gap-2 border-b-2">
+    <div class="flex flex-col px-2 py-1 w-full gap-2">
       <button class="w-full flex justify-between cursor-pointer enabled:hover:underline" (click)="_open = !_open">
         <span class="font-semibold font-outfit">{{ title }}</span>
         <i-lucide name="chevron-down" class="transition-transform duration-300 ease-in-out" [class.rotate-180]="_open"/>
@@ -22,6 +24,7 @@ import {LucideAngularModule} from "lucide-angular";
           <ng-content/>
         </div>
       </div>
+      <dui-separator/>
     </div>
   `,
   styles: ``,

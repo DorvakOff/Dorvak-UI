@@ -54,4 +54,4 @@ _None_
 | `default` | The content of the accordion item.     |
 
 ## Dependencies
-_None_
+* [dui-separator](#/docs/components/separator)

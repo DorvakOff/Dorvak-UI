@@ -46,3 +46,6 @@ export * from './lib/models/table/table-data-accessor';
 export * from './lib/models/table/table-local-data-accessor';
 
 export * from './lib/models/variant';
+
+// Utils
+export * from './lib/utils/utils';

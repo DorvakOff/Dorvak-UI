@@ -17,7 +17,9 @@
       {{ activeItem.name }}
     </h1>
     <div class="flex flex-row gap-2">
-      <dui-badge>{{ activeItem.since }}</dui-badge>
+      <dui-badge variant="success" icon="git-pull-request-create-arrow">
+        {{ activeItem.since }}
+      </dui-badge>
     </div>
     <dui-tabs (tabChange)="onTabChange($event)" [selected]="activeTab">
       @if (activeItem.previewComponent) {

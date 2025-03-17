@@ -8,7 +8,9 @@
 A component that allows the user to input an OTP code in a more user-friendly way.
 
 ## Properties
-_None_
+| Property             | Type                                      | Description                                | Default                        |
+|----------------------|-------------------------------------------|--------------------------------------------|--------------------------------|
+| `label`              | `string`                                  | The label for the input field.             | "Enter your One Time Password" |
 
 ## Methods
 _None_

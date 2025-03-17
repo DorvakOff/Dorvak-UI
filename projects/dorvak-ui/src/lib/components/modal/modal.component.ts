@@ -90,7 +90,7 @@ export class ModalComponent {
 
   @HostListener('document:keydown.escape')
   private onEscape() {
-    if (this.isOpen) {
+    if (this.isOpen && this.closeable) {
       this.close();
     }
   }

@@ -3,7 +3,7 @@ import {SelectItem} from "../../../../dorvak-ui/src/lib/components/select/select
 
 export type FormField = {
   name: string;
-  type: 'input' | 'textarea' | 'select' | 'combobox' | 'checkbox';
+  type: 'input' | 'textarea' | 'select' | 'combobox' | 'checkbox' | 'date';
   label?: string;
   default : any;
   items?: ComboboxItem[] | SelectItem[];

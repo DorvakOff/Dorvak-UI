@@ -214,7 +214,7 @@ export class ComboboxComponent implements ControlValueAccessor {
   }
 
   protected isSelected(item: ComboboxItem): boolean {
-    return this.multi && Array.isArray(this.selectedInternal) ? this.selectedInternal.some(selectedItem => selectedItem.value === item.value) : (this.selectedInternal as ComboboxItem).value === item.value;
+    return this.multi && Array.isArray(this.selectedInternal) ? this.selectedInternal.some(selectedItem => selectedItem.value === item.value) : (this.selectedInternal as ComboboxItem)?.value === item.value;
   }
 
   protected readonly cn = cn;
@@ -254,7 +254,7 @@ export class ComboboxComponent implements ControlValueAccessor {
         return '';
       }
     } else {
-      return (this.selectedInternal as ComboboxItem).label;
+      return (this.selectedInternal as ComboboxItem)?.label ?? '';
     }
   }
 }

@@ -1,10 +1,9 @@
 import {Component, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ComboboxItem} from "../../../../../dorvak-ui/src/lib/components/combobox/combobox.component";
 import {FormField} from "../../models/form-field";
-import {SelectItem} from "../../../../../dorvak-ui/src/lib/components/select/select.component";
 import {PreviewComponent} from "../../models/preview-component";
 import {debounceTime, Subject} from "rxjs";
+import {SelectItem, ComboboxItem, cn} from "dorvak-ui";
 
 @Component({
   selector: 'app-component-showcase',
@@ -98,4 +97,6 @@ export class ComponentShowcaseComponent implements OnInit {
       console.error('Could not copy code snippet: ', err);
     });
   }
+
+  protected readonly cn = cn;
 }

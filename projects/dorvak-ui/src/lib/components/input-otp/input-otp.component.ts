@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, Output, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
 import {LucideAngularModule} from "lucide-angular";
 import {InputComponent} from "../input/input.component";
 
@@ -10,30 +10,37 @@ import {InputComponent} from "../input/input.component";
     InputComponent
   ],
   template: `
-    <div class="flex items-center">
-      <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-                 inputClass="w-9 h-10 rounded-r-none" hideArrows
-                 (input)="onType(0)" type="number" min="0" max="9" maxlength="1"/>
-      <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-                 inputClass="w-9 h-10 rounded-none" (input)="onType(1)"
-                 type="number" min="0" max="9" maxlength="1" hideArrows/>
-      <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-                 inputClass="w-9 h-10 rounded-l-none" hideArrows
-                 (input)="onType(2)" type="number" min="0" max="9" maxlength="1"/>
-      <i-lucide name="minus" size="24" class="mx-1"/>
-      <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-                 inputClass="w-9 h-10 rounded-r-none" hideArrows
-                 (input)="onType(3)" type="number" min="0" max="9" maxlength="1"/>
-      <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-                 inputClass="w-9 h-10 rounded-none" (input)="onType(4)"
-                 type="number" min="0" max="9" maxlength="1" hideArrows/>
-      <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
-                 inputClass="w-9 h-10 rounded-l-none" hideArrows
-                 (input)="onType(5)" type="number" min="0" max="9" maxlength="1"/>
+    <div class="w-full flex flex-col items-center gap-2">
+      <label class="block text-sm font-medium select-none" (click)="inputs.first?.focus()">
+        {{label}}
+      </label>
+      <div class="flex items-center">
+        <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
+                   inputClass="w-9 h-10 rounded-r-none" hideArrows
+                   (input)="onType(0)" type="number" min="0" max="9" maxlength="1"/>
+        <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
+                   inputClass="w-9 h-10 rounded-none" (input)="onType(1)"
+                   type="number" min="0" max="9" maxlength="1" hideArrows/>
+        <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
+                   inputClass="w-9 h-10 rounded-l-none" hideArrows
+                   (input)="onType(2)" type="number" min="0" max="9" maxlength="1"/>
+        <i-lucide name="minus" size="24" class="mx-1"/>
+        <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
+                   inputClass="w-9 h-10 rounded-r-none" hideArrows
+                   (input)="onType(3)" type="number" min="0" max="9" maxlength="1"/>
+        <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
+                   inputClass="w-9 h-10 rounded-none" (input)="onType(4)"
+                   type="number" min="0" max="9" maxlength="1" hideArrows/>
+        <dui-input (paste)="onPaste($event)" #otpInput pattern="[0-9]"
+                   inputClass="w-9 h-10 rounded-l-none" hideArrows
+                   (input)="onType(5)" type="number" min="0" max="9" maxlength="1"/>
+      </div>
     </div>
   `,
 })
 export class InputOtpComponent {
+
+  @Input() label: string = 'Enter your One Time Password';
 
   @Output()
   codeEntered: EventEmitter<string> = new EventEmitter<string>();

@@ -12,7 +12,7 @@ import {InputComponent} from "../input/input.component";
 import {LucideAngularModule} from "lucide-angular";
 import {cn, uniqueId} from "../../utils/utils";
 import {CalendarComponent} from "../calendar/calendar.component";
-import {ControlValueAccessor} from "@angular/forms";
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Subject, throttleTime} from "rxjs";
 import {DatePipe} from "@angular/common";
 
@@ -24,6 +24,13 @@ import {DatePipe} from "@angular/common";
     LucideAngularModule,
     CalendarComponent,
     DatePipe
+  ],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: DatePickerComponent,
+      multi: true
+    }
   ],
   template: `
     <div class="flex flex-col gap-1">
