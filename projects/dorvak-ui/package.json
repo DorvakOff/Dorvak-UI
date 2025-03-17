@@ -1,6 +1,6 @@
 {
   "name": "dorvak-ui",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "peerDependencies": {
     "@angular/common": "^19.1.4",
     "@angular/core": "^19.1.4",
@@ -23,7 +23,7 @@
     "url": "https://github.com/DorvakOff/Dorvak-UI.git"
   },
   "author": "Dorvak",
-  "homepage": "https://dorvak-ui.dorvak.com",
+  "homepage": "https://ui.dorvak.com",
   "license": "MIT",
   "keywords": [
     "angular",
