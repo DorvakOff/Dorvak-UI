@@ -6,7 +6,7 @@ import {cva} from "class-variance-authority";
 import {ButtonComponent} from "../button/button.component";
 
 const alertVariants = cva(
-  "border-2 p-3 flex gap-2 rounded-md m-3 bg min-w-sm max-w-xl relative",
+  "border-2 p-3 flex gap-2 rounded-md bg w-full max-w-xl relative",
   {
     variants: {
       variant: {

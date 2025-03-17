@@ -1,4 +1,12 @@
-import {Component, QueryList, ViewChildren, ViewEncapsulation} from '@angular/core';
+import {
+  AfterContentInit,
+  booleanAttribute,
+  Component,
+  ContentChildren,
+  Input,
+  QueryList,
+  ViewEncapsulation
+} from '@angular/core';
 import {AccordionItemComponent} from "../accordion-item/accordion-item.component";
 
 @Component({
@@ -12,8 +20,20 @@ import {AccordionItemComponent} from "../accordion-item/accordion-item.component
   styles: ``,
   encapsulation: ViewEncapsulation.None
 })
-export class AccordionComponent {
+export class AccordionComponent implements AfterContentInit {
 
-  @ViewChildren(AccordionItemComponent) items!: QueryList<AccordionItemComponent>;
+  @ContentChildren(AccordionItemComponent) items!: QueryList<AccordionItemComponent>;
+
+  @Input({transform: booleanAttribute}) multiple = false;
+
+  ngAfterContentInit() {
+    this.items.forEach(item => {
+      item.expandedChange.subscribe(expanded => {
+        if (!this.multiple && expanded) {
+          this.items.filter(i => i !== item).forEach(i => i.expanded = false);
+        }
+      });
+    });
+  }
 
 }

@@ -1,0 +1,14 @@
+<div class="flex flex-col gap-2">
+  <div class="flex items-center flex-col gap-2">
+    <h2>This FAQ is a simple example of how to use the accordion component</h2>
+    <small>Thought, it is a real FAQ, so feel free to ask any question you have!</small>
+  </div>
+
+  <dui-accordion >
+    @for (faq of faqs; track $index) {
+      <dui-accordion-item [title]="faq.question">
+        <p>{{ faq.answer }}</p>
+      </dui-accordion-item>
+    }
+  </dui-accordion>
+</div>

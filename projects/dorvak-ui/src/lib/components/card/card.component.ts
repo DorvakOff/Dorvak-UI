@@ -9,7 +9,7 @@ import {Component, ViewEncapsulation} from '@angular/core';
         <span class="font-semibold text-lg">
             <ng-content select="[slot='title']"/>
         </span>
-        <span class="text-sm">
+        <span class="text-sm text-muted-foreground">
             <ng-content select="[slot='subtitle']"/>
         </span>
       </span>

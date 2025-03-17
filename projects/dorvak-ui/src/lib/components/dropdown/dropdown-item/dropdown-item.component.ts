@@ -5,7 +5,7 @@ import {DropdownMenuComponent} from "../dropdown-menu/dropdown-menu.component";
   selector: 'dui-dropdown-item',
   encapsulation: ViewEncapsulation.None,
   template: `
-    <button class="w-full select-none enabled:hover:cursor-pointer flex enabled:hover:bg-accent enabled:hover:text-accent-foreground disabled:text-muted-foreground focus-within:bg-accent focus-within:text-accent-foreground rounded-sm px-2 py-1 outline-none"
+    <button class="w-full select-none enabled:hover:cursor-pointer flex enabled:hover:bg-accent enabled:hover:text-accent-foreground disabled:text-muted-foreground focus-within:bg-accent focus-within:text-accent-foreground rounded-sm px-2 py-1 outline-none font-normal text-base"
           (click)="closeOnClick ? dropdownMenu.closeMenu() : null" [disabled]="disabled">
       <ng-content/>
     </button>

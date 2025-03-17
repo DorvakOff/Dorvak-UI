@@ -11,7 +11,7 @@ import {TitleCasePipe} from "@angular/common";
     TitleCasePipe
   ],
   template: `
-    <div class="p-4 gap-2 rounded-xl border bg-card text-card-foreground shadow flex flex-col w-[300px]">
+    <div class="p-4 gap-2 rounded-xl border bg-card text-card-foreground shadow flex flex-col">
       <div class="flex justify-between items-center">
         <dui-button variant="ghost" size="icon" icon="chevron-left" (click)="currentDate.setMonth(currentDate.getMonth() - 1)" [disabled]="isPrevDisabled()" #button/>
         <span class="font-bold capitalize">{{ monthName }} {{ currentDate.getFullYear() }}</span>

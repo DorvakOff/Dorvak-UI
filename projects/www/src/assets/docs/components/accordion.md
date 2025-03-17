@@ -8,7 +8,9 @@
 The `dui-accordion` component is used to create collapsible sections of content. It allows users to expand or collapse sections to view or hide additional information.
 
 ## Properties
-_None_
+| Property   | Type                                          | Description                                | Default   |
+|------------|-----------------------------------------------|--------------------------------------------|-----------|
+| `multiple` | `boolean`                                     | Indicates if multiple items can be expanded. | `false`  |
 
 ## Methods
 _None_
@@ -40,13 +42,14 @@ _None_
 | `expanded` | `boolean`                                     | Indicates if the accordion is expanded.    | `false`   |
 
 ## Methods
-| Name       | Description                           |
-|------------|---------------------------------------|
-| `open`     | Opens the accordion.                  |
-| `close`    | Closes the accordion.                 |
+| Name       | Description                             |
+|------------|-----------------------------------------|
+| `toggle`   | Toggles the expanded state of the item. |
 
 ## Events
-_None_
+| Name             | Description                                          |
+|------------------|------------------------------------------------------|
+| `expandedChange` | Emitted when the expanded state of the item changes. |
 
 ## Slots
 | Name      | Description                            |

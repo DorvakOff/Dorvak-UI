@@ -16,11 +16,14 @@ import {cn, uniqueId} from "../../utils/utils";
     }
   ],
   template: `
-    <div class="flex items-center gap-1 w-fit" [class.flex-row-reverse]="labelPosition === 'right'">
+    <div class="flex items-center justify-between gap-4 w-full" [class.flex-row-reverse]="labelPosition === 'right'">
       @if (label) {
-        <label [class]="cn('text-sm font-medium leading-none select-none', disabled && 'cursor-not-allowed opacity-70')"
+        <label [class]="cn('font-medium leading-none select-none flex flex-col gap-2', disabled && 'cursor-not-allowed opacity-70')"
                [for]="id">
           {{ label }}
+          <small class="text-muted-foreground text-xs">
+            <ng-content/>
+          </small>
         </label>
       }
       <div
@@ -38,7 +41,7 @@ import {cn, uniqueId} from "../../utils/utils";
 export class SwitchComponent implements ControlValueAccessor {
 
   @Input() label: string = '';
-  @Input() labelPosition: 'left' | 'right' = 'right';
+  @Input() labelPosition: 'left' | 'right' = 'left';
   @Input() name: string = '';
   @Input({ transform: booleanAttribute }) disabled: boolean = false;
 

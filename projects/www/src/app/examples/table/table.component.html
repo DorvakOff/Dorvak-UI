@@ -1,0 +1,19 @@
+<div class="flex flex-col gap-4">
+  <dui-switch [(ngModel)]="multipleSelection" label="Toggle multiple selection"/>
+
+  <dui-table #table
+             [pageSize]="5"
+             [columnDefinitions]="columnDefinitions"
+             [data]="tableData"
+             enableRowClick selectable
+             [selectMode]="multipleSelection ? 'multiple' : 'single'"
+  >
+    <dui-button icon="plus" slot="actions">
+      Add
+    </dui-button>
+    <dui-button [disabled]="table.selectedRows.length === 0" icon="pencil" slot="actions"
+                variant="outline">
+      Edit a row
+    </dui-button>
+  </dui-table>
+</div>

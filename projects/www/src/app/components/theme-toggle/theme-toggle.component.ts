@@ -4,7 +4,7 @@ import {Component, OnInit, Renderer2} from '@angular/core';
   selector: 'app-theme-toggle',
   standalone: false,
   template: `
-    <dui-button [icon]="icon" size="icon" buttonClass="h-9" (click)="toggleTheme()"/>
+    <dui-button [icon]="icon" size="icon" (click)="toggleTheme()"/>
   `,
   styles: ``
 })

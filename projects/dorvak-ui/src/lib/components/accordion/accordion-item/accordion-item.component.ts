@@ -1,4 +1,13 @@
-import {booleanAttribute, Component, ElementRef, Input, ViewChild, ViewEncapsulation} from '@angular/core';
+import {
+  booleanAttribute,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
 import {cn} from "../../../utils/utils";
 import {LucideAngularModule} from "lucide-angular";
 import {SeparatorComponent} from "../../separator/separator.component";
@@ -11,7 +20,7 @@ import {SeparatorComponent} from "../../separator/separator.component";
   ],
   template: `
     <div class="flex flex-col px-2 py-1 w-full gap-2">
-      <button class="w-full flex justify-between cursor-pointer enabled:hover:underline" (click)="_open = !_open">
+      <button class="w-full flex justify-between cursor-pointer enabled:hover:underline" (click)="toggle()">
         <span class="font-semibold font-outfit">{{ title }}</span>
         <i-lucide name="chevron-down" class="transition-transform duration-300 ease-in-out" [class.rotate-180]="_open"/>
       </button>
@@ -34,9 +43,12 @@ export class AccordionItemComponent {
 
   @ViewChild('div') content?: ElementRef<HTMLDivElement>;
 
+  @Output() expandedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   @Input({transform: booleanAttribute})
   set expanded(expanded: boolean) {
     this._open = expanded;
+    this.expandedChange.emit(expanded);
   }
 
   @Input()
@@ -70,12 +82,8 @@ export class AccordionItemComponent {
 
   constructor(private elementRef: ElementRef) {}
 
-  open() {
-    this._open = true;
-  }
-
-  close() {
-    this._open = false;
+  public toggle(): void {
+    this.expanded = !this._open;
   }
 
   protected readonly cn = cn;

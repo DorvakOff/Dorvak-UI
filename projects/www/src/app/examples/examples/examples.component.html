@@ -1,0 +1,97 @@
+<div class="grid grid-cols-2 gap-4">
+  <div class="flex flex-col gap-4">
+    <dui-card>
+      <span slot="title">Manage your preferences</span>
+      <span slot="subtitle">You can change your preferences here</span>
+
+      <div class="flex flex-col gap-2">
+        <dui-switch label="Dark mode">
+          The dark mode is a setting that makes the background of the page black.
+        </dui-switch>
+        <dui-switch label="Notifications">
+          You will receive notifications when something happens.
+        </dui-switch>
+        <dui-switch label="Emails">
+          You will receive emails when something happens.
+        </dui-switch>
+      </div>
+
+      <div slot="footer" class="w-full">
+        <dui-button>
+          Save preferences
+        </dui-button>
+      </div>
+    </dui-card>
+    <dui-card>
+      <div slot="title" class="flex flex-row gap-2 items-center justify-between">
+        <div class="flex flex-row gap-2 items-center">
+          <dui-avatar src="https://github.com/DorvakOff.png"/>
+          <div class="flex flex-col">
+            Dorvak
+            <span class="text-muted-foreground text-sm">
+            &#64;Dorvak
+          </span>
+          </div>
+        </div>
+        <dui-dropdown-menu icon="plus" size="icon">
+          <dui-dropdown-item>
+            <div class="flex items-center justify-between w-full">
+              Close conversation
+              <i-lucide name="x" size="16" class="text-muted-foreground"/>
+            </div>
+          </dui-dropdown-item>
+          <dui-dropdown-item>
+            <div class="flex items-center justify-between w-full">
+              Block user
+              <i-lucide name="shield" size="16" class="text-muted-foreground"/>
+            </div>
+          </dui-dropdown-item>
+        </dui-dropdown-menu>
+      </div>
+      <div class="flex flex-col gap-2">
+        <span class="self-start bg-secondary text-secondary-foreground px-4 py-2 rounded-md select-none shadow">Hello, how are you?</span>
+        <span class="self-end bg-primary text-primary-foreground px-4 py-2 rounded-md select-none shadow">I'm fine, thank you!</span>
+        <span class="self-start bg-secondary text-secondary-foreground px-4 py-2 rounded-md select-none shadow">What are you doing?</span>
+        <span class="self-end bg-primary text-primary-foreground px-4 py-2 rounded-md select-none shadow">I'm working on a project</span>
+      </div>
+      <div slot="footer" class="flex flex-row gap-2 w-full">
+        <dui-input class="w-full" placeholder="Type a message..."/>
+        <dui-button icon="send" size="icon"/>
+      </div>
+    </dui-card>
+  </div>
+  <div class="flex flex-col gap-4">
+    <div class="grid grid-cols-2 gap-4">
+      <div class="flex flex-col gap-4">
+        <dui-calendar/>
+      </div>
+      <div class="flex flex-col gap-4">
+        <dui-card>
+          <dui-alert slot="subtitle" variant="warning" icon="triangle-alert">
+            <span slot="title">Verify your account</span>
+            You need to verify your account to access all the features.
+          </dui-alert>
+
+          <div>
+            <dui-input-otp/>
+          </div>
+        </dui-card>
+        <dui-card>
+          <span slot="title">Create a new project</span>
+          <span slot="subtitle">You can create a new project here</span>
+
+          <div class="flex flex-col gap-2">
+            <dui-input label="Project name" placeholder="My project"/>
+            <dui-textarea label="Description" placeholder="This project is about..."/>
+          </div>
+
+          <div slot="footer" class="w-full">
+            <dui-button>
+              Create project
+            </dui-button>
+          </div>
+        </dui-card>
+      </div>
+    </div>
+  </div>
+</div>

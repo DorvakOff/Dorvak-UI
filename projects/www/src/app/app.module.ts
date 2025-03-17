@@ -40,6 +40,10 @@ import { TabsPreviewComponent } from './components/previews/tabs-preview/tabs-pr
 import { TextareaPreviewComponent } from './components/previews/textarea-preview/textarea-preview.component';
 import { TooltipPreviewComponent } from './components/previews/tooltip-preview/tooltip-preview.component';
 import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
+import { LoginAndRegisterComponent } from './examples/login-and-register/login-and-register.component';
+import { TableComponent } from './examples/table/table.component';
+import { ExamplesComponent } from './examples/examples/examples.component';
+import { FaqComponent } from './examples/faq/faq.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +77,11 @@ import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.com
     TabsPreviewComponent,
     TextareaPreviewComponent,
     TooltipPreviewComponent,
-    ThemeToggleComponent
+    ThemeToggleComponent,
+    LoginAndRegisterComponent,
+    TableComponent,
+    ExamplesComponent,
+    FaqComponent
   ],
   imports: [
     BrowserModule,

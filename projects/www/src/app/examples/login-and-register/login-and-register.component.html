@@ -1,0 +1,24 @@
+<dui-card class="w-full self-center">
+  <span slot="title">Authentification</span>
+  <span slot="subtitle">You need to login to access this page</span>
+
+  <div slot="content" class="flex gap-2 flex-col md:flex-row">
+    <div class="flex w-full gap-2 flex-col md:w-1/2">
+      <dui-input placeholder="contact@dorvak.com" type="email" label="Email" required/>
+      <dui-input placeholder="Enter password" type="password" label="Password" required/>
+      <dui-checkbox label="Remember me"/>
+
+      <div class="flex-1"></div>
+      <dui-button variant="primary" class="w-full" icon="log-in" submit>Login</dui-button>
+    </div>
+    <dui-separator vertical class="hidden md:block"/>
+    <dui-separator class="md:hidden visible"/>
+    <div class="flex w-full gap-2 flex-col md:w-1/2">
+      <dui-input placeholder="contact@dorvak.com" type="email" label="Email" required/>
+      <dui-input placeholder="Dorvak" label="Username" required/>
+      <dui-input placeholder="Enter password" type="password" label="Password" required/>
+
+      <dui-button variant="primary" class="w-full" icon="log-in" submit>Register</dui-button>
+    </div>
+  </div>
+</dui-card>

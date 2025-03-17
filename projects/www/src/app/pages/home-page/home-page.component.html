@@ -7,51 +7,17 @@
   </div>
 
   <dui-tabs>
-<!--    <dui-tab title="Examples"></dui-tab>-->
+    <dui-tab title="Examples">
+      <app-examples/>
+    </dui-tab>
     <dui-tab title="Login & Register">
-      <dui-card class="w-full self-center">
-        <span slot="title">Authentification</span>
-        <span slot="subtitle">You need to login to access this page</span>
-
-        <div slot="content" class="flex gap-2 flex-col md:flex-row">
-          <div class="flex w-full gap-2 flex-col md:w-1/2">
-            <dui-input placeholder="contact@dorvak.com" type="email" label="Email" required/>
-            <dui-input placeholder="Enter password" type="password" label="Password" required/>
-            <dui-checkbox label="Remember me"/>
-
-            <div class="flex-1"></div>
-            <dui-button variant="primary" class="w-full" icon="log-in" submit>Login</dui-button>
-          </div>
-          <dui-separator vertical class="hidden md:block"/>
-          <dui-separator class="md:hidden visible"/>
-          <div class="flex w-full gap-2 flex-col md:w-1/2">
-            <dui-input placeholder="contact@dorvak.com" type="email" label="Email" required/>
-            <dui-input placeholder="Dorvak" label="Username" required/>
-            <dui-input placeholder="Enter password" type="password" label="Password" required/>
-
-            <dui-button variant="primary" class="w-full" icon="log-in" submit>Register</dui-button>
-          </div>
-        </div>
-      </dui-card>
+      <app-login-and-register-example/>
     </dui-tab>
     <dui-tab title="Table">
-      <div class="flex flex-col gap-4">
-        <dui-switch [(ngModel)]="multipleSelection" label="Toggle multiple selection"/>
-
-        <dui-table #table [columnDefinitions]="columnDefinitions"
-                   [data]="tableData"
-                   enableRowClick selectable
-                   [selectMode]="multipleSelection ? 'multiple' : 'single'"
-        >
-          <dui-button icon="plus" slot="actions">
-            Add
-          </dui-button>
-          <dui-button [disabled]="table.selectedRows.length === 0" icon="pencil" slot="actions"
-                      variant="outline">
-            Edit a row
-          </dui-button>
-        </dui-table>
-      </div>
+      <app-table-example/>
+    </dui-tab>
+    <dui-tab title="FAQ">
+      <app-faq-example/>
     </dui-tab>
   </dui-tabs>
 </main>
