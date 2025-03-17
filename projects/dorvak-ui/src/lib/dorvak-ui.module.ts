@@ -30,7 +30,6 @@ import {RadioItemComponent} from "./components/radio/radio-item/radio-item.compo
 import {AccordionComponent} from "./components/accordion/accordion/accordion.component";
 import {AccordionItemComponent} from "./components/accordion/accordion-item/accordion-item.component";
 import {ToastComponent} from "./components/toast/toast.component";
-import {ToastService} from "./services/toast.service";
 
 const components = [
   AccordionComponent,
