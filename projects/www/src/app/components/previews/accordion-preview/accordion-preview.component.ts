@@ -6,7 +6,7 @@ import {FormField} from '../../../models/form-field';
   selector: 'app-accordion-preview',
   standalone: false,
   template: `
-    <dui-accordion>
+    <dui-accordion [multiple]="multiple">
       <dui-accordion-item [title]="titleAccordion1" [expanded]="accordion1Expanded">
         {{ contentAccordion1 }}
       </dui-accordion-item>
@@ -20,6 +20,12 @@ import {FormField} from '../../../models/form-field';
 export class AccordionPreviewComponent implements PreviewComponent {
 
   fields: FormField[] = [
+    {
+      name: 'multiple',
+      type: 'checkbox',
+      label: 'Multiple',
+      default: false,
+    },
     {
       name: 'titleAccordion1',
       type: 'input',
@@ -58,6 +64,8 @@ export class AccordionPreviewComponent implements PreviewComponent {
     }
   ];
 
+  multiple: any
+
   titleAccordion1: any;
   contentAccordion1: any;
   accordion1Expanded: any;
@@ -67,7 +75,7 @@ export class AccordionPreviewComponent implements PreviewComponent {
   accordion2Expanded: any
 
   get codeSnippet(): string {
-    return `<dui-accordion>`
+    return `<dui-accordion${(this.multiple ? ' multiple' : '')}>`
       + `\n  <dui-accordion-item title="${this.titleAccordion1}"${this.accordion1Expanded ? ' expanded' : ''}>`
       + `\n    ${this.contentAccordion1}`
       + `\n  </dui-accordion-item>`

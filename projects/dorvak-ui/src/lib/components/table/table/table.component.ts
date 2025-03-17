@@ -37,7 +37,7 @@ import {GetDataParams} from "../../../models/table/get-data-params";
     DatePickerComponent
   ],
   template: `
-    <div class="flex flex-col w-full h-full gap-2">
+    <div class="flex flex-col w-full h-full gap-2 overflow-y-auto">
       <div class="flex items-center justify-between gap-2 w-full">
         <div class="flex items-center gap-2 w-full">
           <ng-content select="[slot=actions]"/>

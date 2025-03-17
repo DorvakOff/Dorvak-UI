@@ -44,6 +44,7 @@ import { LoginAndRegisterComponent } from './examples/login-and-register/login-a
 import { TableComponent } from './examples/table/table.component';
 import { ExamplesComponent } from './examples/examples/examples.component';
 import { FaqComponent } from './examples/faq/faq.component';
+import { ToastPreviewComponent } from './components/previews/toast-preview/toast-preview.component';
 
 @NgModule({
   declarations: [
@@ -81,7 +82,8 @@ import { FaqComponent } from './examples/faq/faq.component';
     LoginAndRegisterComponent,
     TableComponent,
     ExamplesComponent,
-    FaqComponent
+    FaqComponent,
+    ToastPreviewComponent
   ],
   imports: [
     BrowserModule,

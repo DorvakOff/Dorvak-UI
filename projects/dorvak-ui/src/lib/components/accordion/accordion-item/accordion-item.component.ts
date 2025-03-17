@@ -22,7 +22,7 @@ import {SeparatorComponent} from "../../separator/separator.component";
     <div class="flex flex-col px-2 py-1 w-full gap-2">
       <button class="w-full flex justify-between cursor-pointer enabled:hover:underline" (click)="toggle()">
         <span class="font-semibold font-outfit">{{ title }}</span>
-        <i-lucide name="chevron-down" class="transition-transform duration-300 ease-in-out" [class.rotate-180]="_open"/>
+        <i-lucide name="chevron-down" class="transition-transform duration-300 ease-in-out rotate-0" [class.rotate-180]="_open"/>
       </button>
       <div
         class="flex w-full flex-col gap-2 overflow-hidden transition-all duration-300 ease-in-out h-full"

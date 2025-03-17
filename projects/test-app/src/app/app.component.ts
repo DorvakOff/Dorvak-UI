@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ColumnDefinition, ComboboxItem, SelectItem} from "dorvak-ui";
+import {ColumnDefinition, ComboboxItem, SelectItem, ToastService} from "dorvak-ui";
 import {StatusCellRendererComponent} from "./components/status-cell-renderer/status-cell-renderer.component";
 import {DemoTableData} from "./models/demo-table-data";
 
@@ -26,7 +26,7 @@ export class AppComponent {
   comboItems: ComboboxItem[] = Array.from({length: 10}, (_, i) => ({value: i, label: `Item ${i}`}));
   selectItems: SelectItem[] = Array.from({length: 10}, (_, i) => ({value: i, label: `Item ${i}`}));
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private toastService: ToastService) {
     this.formCard = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -79,5 +79,13 @@ export class AppComponent {
   }
 
   multipleSelection: boolean = false;
+
+  addToast() {
+    this.toastService.addAlert({
+      title: 'Hello',
+      message: 'This is a toast message',
+      variant: 'info'
+    });
+  }
 
 }

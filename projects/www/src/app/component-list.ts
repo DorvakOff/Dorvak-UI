@@ -23,12 +23,14 @@ import {DatePickerPreviewComponent} from "./components/previews/date-picker-prev
 import {ComboboxPreviewComponent} from "./components/previews/combobox-preview/combobox-preview.component";
 import {CheckboxPreviewComponent} from "./components/previews/checkbox-preview/checkbox-preview.component";
 import {CardPreviewComponent} from "./components/previews/card-preview/card-preview.component";
+import {ToastPreviewComponent} from "./components/previews/toast-preview/toast-preview.component";
 
 type ComponentList = {
   name: string;
   previewComponent: any;
   id: string;
   since: string;
+  mobileFriendly: boolean;
 }
 
 export const componentList: ComponentList[] = [
@@ -36,109 +38,127 @@ export const componentList: ComponentList[] = [
     name: "Accordion",
     previewComponent: AccordionPreviewComponent,
     id: 'accordion',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: "Alert",
     previewComponent: AlertPreviewComponent,
     id: 'alert',
     since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: "Alert Modal",
     previewComponent: AlertModalPreviewComponent,
     id: 'alert-modal',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: "Avatar",
     previewComponent: AvatarPreviewComponent,
     id: 'avatar',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Badge',
     previewComponent: BadgePreviewComponent,
     id: 'badge',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Breadcrumb',
     previewComponent: BreadcrumbPreviewComponent,
     id: 'breadcrumb',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Button',
     previewComponent: ButtonPreviewComponent,
     id: 'button',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Calendar',
     previewComponent: CalendarPreviewComponent,
     id: 'calendar',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Card',
     previewComponent: CardPreviewComponent,
     id: 'card',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Checkbox',
     previewComponent: CheckboxPreviewComponent,
     id: 'checkbox',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Combobox',
     previewComponent: ComboboxPreviewComponent,
     id: 'combobox',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Date Picker',
     previewComponent: DatePickerPreviewComponent,
     id: 'date-picker',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Dropdown',
     previewComponent: DropdownPreviewComponent,
     id: 'dropdown',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Input',
     previewComponent: InputPreviewComponent,
     id: 'input',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Input OTP',
     previewComponent: InputOtpPreviewComponent,
     id: 'input-otp',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Link',
     previewComponent: LinkPreviewComponent,
     id: 'link',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Modal',
     previewComponent: ModalPreviewComponent,
     id: 'modal',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Pagination',
     previewComponent: PaginationPreviewComponent,
     id: 'pagination',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: false,
   },
   // {
   //   name: 'Radio',
@@ -150,42 +170,56 @@ export const componentList: ComponentList[] = [
     name: 'Select',
     previewComponent: SelectPreviewComponent,
     id: 'select',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Separator',
     previewComponent: SeparatorPreviewComponent,
     id: 'separator',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Switch',
     previewComponent: SwitchPreviewComponent,
     id: 'switch',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Table',
     previewComponent: TablePreviewComponent,
     id: 'table',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: false
   },
   {
     name: 'Tabs',
     previewComponent: TabsPreviewComponent,
     id: 'tabs',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   },
   {
     name: 'Textarea',
     previewComponent: TextareaPreviewComponent,
     id: 'textarea',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
+  },
+  {
+    name: 'Toast',
+    previewComponent: ToastPreviewComponent,
+    id: 'toast',
+    since: 'v1.2.5',
+    mobileFriendly: true
   },
   {
     name: 'Tooltip',
     previewComponent: TooltipPreviewComponent,
     id: 'tooltip',
-    since: 'v1.2.2'
+    since: 'v1.2.2',
+    mobileFriendly: true
   }
 ];

@@ -15,7 +15,7 @@ import {cn} from "../../../utils/utils";
   selector: 'dui-tabs',
   encapsulation: ViewEncapsulation.None,
   template: `
-    <div class="flex flex-col w-full">
+    <div class="flex flex-col w-full overflow-y-auto">
       <div
         class="flex flex-row gap-1 border-b-4 border-b-muted w-full"
         [class.justify-start]="align === 'left'"

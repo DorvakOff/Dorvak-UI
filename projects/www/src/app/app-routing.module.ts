@@ -5,6 +5,7 @@ import {DocsPageComponent} from "./pages/docs-page/docs-page.component";
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
+  { path: 'docs', component: DocsPageComponent },
   { path: 'docs/components', component: DocsPageComponent },
   { path: 'docs/components/:item', component: DocsPageComponent },
   { path: 'docs/components/:item/:selectedTab', component: DocsPageComponent },

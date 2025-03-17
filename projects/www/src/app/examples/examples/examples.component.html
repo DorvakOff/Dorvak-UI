@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 gap-4">
+<div class="grid grid-cols-1 gap-4 lg:grid-cols-2">
   <div class="flex flex-col gap-4">
     <dui-card>
       <span slot="title">Manage your preferences</span>
@@ -61,37 +61,39 @@
     </dui-card>
   </div>
   <div class="flex flex-col gap-4">
-    <div class="grid grid-cols-2 gap-4">
-      <div class="flex flex-col gap-4">
-        <dui-calendar/>
-      </div>
-      <div class="flex flex-col gap-4">
-        <dui-card>
-          <dui-alert slot="subtitle" variant="warning" icon="triangle-alert">
-            <span slot="title">Verify your account</span>
-            You need to verify your account to access all the features.
-          </dui-alert>
+    <div class="grid grid-cols-1 xl:grid-cols-2 gap-4">
+      <dui-card>
+        <dui-alert slot="subtitle" variant="warning" icon="triangle-alert">
+          <span slot="title">Verify your account</span>
+          You need to verify your account to access all the features.
+        </dui-alert>
 
-          <div>
-            <dui-input-otp/>
-          </div>
-        </dui-card>
-        <dui-card>
-          <span slot="title">Create a new project</span>
-          <span slot="subtitle">You can create a new project here</span>
+        <div>
+          <dui-input-otp/>
+        </div>
 
-          <div class="flex flex-col gap-2">
-            <dui-input label="Project name" placeholder="My project"/>
-            <dui-textarea label="Description" placeholder="This project is about..."/>
-          </div>
+        <div slot="footer" class="w-full">
+          <dui-button icon="shield">
+            Verify account
+          </dui-button>
+        </div>
+      </dui-card>
+      <dui-card>
+        <span slot="title">Create a new project</span>
+        <span slot="subtitle">You can create a new project here</span>
 
-          <div slot="footer" class="w-full">
-            <dui-button>
-              Create project
-            </dui-button>
-          </div>
-        </dui-card>
-      </div>
+        <div class="flex flex-col gap-2">
+          <dui-input label="Project name" placeholder="My project"/>
+          <dui-textarea label="Description" placeholder="This project is about..."/>
+        </div>
+
+        <div slot="footer" class="w-full">
+          <dui-button>
+            Create project
+          </dui-button>
+        </div>
+      </dui-card>
     </div>
+    <dui-calendar/>
   </div>
 </div>

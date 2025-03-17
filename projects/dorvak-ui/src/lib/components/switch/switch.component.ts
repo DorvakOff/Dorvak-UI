@@ -18,10 +18,10 @@ import {cn, uniqueId} from "../../utils/utils";
   template: `
     <div class="flex items-center justify-between gap-4 w-full" [class.flex-row-reverse]="labelPosition === 'right'">
       @if (label) {
-        <label [class]="cn('font-medium leading-none select-none flex flex-col gap-2', disabled && 'cursor-not-allowed opacity-70')"
+        <label [class]="cn('font-medium leading-none select-none flex flex-col', disabled && 'cursor-not-allowed opacity-70', info.children.length && 'gap-2')"
                [for]="id">
           {{ label }}
-          <small class="text-muted-foreground text-xs">
+          <small class="text-muted-foreground text-xs" #info>
             <ng-content/>
           </small>
         </label>

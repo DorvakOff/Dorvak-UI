@@ -26,9 +26,11 @@ import {DropdownMenuComponent} from "./components/dropdown/dropdown-menu/dropdow
 import {DropdownItemComponent} from "./components/dropdown/dropdown-item/dropdown-item.component";
 import {LucideAngularModule, icons} from "lucide-angular";
 import {TableComponent} from "./components/table/table/table.component";
-import {RadioComponent} from "./components/radio/radio.component";
+import {RadioItemComponent} from "./components/radio/radio-item/radio-item.component";
 import {AccordionComponent} from "./components/accordion/accordion/accordion.component";
 import {AccordionItemComponent} from "./components/accordion/accordion-item/accordion-item.component";
+import {ToastComponent} from "./components/toast/toast.component";
+import {ToastService} from "./services/toast.service";
 
 const components = [
   AccordionComponent,
@@ -51,7 +53,7 @@ const components = [
   LinkComponent,
   ModalComponent,
   PaginationComponent,
-  RadioComponent,
+  RadioItemComponent,
   SelectComponent,
   SeparatorComponent,
   SwitchComponent,
@@ -59,6 +61,7 @@ const components = [
   TabComponent,
   TabsComponent,
   TextareaComponent,
+  ToastComponent,
   TooltipComponent
 ];
 
@@ -68,7 +71,9 @@ const components = [
     LucideAngularModule.pick(icons)
   ],
   exports: [
-    ...components,
+    ...components
+  ],
+  providers: [
   ]
 })
 export class DorvakUiModule { }

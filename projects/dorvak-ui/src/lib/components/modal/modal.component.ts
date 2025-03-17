@@ -20,7 +20,7 @@ import {cn} from "../../utils/utils";
   ],
   template: `
     <div [class]="cn('fixed w-screen h-screen inset-0 bg-black/50 flex items-center justify-center z-50 transition-colors', !isOpen && !dismissing && 'hidden', dismissing && 'bg-black/0')">
-      <dui-card role="dialog" aria-modal="true" class="relative w-1/2 duration-300" [class.animate-in]="isOpen" [class.fade-in-0]="isOpen" [class.animate-out]="dismissing" [class.fade-out-0]="dismissing">
+      <dui-card role="dialog" aria-modal="true" class="relative w-full md:w-1/2 duration-300" [class.animate-in]="isOpen" [class.fade-in-0]="isOpen" [class.animate-out]="dismissing" [class.fade-out-0]="dismissing">
         @if (closeable) {
             <dui-button class="absolute top-2 right-2" (click)="close()" size="icon" icon="x" variant="ghost"></dui-button>
         }

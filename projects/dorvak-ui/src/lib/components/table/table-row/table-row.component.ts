@@ -4,12 +4,12 @@ import {NgClass} from '@angular/common';
 import {TableRowCellComponent} from "../table-row-cell/table-row-cell.component";
 import {CheckboxComponent} from "../../checkbox/checkbox.component";
 import {cn} from "../../../utils/utils";
-import {RadioComponent} from "../../radio/radio.component";
+import {RadioItemComponent} from "../../radio/radio-item/radio-item.component";
 
 @Component({
   selector: 'dui-table-row',
   standalone: true,
-  imports: [TableRowCellComponent, CheckboxComponent, NgClass, RadioComponent],
+  imports: [TableRowCellComponent, CheckboxComponent, NgClass, RadioItemComponent],
   encapsulation: ViewEncapsulation.None,
   template: `
     <tr

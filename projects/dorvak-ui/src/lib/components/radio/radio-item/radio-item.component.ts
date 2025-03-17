@@ -19,7 +19,7 @@ import {LucideAngularModule} from "lucide-angular";
   styles: ``,
   encapsulation: ViewEncapsulation.None
 })
-export class RadioComponent {
+export class RadioItemComponent {
 
   @Output() checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
