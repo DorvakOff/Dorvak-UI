@@ -73,7 +73,7 @@ Add these lines to your `src/styles.css` file:
 }
 
 /* TailwindCSS custom theme */
-@theme {
+@theme inline {
   --font-roboto: 'Roboto', sans-serif;
   --font-outfit: 'Outfit', sans-serif;
   --color-background: var(--background);

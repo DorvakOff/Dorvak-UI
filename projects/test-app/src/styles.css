@@ -19,7 +19,7 @@
   --accent-foreground: hsl(0 0% 9%);
   --destructive: hsl(0 84.2% 60.2%);
   --destructive-foreground: hsl(0 0% 98%);
-  --info: hsl(221.2 83.2% 53.3%);
+  --info: hsl(219, 46%, 55%);
   --info-foreground: hsl(210 40% 98%);
   --warning: hsl(34.34 91.88% 55.42%);
   --warning-foreground: hsl(60 9.1% 97.8%);

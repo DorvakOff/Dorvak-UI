@@ -39,6 +39,7 @@ import { TablePreviewComponent } from './components/previews/table-preview/table
 import { TabsPreviewComponent } from './components/previews/tabs-preview/tabs-preview.component';
 import { TextareaPreviewComponent } from './components/previews/textarea-preview/textarea-preview.component';
 import { TooltipPreviewComponent } from './components/previews/tooltip-preview/tooltip-preview.component';
+import { ThemeToggleComponent } from './components/theme-toggle/theme-toggle.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { TooltipPreviewComponent } from './components/previews/tooltip-preview/t
     TablePreviewComponent,
     TabsPreviewComponent,
     TextareaPreviewComponent,
-    TooltipPreviewComponent
+    TooltipPreviewComponent,
+    ThemeToggleComponent
   ],
   imports: [
     BrowserModule,
