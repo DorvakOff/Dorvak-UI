@@ -22,8 +22,12 @@ export class ThemeToggleComponent implements OnInit {
     this.renderer.setAttribute(document.body, "data-theme", theme);
   }
 
+  getDefaultTheme() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+
   get currentTheme() {
-    let theme = localStorage.getItem('theme') ?? matchMedia("(prefers-color-scheme: dark)");
+    let theme = localStorage.getItem('theme') ?? this.getDefaultTheme();
 
     if (theme === 'dark') {
       return 'dark';
