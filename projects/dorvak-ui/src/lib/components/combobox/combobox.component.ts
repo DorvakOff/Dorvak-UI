@@ -4,7 +4,7 @@ import {
   ElementRef,
   EventEmitter,
   HostListener,
-  Input, OnInit,
+  Input,
   Output,
   ViewChild, ViewEncapsulation,
 } from '@angular/core';
@@ -76,7 +76,7 @@ type SelectedType<Multi extends boolean> = Multi extends true ? ComboboxItem[] :
   `,
   styles: ``
 })
-export class ComboboxComponent implements ControlValueAccessor, OnInit {
+export class ComboboxComponent implements ControlValueAccessor {
 
   @Input() label: string = '';
   @Input() items: ComboboxItem[] = [];
@@ -108,9 +108,6 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
     this.scrollThrottle.pipe(
       throttleTime(100)
     ).subscribe(showOnTop => this.showOnTop = showOnTop);
-  }
-
-  ngOnInit() {
   }
 
   @Input()
@@ -166,7 +163,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  handleInputClick($event: Event) {
+  protected handleInputClick($event: Event) {
     $event.stopPropagation();
 
     if (!this.disabled) {
@@ -178,7 +175,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  openCombobox() {
+  private openCombobox() {
     this.visible = true;
     this.dismissing = false;
     this._searchValue = '';
@@ -189,7 +186,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
     });
   }
 
-  closeCombobox() {
+  private closeCombobox() {
     this.dismissing = true;
 
     setTimeout(() => {
@@ -198,7 +195,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
     }, 200);
   }
 
-  get filteredItems(): ComboboxItem[] {
+  protected get filteredItems(): ComboboxItem[] {
     return this.items.filter(item => item.label.toLowerCase().includes(this._searchValue.toLowerCase()));
   }
 
@@ -216,13 +213,13 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  isSelected(item: ComboboxItem): boolean {
+  protected isSelected(item: ComboboxItem): boolean {
     return this.multi && Array.isArray(this.selectedInternal) ? this.selectedInternal.some(selectedItem => selectedItem.value === item.value) : (this.selectedInternal as ComboboxItem).value === item.value;
   }
 
   protected readonly cn = cn;
 
-  markAsTouched() {
+  private markAsTouched() {
     if (!this._touched) {
       this.onTouched();
       this._touched = true;
@@ -246,7 +243,7 @@ export class ComboboxComponent implements ControlValueAccessor, OnInit {
     this.disabled = isDisabled;
   }
 
-  getValue() {
+  protected getValue() {
     if (this.multi) {
       let selected = this.selectedInternal as ComboboxItem[] | undefined;
       if (selected && selected.length > 1) {

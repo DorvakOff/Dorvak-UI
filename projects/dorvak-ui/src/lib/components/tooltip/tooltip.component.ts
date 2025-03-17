@@ -34,13 +34,13 @@ export class TooltipComponent {
   protected readonly cn = cn;
 
   @HostListener('mouseenter')
-  show() {
+  private show() {
     this._show = true;
     this._hiding = false;
   }
 
   @HostListener('mouseleave')
-  hide() {
+  private hide() {
     this._show = false;
 
     setTimeout(() => this._hiding = true, 100);

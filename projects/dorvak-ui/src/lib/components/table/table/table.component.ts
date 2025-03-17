@@ -22,7 +22,20 @@ import {GetDataParams} from "../../../models/table/get-data-params";
 @Component({
   selector: 'dui-table',
   standalone: true,
-  imports: [LucideAngularModule, TableRowComponent, CheckboxComponent, PaginationComponent, TableHeaderComponent, ButtonComponent, DropdownMenuComponent, DropdownItemComponent, ModalComponent, SelectComponent, InputComponent, DatePickerComponent],
+  imports: [
+    LucideAngularModule,
+    TableRowComponent,
+    CheckboxComponent,
+    PaginationComponent,
+    TableHeaderComponent,
+    ButtonComponent,
+    DropdownMenuComponent,
+    DropdownItemComponent,
+    ModalComponent,
+    SelectComponent,
+    InputComponent,
+    DatePickerComponent
+  ],
   template: `
     <div class="flex flex-col w-full h-full gap-2">
       <div class="flex items-center justify-between gap-2 w-full">
@@ -244,12 +257,12 @@ export class TableComponent implements OnInit {
 
   protected _sortColumn: SortDefinition | null = null;
 
-  handlePageChange(page: number): void {
+  protected handlePageChange(page: number): void {
     this.currentPage = page;
     this.loadRows();
   }
 
-  loadRows(): void {
+  private loadRows(): void {
     this._loadedRows = [];
     this.loading = true;
 
@@ -280,11 +293,11 @@ export class TableComponent implements OnInit {
     return this._sortColumn?.direction === 'asc' ? 'arrow-up' : 'arrow-down';
   }
 
-  isSortable(column: ColumnDefinition): boolean {
+  protected isSortable(column: ColumnDefinition): boolean {
     return column.sortable ?? this.defaultColumnDefinition.sortable ?? false;
   }
 
-  toggleSort(column: ColumnDefinition): void {
+  protected toggleSort(column: ColumnDefinition): void {
     if (!this.isSortable(column)) return;
 
     if (this._sortColumn?.field === column.field) {
@@ -302,7 +315,7 @@ export class TableComponent implements OnInit {
     this.loadRows()
   }
 
-  handleChange(checked: boolean, row: any): void {
+  protected handleChange(checked: boolean, row: any): void {
     if (this.selectMode === 'single') {
       if (checked) {
         this.selectedRows = [row];
@@ -316,7 +329,7 @@ export class TableComponent implements OnInit {
     }
   }
 
-  isChecked(row: any) {
+  protected isChecked(row: any) {
     if (this.selectMode === 'single') {
       return this.selectedRows[0] === row;
     } else if (this.selectMode === 'multiple') {
@@ -326,7 +339,7 @@ export class TableComponent implements OnInit {
     return false;
   }
 
-  selectAll(checked: boolean): void {
+  protected selectAll(checked: boolean): void {
     if (checked) {
       this.selectedRows = [...this._loadedRows];
     } else {
@@ -334,11 +347,11 @@ export class TableComponent implements OnInit {
     }
   }
 
-  isAllChecked(): boolean {
+  protected isAllChecked(): boolean {
     return this._loadedRows.length > 0 && this._loadedRows.every(row => this.isChecked(row));
   }
 
-  toggleColumnVisibility(column: ColumnDefinition): void {
+  protected toggleColumnVisibility(column: ColumnDefinition): void {
     let visibleColumns = this._visibleColumns;
     let visible = visibleColumns.includes(column);
 
@@ -351,7 +364,7 @@ export class TableComponent implements OnInit {
     this._visibleColumns = this.columnDefinitions.filter(col => visibleColumns.includes(col));
   }
 
-  filterableColumns(): SelectItem[] {
+  protected filterableColumns(): SelectItem[] {
     return this.columnDefinitions
       .filter(column =>column.filterable ?? this.defaultColumnDefinition.filterable ?? false)
       .map(column => ({
@@ -360,7 +373,7 @@ export class TableComponent implements OnInit {
       }));
   }
 
-  addFilter(): void {
+  protected addFilter(): void {
     this._filtersInPopup.push({
       column: undefined,
       operator: 'equals',
@@ -368,7 +381,7 @@ export class TableComponent implements OnInit {
     });
   }
 
-  removeFilter($index: number) {
+  protected removeFilter($index: number) {
     this._filtersInPopup = this._filtersInPopup.filter((_, index) => index !== $index);
 
     if (this._filtersInPopup.length === 0) {
@@ -376,7 +389,7 @@ export class TableComponent implements OnInit {
     }
   }
 
-  openFiltersModal() {
+  protected openFiltersModal() {
     this._filtersInPopup = [...this._filters.map(filter => ({
       column: filter.column,
       operator: filter.operator,
@@ -390,7 +403,7 @@ export class TableComponent implements OnInit {
     this.filtersModal.open();
   }
 
-  saveFilters() {
+  protected saveFilters() {
     this._filters = [...this._filtersInPopup.filter(f => f.column && f.operator && f.value).map(filter => ({
       column: filter.column,
       operator: filter.operator,
@@ -400,14 +413,14 @@ export class TableComponent implements OnInit {
     this.loadRows();
   }
 
-  getColumnDataType(column: string | undefined) {
+  protected getColumnDataType(column: string | undefined) {
     if (!column) return 'string';
 
     const columnDefinition = this.columnDefinitions.find(col => col.field === column);
     return columnDefinition?.dataType ?? 'string';
   }
 
-  getFiltersFor(column: string | undefined) {
+  protected getFiltersFor(column: string | undefined) {
     return this.filterOperators[this.getColumnDataType(column)] ?? [];
   }
 }

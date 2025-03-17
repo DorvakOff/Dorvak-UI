@@ -102,7 +102,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   @Input() label: string = '';
   @Input() type: string = 'text';
-  _type: string = 'text';
+  protected _type: string = 'text';
   @Input() placeholder: string = '';
   @Input() id: string = uniqueId('dui-input');
   @Input() pattern: string | null = null;
@@ -111,7 +111,6 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   @Input() icon: string | LucideIconNode[] | undefined;
   @Input() iconPosition: 'left' | 'right' = 'right';
   @Input() autocomplete: string = 'off';
-  @Input({transform: booleanAttribute}) valid: boolean = true;
   @Input({transform: numberAttribute}) min: number | null = null;
   @Input({transform: numberAttribute}) max: number | null = null;
   @Input({transform: booleanAttribute}) disabled: boolean = false;
@@ -140,7 +139,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     }
   }
 
-  handleIconClick($event: MouseEvent) {
+  protected handleIconClick($event: MouseEvent) {
     if (this.iconClick) {
       this.iconClick();
       $event.stopPropagation()
@@ -163,7 +162,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
   protected readonly cn = cn;
 
-  markAsTouched() {
+  private markAsTouched() {
     if (!this._touched) {
       this.onTouched();
       this._touched = true;
@@ -187,7 +186,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
     this.disabled = isDisabled;
   }
 
-  focus() {
+  public focus() {
     this.input.nativeElement.focus();
   }
 }

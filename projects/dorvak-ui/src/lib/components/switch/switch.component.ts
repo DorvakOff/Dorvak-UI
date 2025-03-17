@@ -61,7 +61,7 @@ export class SwitchComponent implements ControlValueAccessor {
 
   @Output() checkedChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  toggle() {
+  protected toggle() {
     if (this.disabled) {
       return;
     }
@@ -71,7 +71,7 @@ export class SwitchComponent implements ControlValueAccessor {
 
   protected readonly cn = cn;
 
-  markAsTouched() {
+  private markAsTouched() {
     if (!this._touched) {
       this.onTouched();
       this._touched = true;

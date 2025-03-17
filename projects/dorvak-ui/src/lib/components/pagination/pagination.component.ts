@@ -21,7 +21,7 @@ import {cn} from "../../utils/utils";
       <div [class]="cn('flex items-center gap-4 py-2 px-10 flex-wrap', showItemsCount ? 'lg:justify-between justify-center' : 'justify-center')">
         @if (showItemsCount) {
           <div class="text-sm text-gray-500">
-            Showing {{ currentPage * pageSize + 1 }} to {{ Math.min((currentPage + 1) * pageSize, totalItems) }} of {{ totalItems }} results
+            Showing {{ currentPage * pageSize + 1 }} to {{ Math.min((currentPage + 1) * pageSize, totalItems) }} of {{ totalItems }} items
           </div>
         }
         <div class="flex items-center gap-2">
@@ -53,12 +53,12 @@ export class PaginationComponent {
 
   @Output() pageChange = new EventEmitter<number>();
 
-  handlePageChange(page: number) {
+  protected handlePageChange(page: number) {
     this.currentPage = page;
     this.pageChange.emit(page);
   }
 
-  getPagesToShow(): number[] {
+  protected getPagesToShow(): number[] {
     const pages: number[] = [];
 
     if (this.totalPages <= 7) {

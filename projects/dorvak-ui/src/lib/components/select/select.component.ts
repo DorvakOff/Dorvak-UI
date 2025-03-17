@@ -126,7 +126,7 @@ export class SelectComponent implements ControlValueAccessor {
 
   @HostListener('document:scroll')
   @HostListener('window:resize')
-  recalculatePosition() {
+  private recalculatePosition() {
     if (this.visible) {
       // if the combobox is not visible on the screen, show it on top of the input
       this.scrollThrottle.next(window.innerHeight - this.input.input.nativeElement.getBoundingClientRect().bottom < this.combobox.nativeElement.clientHeight
@@ -142,12 +142,12 @@ export class SelectComponent implements ControlValueAccessor {
     }
   }
 
-  getLabel(value: any) {
+  protected getLabel(value: any) {
     const item = this.items.find(item => item.value === value);
     return item ? item.label : '';
   }
 
-  handleInputClick($event: Event) {
+  protected handleInputClick($event: Event) {
     $event.stopPropagation();
 
     if (!this.disabled) {
@@ -159,14 +159,14 @@ export class SelectComponent implements ControlValueAccessor {
     }
   }
 
-  openCombobox() {
+  private openCombobox() {
     this.visible = true;
     this.dismissing = false;
     this.showOnTop = false;
     setTimeout(() => this.recalculatePosition());
   }
 
-  closeCombobox() {
+  private closeCombobox() {
     this.dismissing = true;
 
     setTimeout(() => {
@@ -182,7 +182,7 @@ export class SelectComponent implements ControlValueAccessor {
 
   protected readonly cn = cn;
 
-  markAsTouched() {
+  private markAsTouched() {
     if (!this._touched) {
       this.onTouched();
       this._touched = true;

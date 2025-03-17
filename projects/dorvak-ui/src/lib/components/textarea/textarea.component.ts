@@ -85,7 +85,7 @@ export class TextareaComponent implements ControlValueAccessor {
 
   @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
 
-  markAsTouched() {
+  private markAsTouched() {
     if (!this._touched) {
       this.onTouched();
       this._touched = true;
@@ -109,7 +109,7 @@ export class TextareaComponent implements ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  focus() {
+  public focus() {
     this.input.nativeElement.focus();
   }
 

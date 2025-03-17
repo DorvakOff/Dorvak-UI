@@ -103,7 +103,7 @@ export class DatePickerComponent implements ControlValueAccessor {
 
   @HostListener('document:scroll')
   @HostListener('window:resize')
-  recalculatePosition() {
+  private recalculatePosition() {
     if (this.visible) {
       // if the combobox is not visible on the screen, show it on top of the input
       this.scrollThrottle.next(window.innerHeight - this.input.input.nativeElement.getBoundingClientRect().bottom < this.popup.nativeElement.clientHeight
@@ -119,7 +119,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
   }
 
-  handleInputClick($event: Event) {
+  protected handleInputClick($event: Event) {
     $event.stopPropagation();
 
     if (!this.disabled) {
@@ -131,7 +131,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     }
   }
 
-  openCombobox() {
+  private openCombobox() {
     this.visible = true;
     this.dismissing = false;
     this.showOnTop = false;
@@ -141,7 +141,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     });
   }
 
-  closeCombobox() {
+  protected closeCombobox() {
     this.dismissing = true;
 
     setTimeout(() => {
@@ -150,7 +150,7 @@ export class DatePickerComponent implements ControlValueAccessor {
     }, 200);
   }
 
-  markAsTouched() {
+  private markAsTouched() {
     if (!this._touched) {
       this.onTouched();
       this._touched = true;

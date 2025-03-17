@@ -119,12 +119,12 @@ export const componentList: ComponentList[] = [
     id: 'pagination',
     since: 'v1.0.0'
   },
-  {
-    name: 'Radio',
-    previewComponent: null,
-    id: 'radio',
-    since: 'v1.0.0'
-  },
+  // {
+  //   name: 'Radio',
+  //   previewComponent: null,
+  //   id: 'radio',
+  //   since: 'v1.0.0'
+  // },
   {
     name: 'Select',
     previewComponent: null,

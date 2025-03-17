@@ -53,7 +53,7 @@ export class DropdownMenuComponent {
   protected dismissing: boolean = false
   private scrollThrottle: Subject<boolean> = new Subject<boolean>();
 
-  toggleMenu() {
+  protected toggleMenu() {
     this.visible ? this.closeMenu() : this.openMenu();
   }
 
@@ -72,7 +72,7 @@ export class DropdownMenuComponent {
 
   @HostListener('document:scroll')
   @HostListener('window:resize')
-  recalculatePosition() {
+  private recalculatePosition() {
     if (this.visible) {
       // if the combobox is not visible on the screen, show it on top of the input
       this.scrollThrottle.next(window.innerHeight - this.button.button.nativeElement.getBoundingClientRect().bottom < this.menu.nativeElement.clientHeight
@@ -88,7 +88,7 @@ export class DropdownMenuComponent {
     }
   }
 
-  openMenu() {
+  private openMenu() {
     this.visible = true;
     this.dismissing = false;
     this.showOnTop = false;

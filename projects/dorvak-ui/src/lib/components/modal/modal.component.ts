@@ -41,19 +41,17 @@ export class ModalComponent {
 
   @Input({ transform: booleanAttribute }) closeable: boolean = true;
   @Input({ transform: booleanAttribute }) allowClickOutside = true;
-  @Input() allowClose: Function | null = () => true;
 
   @Output() onClose: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild(CardComponent, { read: ElementRef }) modal!: ElementRef<HTMLElement>;
 
-  isOpen = false;
+  protected isOpen = false;
   protected dismissing = false;
 
-  constructor(private renderer: Renderer2) {
-  }
+  constructor(private renderer: Renderer2) {}
 
-  open() {
+  public open() {
     this.renderer.addClass(document.body, 'overflow-hidden');
     setTimeout(() => {
       this.dismissing = false;
@@ -61,7 +59,7 @@ export class ModalComponent {
     }, 100);
   }
 
-  close() {
+  public close() {
     this.isOpen = false;
     this.dismissing = true;
 
@@ -77,10 +75,6 @@ export class ModalComponent {
   private clickOutside(event: MouseEvent) {
     if (!this.closeable || !this.isOpen) {
       return;
-    }
-
-    if (this.allowClose && !this.allowClose()) {
-      return
     }
 
     if (!this.allowClickOutside || !this.isOpen) {

@@ -51,11 +51,9 @@ export class TabsComponent implements AfterContentInit {
 
   @Output() tabChange: EventEmitter<string> = new EventEmitter<string>();
 
-  selectedTabTitle: string | undefined = undefined;
-  selectedTab: TabComponent | null = null;
+  private selectedTabTitle: string | undefined = undefined;
 
-  selectTab(tab: TabComponent) {
-    this.selectedTab = tab;
+  protected selectTab(tab: TabComponent) {
     this.tabs.forEach((tab) => {
       tab.selected = false;
     });

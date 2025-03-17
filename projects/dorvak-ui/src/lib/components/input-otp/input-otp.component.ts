@@ -40,9 +40,9 @@ export class InputOtpComponent {
 
   @ViewChildren('otpInput') inputs!: QueryList<InputComponent>;
 
-  _pasting: boolean = false;
+  private _pasting: boolean = false;
 
-  onType(index: number) {
+  protected onType(index: number) {
     let input = this.inputs.get(index);
 
     if (!input) {
@@ -52,7 +52,7 @@ export class InputOtpComponent {
     this.handleType(input, index);
   }
 
-  handleType(input: InputComponent, index: number) {
+  private handleType(input: InputComponent, index: number) {
     let value = input.value;
     let next = this.inputs.get(index + 1);
     let prev = this.inputs.get(index - 1);
@@ -72,7 +72,7 @@ export class InputOtpComponent {
     }
   }
 
-  onPaste(event: ClipboardEvent) {
+  protected onPaste(event: ClipboardEvent) {
     event.preventDefault();
 
     let clipboardData = event.clipboardData;
