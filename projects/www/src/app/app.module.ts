@@ -45,6 +45,7 @@ import { TableComponent } from './examples/table/table.component';
 import { ExamplesComponent } from './examples/examples/examples.component';
 import { FaqComponent } from './examples/faq/faq.component';
 import { ToastPreviewComponent } from './components/previews/toast-preview/toast-preview.component';
+import { RadioPreviewComponent } from './components/previews/radio-preview/radio-preview.component';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { ToastPreviewComponent } from './components/previews/toast-preview/toast
     TableComponent,
     ExamplesComponent,
     FaqComponent,
-    ToastPreviewComponent
+    ToastPreviewComponent,
+    RadioPreviewComponent
   ],
   imports: [
     BrowserModule,

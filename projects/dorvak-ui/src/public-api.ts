@@ -25,6 +25,7 @@ export * from './lib/components/input-otp/input-otp.component';
 export * from './lib/components/link/link.component';
 export * from './lib/components/modal/modal.component';
 export * from './lib/components/pagination/pagination.component';
+export * from './lib/components/radio/radio-group/radio-group.component';
 export * from './lib/components/radio/radio-item/radio-item.component';
 export * from './lib/components/select/select.component';
 export * from './lib/components/separator/separator.component';

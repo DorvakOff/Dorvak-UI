@@ -22,7 +22,7 @@ import {RadioItemComponent} from "../../radio/radio-item/radio-item.component";
             @if (selectMode === 'multiple') {
               <dui-checkbox [(checked)]="checked"/>
             } @else {
-              <dui-radio [(checked)]="checked"/>
+              <dui-radio-item [(checked)]="checked"/>
             }
           </div>
         </td>

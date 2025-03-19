@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {PreviewComponent} from "../../../models/preview-component";
 import {FormField} from "../../../models/form-field";
+import {ModalComponent} from "dorvak-ui";
 
 @Component({
   selector: 'app-modal-preview',
   standalone: false,
   template: `
-    <dui-button (click)="modal.open()">Show Modal</dui-button>
+    <dui-button (click)="openModal()">Show Modal</dui-button>
     <dui-modal #modal [closeable]="closeable" [allowClickOutside]="allowClickOutside">
       <span slot="title">{{ title }}</span>
       <span slot="subtitle">{{ subtitle }}</span>
@@ -22,6 +23,12 @@ import {FormField} from "../../../models/form-field";
   styles: ``
 })
 export class ModalPreviewComponent implements PreviewComponent {
+
+  @ViewChild('modal') modalRef!: ModalComponent;
+
+  openModal() {
+    this.modalRef.open();
+  }
 
   fields: FormField[] = [
     {

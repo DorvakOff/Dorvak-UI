@@ -30,6 +30,7 @@ import {RadioItemComponent} from "./components/radio/radio-item/radio-item.compo
 import {AccordionComponent} from "./components/accordion/accordion/accordion.component";
 import {AccordionItemComponent} from "./components/accordion/accordion-item/accordion-item.component";
 import {ToastComponent} from "./components/toast/toast.component";
+import {RadioGroupComponent} from "./components/radio/radio-group/radio-group.component";
 
 const components = [
   AccordionComponent,
@@ -52,6 +53,7 @@ const components = [
   LinkComponent,
   ModalComponent,
   PaginationComponent,
+  RadioGroupComponent,
   RadioItemComponent,
   SelectComponent,
   SeparatorComponent,

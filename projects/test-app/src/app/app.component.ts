@@ -81,7 +81,7 @@ export class AppComponent {
   multipleSelection: boolean = false;
 
   addToast() {
-    this.toastService.addAlert({
+    this.toastService.addToast({
       title: 'Hello',
       message: 'This is a toast message',
       variant: 'info'
