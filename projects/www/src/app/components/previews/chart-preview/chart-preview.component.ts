@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PreviewComponent, PreviewWithTsSnippet} from "../../../models/preview-component";
 import {FormField} from "../../../models/form-field";
 import {ChartConfig, ChartData} from "dorvak-ui";
@@ -7,14 +7,17 @@ import {ChartConfig, ChartData} from "dorvak-ui";
   selector: 'app-chart-preview',
   standalone: false,
   template: `
-    <dui-line-chart [config]="config" [data]="randomData()"/>
+    <div class="flex flex-row gap-2 w-full h-full justify-center items-center">
+      <dui-line-chart [config]="config" [data]="randomData" class="w-1/3"/>
+      <dui-button (click)="generateRandomData()">Generate Random Data</dui-button>
+    </div>
   `,
   host: {
-    class: "h-full"
+    class: "h-full w-full"
   },
   styles: ``
 })
-export class ChartPreviewComponent implements PreviewComponent, PreviewWithTsSnippet {
+export class ChartPreviewComponent implements PreviewComponent, PreviewWithTsSnippet, OnInit {
 
   fields: FormField[] = [];
 
@@ -29,7 +32,7 @@ export class ChartPreviewComponent implements PreviewComponent, PreviewWithTsSni
   }
 
   get codeSnippet(): string {
-    return `<dui-line-chart [config]="config" [data]="randomData()"/>`;
+    return `<dui-line-chart [config]="config" [data]="data"/>`
   }
 
   get tsSnippet(): string {
@@ -53,8 +56,14 @@ export class ChartPreviewComponent implements PreviewComponent, PreviewWithTsSni
       + `\n`
   }
 
-  randomData(): ChartData[] {
-    return Array.from(({length: 10}), (_, i) => ({
+  randomData: ChartData[] = []
+
+  ngOnInit() {
+    this.generateRandomData();
+  }
+
+  generateRandomData() {
+    this.randomData = Array.from(({length: 10}), (_, i) => ({
       x: i,
       y: Math.floor(Math.random() * 100),
       label: `Label ${i}`,

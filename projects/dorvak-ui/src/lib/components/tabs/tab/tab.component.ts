@@ -26,7 +26,6 @@ export class TabComponent {
   @Input({ transform: booleanAttribute }) selected = false;
   @Input({ transform: booleanAttribute }) disabled = false;
 
-  constructor(private elementRef: ElementRef) {
-  }
+  constructor(private elementRef: ElementRef) {}
 
 }
