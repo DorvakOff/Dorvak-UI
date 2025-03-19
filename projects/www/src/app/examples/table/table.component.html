@@ -8,11 +8,12 @@
              enableRowClick selectable
              [selectMode]="multipleSelection ? 'multiple' : 'single'"
   >
-    <dui-button icon="plus" slot="actions">
+    <dui-button icon="plus" slot="actions" (click)="clickAddButton()">
       Add
     </dui-button>
     <dui-button [disabled]="table.selectedRows.length === 0" icon="pencil" slot="actions"
-                variant="outline">
+                variant="outline"
+                (click)="clickEditButton(table.selectedRows)">
       Edit a row
     </dui-button>
   </dui-table>

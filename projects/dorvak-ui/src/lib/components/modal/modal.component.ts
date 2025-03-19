@@ -10,17 +10,19 @@ import {
 import {CardComponent} from "../card/card.component";
 import {ButtonComponent} from "../button/button.component";
 import {cn} from "../../utils/utils";
+import {TrapFocusDirective} from "../../directives/trap-focus.directive";
 
 @Component({
   selector: 'dui-modal',
   encapsulation: ViewEncapsulation.None,
   imports: [
     CardComponent,
-    ButtonComponent
+    ButtonComponent,
+    TrapFocusDirective
   ],
   template: `
-    <div [class]="cn('fixed w-screen h-screen inset-0 bg-black/50 flex items-center justify-center z-50 transition-colors', !isOpen && !dismissing && 'hidden', dismissing && 'bg-black/0')">
-      <dui-card role="dialog" aria-modal="true" class="relative w-full md:w-1/2 duration-300" [class.animate-in]="isOpen" [class.fade-in-0]="isOpen" [class.animate-out]="dismissing" [class.fade-out-0]="dismissing">
+    <div [class]="cn('fixed inset-0 bg-black/50 flex items-center justify-center z-50 transition-colors', !isOpen && !dismissing && 'hidden', dismissing && 'bg-black/0')">
+      <dui-card duiTrapFocus role="dialog" aria-modal="true" class="relative w-full md:w-1/2 duration-300" [class.animate-in]="isOpen" [class.fade-in-0]="isOpen" [class.animate-out]="dismissing" [class.fade-out-0]="dismissing">
         @if (closeable) {
             <dui-button class="absolute top-2 right-2" (click)="close()" size="icon" icon="x" variant="ghost"></dui-button>
         }
@@ -53,10 +55,18 @@ export class ModalComponent {
 
   public open() {
     this.renderer.addClass(document.body, 'overflow-hidden');
+    this.dismissing = false;
     setTimeout(() => {
-      this.dismissing = false;
       this.isOpen = true;
-    }, 100);
+      setTimeout(() => {
+        let focusableEls = this.modal.nativeElement.querySelectorAll("a[href], button, textarea, input[type='text'], input[type='radio'], input[type='checkbox'], select");
+        let firstFocusableEl = focusableEls[0];
+
+        if (firstFocusableEl) {
+          (firstFocusableEl as HTMLElement).focus();
+        }
+      }, 300);
+    });
   }
 
   public close() {

@@ -15,6 +15,7 @@ import {CalendarComponent} from "../calendar/calendar.component";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
 import {Subject, throttleTime} from "rxjs";
 import {DatePipe} from "@angular/common";
+import {TrapFocusDirective} from "../../directives/trap-focus.directive";
 
 @Component({
   selector: 'dui-date-picker',
@@ -23,7 +24,8 @@ import {DatePipe} from "@angular/common";
     InputComponent,
     LucideAngularModule,
     CalendarComponent,
-    DatePipe
+    DatePipe,
+    TrapFocusDirective
   ],
   providers: [
     {
@@ -48,6 +50,7 @@ import {DatePipe} from "@angular/common";
                 'absolute top-10 left-0 duration-300 z-10',
                 showOnTop && 'bottom-10 top-auto'
               )"
+             duiTrapFocus
              [class.hidden]="!visible && !dismissing"
              [class.animate-in]="visible" [class.fade-in-0]="visible" [class.animate-out]="dismissing" [class.fade-out-0]="dismissing"
              #popup>

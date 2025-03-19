@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ColumnDefinition} from "dorvak-ui";
+import {ColumnDefinition, ToastService} from "dorvak-ui";
 import {
   StatusCellRendererComponent
 } from "../../../../../test-app/src/app/components/status-cell-renderer/status-cell-renderer.component";
@@ -45,4 +45,22 @@ export class TableComponent {
 
   multipleSelection: boolean = false;
 
+  constructor(private toastService: ToastService) {
+  }
+
+  clickAddButton() {
+    this.toastService.addToast({
+      title: `Add button clicked`,
+      message: `You clicked the add button`,
+      variant: 'info'
+    });
+  }
+
+  clickEditButton(selectedRows: any[]) {
+    this.toastService.addToast({
+      title: `Edit button clicked`,
+      message: JSON.stringify(selectedRows),
+      variant: 'info'
+    });
+  }
 }
