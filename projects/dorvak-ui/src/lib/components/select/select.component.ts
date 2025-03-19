@@ -57,7 +57,7 @@ export interface SelectItem {
                #combobox>
             <ul class="max-h-40 overflow-y-auto overscroll-contain [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-border">
               @for (item of items; track item.value) {
-                <li [class]="cn('cursor-pointer flex justify-between items-center hover:bg-accent hover:text-accent-foreground focus-within:bg-accent focus-within:text-accent-foreground rounded-sm px-2 py-1 outline-none', item.value === selected && 'bg-accent text-accent-foreground')"
+                <li [class]="cn('cursor-pointer flex justify-between items-center hover:bg-accent hover:text-accent-foreground focus-visible:bg-accent focus-visible:text-accent-foreground focus-visible:ring-2 focus-visible:ring-ring ring-offset-background transition-all outline-none rounded-sm px-2 py-1', item.value === selected && 'bg-accent text-accent-foreground')"
                   (click)="onSelect(item); $event.stopPropagation()" tabindex="0" (keydown.enter)="onSelect(item)"
                 >
                   <span>{{ item.label }}</span>

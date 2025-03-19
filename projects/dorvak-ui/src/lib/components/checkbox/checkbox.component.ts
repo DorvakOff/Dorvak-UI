@@ -24,7 +24,7 @@ import {LucideAngularModule} from "lucide-angular";
         {{ label }}
       </label>
       <button
-        [class]="cn('peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring bg-white text-primary', disabled && 'cursor-not-allowed opacity-50', checked && 'bg-primary text-primary-foreground')"
+        [class]="cn('peer h-4 w-4 shrink-0 rounded-sm border border-primary shadow focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background transition-all outline-none bg-background text-primary', disabled && 'cursor-not-allowed opacity-50', checked && 'bg-primary text-primary-foreground')"
         (click)="toggle(); $event.stopPropagation()"
         [tabindex]="disabled ? -1 : 0"
       >

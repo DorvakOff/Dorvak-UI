@@ -27,7 +27,7 @@ import {cn, uniqueId} from "../../utils/utils";
         </label>
       }
       <div
-        [class]="cn('peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background bg-input', checked && 'bg-primary', disabled && 'cursor-not-allowed opacity-50')"
+        [class]="cn('peer inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent shadow-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background transition-all outline-none bg-input', checked && 'bg-primary', disabled && 'cursor-not-allowed opacity-50')"
         (click)="toggle()" (keydown.space)="toggle(); $event.preventDefault()" (keydown.enter)="toggle()"
         [tabindex]="disabled ? -1 : 0">
         <input type="checkbox" [(ngModel)]="checked" [disabled]="disabled" [name]="name" [attr.id]="id" class="hidden">

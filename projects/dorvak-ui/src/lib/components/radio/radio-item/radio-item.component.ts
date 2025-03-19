@@ -9,14 +9,12 @@ import {uniqueId} from "../../../utils/utils";
   ],
   template: `
     <div class="flex flex-row gap-2 items-center w-fit select-none" [class.flex-row-reverse]="labelPosition === 'right'" [class.text-muted-foreground]="disabled">
-      <div class="aspect-square h-4 w-4 rounded-full border border-current ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50" [class.text-primary]="!disabled">
-        <button class="flex items-center justify-center h-full w-full" (click)="input.click(); $event.stopPropagation()">
-          <input [id]="id" #input type="radio" class="hidden" [attr.name]="name" [attr.value]="value" [disabled]="disabled" (change)="checked = !checked" [checked]="checked"/>
-          @if (checked) {
-            <div class="h-2 w-2 bg-current rounded-full"></div>
-          }
-        </button>
-      </div>
+      <button [disabled]="disabled" [class.text-primary]="!disabled" class="aspect-square h-4 w-4 rounded-full border border-current disabled:cursor-not-allowed flex items-center justify-center focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background transition-all outline-none" (click)="input.click(); $event.stopPropagation()">
+        <input [id]="id" #input type="radio" class="hidden" [attr.name]="name" [attr.value]="value" [disabled]="disabled" (change)="checked = !checked" [checked]="checked"/>
+        @if (checked) {
+          <div class="h-2 w-2 bg-current rounded-full"></div>
+        }
+      </button>
       @if (label) {
         <label [for]="id">{{ label }}</label>
       }

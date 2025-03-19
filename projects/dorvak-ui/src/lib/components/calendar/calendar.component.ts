@@ -23,7 +23,7 @@ import {TitleCasePipe} from "@angular/common";
         }
         @for (day of daysToDisplay; track $index) {
           <button
-            [class]="cn('p-2 h-10 w-10 text-sm text-center rounded-md enabled:hover:bg-accent enabled:hover:text-accent-foreground disabled:cursor-not-allowed disabled:text-muted-foreground',
+            [class]="cn('p-2 h-10 w-10 text-sm text-center rounded-md enabled:hover:bg-accent enabled:hover:text-accent-foreground disabled:cursor-not-allowed disabled:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background transition-all outline-none',
               isToday(day.date) && 'bg-accent text-accent-foreground',
               day.date.getMonth() !== currentDate.getMonth() && 'text-muted-foreground',
               day.date.getTime() === value.getTime() && 'bg-primary text-primary-foreground enabled:hover:bg-primary enabled:hover:text-primary-foreground'
