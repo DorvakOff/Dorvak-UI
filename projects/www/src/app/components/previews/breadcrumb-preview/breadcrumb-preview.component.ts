@@ -17,7 +17,8 @@ export class BreadcrumbPreviewComponent implements PreviewComponent {
 
   items: BreadcrumbItem[] = [
     {label: 'Home', url: '/'},
-    {label: 'Docs', url: '/#/docs/components/breadcrumb'},
+    {label: 'Docs', url: '/#/docs/'},
+    {label: 'Components', url: '/#/docs/components/'},
     {label: 'Breadcrumb'}
   ];
 
