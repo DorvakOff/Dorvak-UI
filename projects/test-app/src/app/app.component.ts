@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ColumnDefinition, ComboboxItem, SelectItem, ToastService} from "dorvak-ui";
+import {ChartConfig, ChartData, ColumnDefinition, ComboboxItem, SelectItem, ToastService} from "dorvak-ui";
 import {StatusCellRendererComponent} from "./components/status-cell-renderer/status-cell-renderer.component";
 import {DemoTableData} from "./models/demo-table-data";
 
@@ -39,6 +39,12 @@ export class AppComponent {
       select: [null, [Validators.required]],
       textarea: ['', [Validators.required]],
     });
+
+    this.chartValues = Array.from({length: 10}, (_, i) => ({
+      x: i,
+      y: Math.floor(Math.random() * 100),
+      label: `Label ${i}`
+    }));
   }
 
   testAlert(args?: any) {
@@ -88,4 +94,23 @@ export class AppComponent {
     });
   }
 
+  chartValues: ChartData[];
+  numberOfPoints: number = 100;
+  chartConfig: ChartConfig = {
+    xAxis: {
+      label: 'X Axis',
+    },
+    yAxis: {
+      label: 'Y Axis',
+    },
+    legend: 'Chart Legend',
+  }
+
+  generateRandomChartData() {
+    this.chartValues = Array.from({length: this.numberOfPoints ?? 0}, (_, i) => ({
+      x: i,
+      y: Math.floor(Math.random() * 100),
+      label: `Label ${i}`
+    }));
+  }
 }

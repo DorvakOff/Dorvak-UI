@@ -49,6 +49,7 @@ import { RadioPreviewComponent } from './components/previews/radio-preview/radio
 import { InstallationPageComponent } from './pages/docs/installation-page/installation-page.component';
 import { TemplateComponent } from './pages/docs/template/template.component';
 import { CopyButtonComponent } from './components/copy-button/copy-button.component';
+import { ChartPreviewComponent } from './components/previews/chart-preview/chart-preview.component';
 
 @NgModule({
   declarations: [
@@ -91,7 +92,8 @@ import { CopyButtonComponent } from './components/copy-button/copy-button.compon
     RadioPreviewComponent,
     InstallationPageComponent,
     TemplateComponent,
-    CopyButtonComponent
+    CopyButtonComponent,
+    ChartPreviewComponent
   ],
   imports: [
     BrowserModule,

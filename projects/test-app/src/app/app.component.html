@@ -95,6 +95,16 @@
 </dui-card>
 
 <dui-separator/>
+<h2 class="font-bold text-2xl font-outfit">Chart</h2>
+<div class="flex gap-2 items-center">
+  <dui-line-chart class="w-4/5 self-center" [data]="chartValues" [config]="chartConfig"/>
+  <div class="flex flex-col gap-2">
+    <dui-input type="number" label="Number of points" required [(ngModel)]="numberOfPoints" (valueChange)="generateRandomChartData()" />
+    <dui-button (click)="generateRandomChartData()" icon="shuffle">Generate random data</dui-button>
+  </div>
+</div>
+
+<dui-separator/>
 <h2 class="font-bold text-2xl font-outfit">Checkboxes</h2>
 <dui-checkbox label="Checkbox"/>
 <dui-checkbox checked disabled label="Disabled Checkbox"/>

@@ -23,7 +23,7 @@ import {cn} from "../../../utils/utils";
         [class.justify-end]="align === 'right'"
       >
         @for (tab of tabs; track $index) {
-          <button (click)="selectTab(tab)"
+          <button (click)="selectTab(tab); $event.stopPropagation()"
                   [class]="cn('relative px-4 py-2 cursor-pointer rounded-t-md disabled:cursor-not-allowed disabled:bg-muted disabled:text-muted-foreground font-semibold', 'focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background outline-none transition-all', 'after:content-[\\' \\'] after:h-1 after:w-full after:absolute after:-bottom-1 after:left-0 after:right-0 after:rounded-full enabled:hover:after:bg-primary', tab.selected && 'after:bg-primary')"
                   [disabled]="tab.disabled"
           >

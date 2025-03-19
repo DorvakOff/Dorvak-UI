@@ -1,7 +1,7 @@
 import {Component, ComponentRef, Input, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {FormField} from "../../models/form-field";
-import {PreviewComponent} from "../../models/preview-component";
+import {PreviewComponent, PreviewWithTsSnippet} from "../../models/preview-component";
 import {debounceTime, Subject} from "rxjs";
 import {SelectItem, ComboboxItem, cn} from "dorvak-ui";
 import {CopyButtonComponent} from "../copy-button/copy-button.component";
@@ -80,6 +80,20 @@ export class ComponentShowcaseComponent implements OnInit {
     }
 
     return  `\`\`\`html\n${this.generatedComponent.instance.codeSnippet}`;
+  }
+
+  getTsSnippet() {
+    if (!this.generatedComponent) {
+      return '';
+    }
+
+    let component = this.generatedComponent.instance as unknown as PreviewWithTsSnippet;
+
+    if (component.tsSnippet) {
+      return `\`\`\`typescript\n${component.tsSnippet}`;
+    }
+
+    return '';
   }
 
   asAny(items: ComboboxItem[] | SelectItem[] | undefined): any[] {

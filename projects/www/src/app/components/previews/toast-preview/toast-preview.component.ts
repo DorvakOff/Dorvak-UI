@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {availableIcons, PreviewComponent} from "../../../models/preview-component";
+import {availableIcons, PreviewComponent, PreviewWithTsSnippet} from "../../../models/preview-component";
 import {FormField} from "../../../models/form-field";
 import {ToastService} from "dorvak-ui";
 
@@ -11,7 +11,7 @@ import {ToastService} from "dorvak-ui";
   `,
   styles: ``
 })
-export class ToastPreviewComponent implements PreviewComponent {
+export class ToastPreviewComponent implements PreviewComponent, PreviewWithTsSnippet {
 
   fields: FormField[] = [
     {
@@ -54,16 +54,23 @@ export class ToastPreviewComponent implements PreviewComponent {
   icon: any;
 
   get codeSnippet(): string {
-    return `<!-- app.component.html -->`
-      +  `\n<dui-toast/>`
-      +  `\n<!-- In your component Import the ToastService`
-      +  `\n  toastService.addToast({`
-      +  `\n    message: ${this.message},`
-      +  `\n    title: ${this.title},`
-      +  `\n    variant: ${this.variant},`
-      +  `\n    icon: ${this.icon}`
+    return `<dui-toast/>`
+      +  `\n<dui-button (click)="createToast()">Show Toast</dui-button>`;
+  }
+
+  get tsSnippet(): string {
+    return `import { ToastService } from "dorvak-ui";`
+      +  `\n`
+      +  `\nconstructor(private toastService: ToastService) {}`
+      +  `\n`
+      +  `\ncreateToast() {`
+      +  `\n  this.toastService.addToast({`
+      +  `\n    message: "${this.message}",`
+      +  `\n    title: "${this.title}",`
+      +  `\n    variant: "${this.variant}",`
+      +  `\n    icon: "${this.icon}"`
       +  `\n  });`
-      +  `\n-->`;
+      +  `\n}`;
   }
 
   createToast() {

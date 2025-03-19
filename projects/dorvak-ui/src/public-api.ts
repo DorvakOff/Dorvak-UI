@@ -37,6 +37,9 @@ export * from './lib/components/textarea/textarea.component';
 export * from './lib/components/toast/toast.component';
 export * from './lib/components/tooltip/tooltip.component';
 
+// Charts
+export * from './lib/components/chart/line-chart/line-chart.component';
+
 // Models
 export * from './lib/models/table/cell-renderer';
 export * from './lib/models/table/column-definition';

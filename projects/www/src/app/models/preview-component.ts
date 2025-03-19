@@ -11,6 +11,10 @@ export interface PreviewComponent {
 
 }
 
+export interface PreviewWithTsSnippet extends PreviewComponent {
+  get tsSnippet (): string;
+}
+
 export function availableIcons(): any[] {
   return Object.keys(icons).map(icon => {
     return {

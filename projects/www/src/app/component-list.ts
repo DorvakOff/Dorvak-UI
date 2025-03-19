@@ -25,6 +25,7 @@ import {CheckboxPreviewComponent} from "./components/previews/checkbox-preview/c
 import {CardPreviewComponent} from "./components/previews/card-preview/card-preview.component";
 import {ToastPreviewComponent} from "./components/previews/toast-preview/toast-preview.component";
 import {RadioPreviewComponent} from "./components/previews/radio-preview/radio-preview.component";
+import {ChartPreviewComponent} from "./components/previews/chart-preview/chart-preview.component";
 
 type ComponentList = {
   name: string;
@@ -97,6 +98,13 @@ export const componentList: ComponentList[] = [
     id: 'card',
     since: 'v1.2.2',
     mobileFriendly: true
+  },
+  {
+    name: 'Chart',
+    previewComponent: ChartPreviewComponent,
+    id: 'chart',
+    since: 'v1.2.8',
+    mobileFriendly: false
   },
   {
     name: 'Checkbox',

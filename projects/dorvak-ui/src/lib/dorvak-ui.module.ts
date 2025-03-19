@@ -31,6 +31,7 @@ import {AccordionComponent} from "./components/accordion/accordion/accordion.com
 import {AccordionItemComponent} from "./components/accordion/accordion-item/accordion-item.component";
 import {ToastComponent} from "./components/toast/toast.component";
 import {RadioGroupComponent} from "./components/radio/radio-group/radio-group.component";
+import {LineChartComponent} from "./components/chart/line-chart/line-chart.component";
 
 const components = [
   AccordionComponent,
@@ -50,6 +51,7 @@ const components = [
   DropdownMenuComponent,
   InputComponent,
   InputOtpComponent,
+  LineChartComponent,
   LinkComponent,
   ModalComponent,
   PaginationComponent,

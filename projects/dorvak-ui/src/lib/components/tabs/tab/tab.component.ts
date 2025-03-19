@@ -4,9 +4,9 @@ import {booleanAttribute, Component, ElementRef, Input, ViewEncapsulation} from 
   selector: 'dui-tab',
   encapsulation: ViewEncapsulation.None,
   template: `
-    @if (selected) {
+    <div [hidden]="!selected">
      <ng-content/>
-    }
+    </div>
   `
 })
 export class TabComponent {

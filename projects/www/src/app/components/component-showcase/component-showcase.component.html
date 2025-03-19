@@ -33,13 +33,22 @@
     }
   </div>
   <dui-separator/>
-  <dui-accordion>
-    <dui-accordion-item title="Code Snippet">
+  <dui-tabs>
+    <dui-tab title="HTML" selected>
       <markdown
         clipboard [clipboardButtonComponent]="CopyButtonComponent"
         [data]="getCodeSnippet()"
         [class]="PROSE_CLASS"
       />
-    </dui-accordion-item>
-  </dui-accordion>
+    </dui-tab>
+    @if (getTsSnippet()) {
+      <dui-tab title="TypeScript">
+        <markdown
+          clipboard [clipboardButtonComponent]="CopyButtonComponent"
+          [data]="getTsSnippet()"
+          [class]="PROSE_CLASS"
+        />
+      </dui-tab>
+    }
+  </dui-tabs>
 </div>
