@@ -10,6 +10,7 @@ export class AppComponent {
 
   links = [
     { text: 'Home', url: '/' },
+    { text: 'Docs', url: '/docs/getting-started/installation' },
     { text: 'Components', url: '/docs/components' }
   ]
 

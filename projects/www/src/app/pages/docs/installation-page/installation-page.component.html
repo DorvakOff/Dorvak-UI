@@ -1,0 +1,14 @@
+<app-template>
+  <dui-breadcrumb [items]="[
+      { label: 'Docs', url: '/#/docs' },
+      { label: 'Getting Started', url: '/#/docs/getting-started' },
+      { label: 'Installation' }
+    ]" slot="breadcrumbs"/>
+  <span slot="title">Installation</span>
+  <markdown
+    src="https://raw.githubusercontent.com/DorvakOff/Dorvak-UI/refs/heads/main/README.md"
+    clipboard
+    [clipboardButtonComponent]="CopyButtonComponent"
+    [class]="PROSE_CLASS"
+  />
+</app-template>

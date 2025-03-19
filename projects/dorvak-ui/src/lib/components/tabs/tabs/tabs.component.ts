@@ -62,8 +62,10 @@ export class TabsComponent implements AfterContentInit {
   }
 
   ngAfterContentInit()  {
-    const selectedTab = this.tabs.find(tab => tab.title.toLowerCase() === this.selectedTabTitle?.toLowerCase()) ?? this.tabs.first;
-    this.selectTab(selectedTab);
+    setTimeout(() => {
+      const selectedTab = this.tabs.find(tab => tab.title.toLowerCase() === this.selectedTabTitle?.toLowerCase()) ?? this.tabs.first;
+      this.selectTab(selectedTab);
+    });
   }
 
   protected readonly cn = cn;

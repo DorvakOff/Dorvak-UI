@@ -35,21 +35,10 @@
   <dui-separator/>
   <dui-accordion>
     <dui-accordion-item title="Code Snippet">
-      <ng-template #copyButton>
-        <dui-button
-          [icon]="copied ? 'check' : 'copy'"
-          size="sm"
-          variant="outline"
-          (click)="copyCodeSnippet()"
-        >
-          {{ copied ? 'Copied!' : 'Copy' }}
-        </dui-button>
-      </ng-template>
-
       <markdown
-        clipboard [clipboardButtonTemplate]="copyButton"
+        clipboard [clipboardButtonComponent]="CopyButtonComponent"
         [data]="getCodeSnippet()"
-        class="prose prose-code:bg-accent prose-code:p-1 prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none w-full max-w-full"
+        [class]="PROSE_CLASS"
       />
     </dui-accordion-item>
   </dui-accordion>

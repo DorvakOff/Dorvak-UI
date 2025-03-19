@@ -1,0 +1,1 @@
+export const PROSE_CLASS = 'prose prose-code:rounded-sm prose-code:before:content-none prose-code:after:content-none prose-headings:text-foreground prose-table:text-foreground prose-code:text-muted-foreground prose-em:text-muted-foreground prose-p:text-foreground prose-a:text-primary w-full max-w-full';

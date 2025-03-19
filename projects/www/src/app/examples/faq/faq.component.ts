@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {PROSE_CLASS} from "../../utils/utils";
 
 @Component({
   selector: 'app-faq-example',
@@ -30,4 +31,5 @@ export class FaqComponent {
     }
   ];
 
+    protected readonly PROSE_CLASS = PROSE_CLASS;
 }

@@ -4,6 +4,8 @@ import {FormField} from "../../models/form-field";
 import {PreviewComponent} from "../../models/preview-component";
 import {debounceTime, Subject} from "rxjs";
 import {SelectItem, ComboboxItem, cn} from "dorvak-ui";
+import {CopyButtonComponent} from "../copy-button/copy-button.component";
+import {PROSE_CLASS} from "../../utils/utils";
 
 @Component({
   selector: 'app-component-showcase',
@@ -99,4 +101,6 @@ export class ComponentShowcaseComponent implements OnInit {
   }
 
   protected readonly cn = cn;
+  protected readonly CopyButtonComponent = CopyButtonComponent;
+  protected readonly PROSE_CLASS = PROSE_CLASS;
 }

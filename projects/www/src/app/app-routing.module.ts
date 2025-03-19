@@ -1,14 +1,30 @@
 import { NgModule } from '@angular/core';
 import {provideRouter, RouterModule, Routes, withComponentInputBinding, withHashLocation} from '@angular/router';
 import {HomePageComponent} from "./pages/home-page/home-page.component";
-import {DocsPageComponent} from "./pages/docs-page/docs-page.component";
+import {ComponentsPageComponent} from "./pages/docs/components-page/components-page.component";
+import {InstallationPageComponent} from "./pages/docs/installation-page/installation-page.component";
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'docs', component: DocsPageComponent },
-  { path: 'docs/components', component: DocsPageComponent },
-  { path: 'docs/components/:item', component: DocsPageComponent },
-  { path: 'docs/components/:item/:selectedTab', component: DocsPageComponent },
+  {
+    path: 'docs',
+    children: [
+      { path: '', redirectTo: 'getting-started', pathMatch: 'full' },
+      { path: 'getting-started',
+        children: [
+          { path: 'installation', component: InstallationPageComponent },
+          { path: '**', redirectTo: 'installation', pathMatch: 'full' },
+        ]
+      },
+      { path: 'components',
+        children: [
+          { path: ':item', component: ComponentsPageComponent },
+          { path: ':item/:selectedTab', component: ComponentsPageComponent },
+          { path: '**', component: ComponentsPageComponent },
+        ]
+      },
+    ]
+  }
 ];
 
 @NgModule({

@@ -1,0 +1,44 @@
+<div class="flex h-[calc(100dvh-4rem)] w-full relative">
+  <div
+    [class]="cn('bg-background border-r shadow transition-all w-full overflow-y-auto duration-300 ease-in-out h-[calc(100dvh-4rem)] absolute md:relative z-50', sidebarOpen ? 'max-w-64' : 'max-w-0')"
+  >
+    <div class="flex flex-col p-4 gap-2">
+      <dui-button variant="outline" icon="x" (click)="toggleSidebar()" class="block md:hidden">
+        Close
+      </dui-button>
+
+      <div class="flex flex-col gap-4">
+        @for (group of sidebarContent; track group.id) {
+          <div>
+            <span class="text-foreground font-bold text-lg">{{ group.name }}</span>
+            <ul class="flex flex-col gap-1">
+              @for (item of group.children; track item.id) {
+                <li class="flex">
+                  <a [routerLink]="['/docs/', group.id, item.id ]"
+                     routerLinkActive="font-semibold bg-accent text-accent-foreground"
+                     class="w-full rounded-sm hover:bg-accent hover:text-accent-foreground font-normal text-foreground px-2 py-1">
+                    {{ item.name }}
+                  </a>
+                </li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+
+    </div>
+  </div>
+  <div class="flex flex-col flex-1 p-4 gap-4 overflow-y-auto w-full max-w-full">
+    <ng-content select="[slot='breadcrumbs']"/>
+    <div class="flex flex-row items-center gap-4 flex-wrap">
+      <div class="flex flex-row items-center gap-4">
+        <dui-button variant="outline" icon="menu" size="icon" (click)="toggleSidebar()"/>
+        <h1 class="text-4xl font-bold font-outfit">
+          <ng-content select="[slot='title']"/>
+        </h1>
+      </div>
+      <ng-content select="[slot='badges']"/>
+    </div>
+    <ng-content/>
+  </div>
+</div>

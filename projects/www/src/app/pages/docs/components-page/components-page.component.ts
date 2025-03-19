@@ -1,19 +1,19 @@
 import {Component, Input} from '@angular/core';
 import {Router} from "@angular/router";
-import { componentList } from "../../component-list";
+import { componentList } from "../../../component-list";
 import {cn} from "dorvak-ui";
+import {PROSE_CLASS} from "../../../utils/utils";
 
 @Component({
   selector: 'app-docs-page',
   standalone: false,
-  templateUrl: './docs-page.component.html'
+  templateUrl: './components-page.component.html'
 })
-export class DocsPageComponent {
+export class ComponentsPageComponent {
 
   items = componentList;
   activeItem = this.items[0];
   activeTab: string | undefined
-  sidebarOpen = document.documentElement.clientWidth > 768;
 
   constructor(private router: Router) {
   }
@@ -52,9 +52,6 @@ export class DocsPageComponent {
     }
   }
 
-  toggleSidebar() {
-    this.sidebarOpen = !this.sidebarOpen;
-  }
-
   protected readonly cn = cn;
+  protected readonly PROSE_CLASS = PROSE_CLASS;
 }

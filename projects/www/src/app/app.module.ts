@@ -9,7 +9,7 @@ import {RouterLink} from "@angular/router";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NgOptimizedImage} from "@angular/common";
 import {HomePageComponent} from './pages/home-page/home-page.component';
-import {DocsPageComponent} from './pages/docs-page/docs-page.component';
+import {ComponentsPageComponent} from './pages/docs/components-page/components-page.component';
 import {SlugifyPipe} from './pipes/slugify.pipe';
 import {MarkdownComponent, MarkdownModule} from "ngx-markdown";
 import {HttpClient, provideHttpClient, withFetch, withInterceptorsFromDi} from "@angular/common/http";
@@ -46,12 +46,15 @@ import { ExamplesComponent } from './examples/examples/examples.component';
 import { FaqComponent } from './examples/faq/faq.component';
 import { ToastPreviewComponent } from './components/previews/toast-preview/toast-preview.component';
 import { RadioPreviewComponent } from './components/previews/radio-preview/radio-preview.component';
+import { InstallationPageComponent } from './pages/docs/installation-page/installation-page.component';
+import { TemplateComponent } from './pages/docs/template/template.component';
+import { CopyButtonComponent } from './components/copy-button/copy-button.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    DocsPageComponent,
+    ComponentsPageComponent,
     SlugifyPipe,
     ComponentShowcaseComponent,
     AlertPreviewComponent,
@@ -85,7 +88,10 @@ import { RadioPreviewComponent } from './components/previews/radio-preview/radio
     ExamplesComponent,
     FaqComponent,
     ToastPreviewComponent,
-    RadioPreviewComponent
+    RadioPreviewComponent,
+    InstallationPageComponent,
+    TemplateComponent,
+    CopyButtonComponent
   ],
   imports: [
     BrowserModule,
