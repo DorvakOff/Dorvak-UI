@@ -16,10 +16,10 @@
               <dui-textarea [label]="field.label ?? field.name | titlecase" [formControlName]="field.name"/>
             }
             @case ('select') {
-              <dui-select [label]="field.label ?? field.name | titlecase" [formControlName]="field.name" [items]="asAny(field.items)"/>
+              <dui-select [label]="field.label ?? field.name | titlecase" inPortal [formControlName]="field.name" [items]="asAny(field.items)"/>
             }
             @case ('combobox') {
-              <dui-combobox [label]="field.label ?? field.name | titlecase" [formControlName]="field.name" [items]="asAny(field.items)"/>
+              <dui-combobox [label]="field.label ?? field.name | titlecase" inPortal [formControlName]="field.name" [items]="asAny(field.items)"/>
             }
             @case ('checkbox') {
               <dui-checkbox [label]="field.label ?? field.name | titlecase" [formControlName]="field.name"/>

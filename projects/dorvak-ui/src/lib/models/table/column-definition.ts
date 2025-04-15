@@ -1,4 +1,4 @@
-import {ICellRenderer} from "./cell-renderer";
+import {Type} from "@angular/core";
 
 export type BaseColumnDefinition = {
   sortable?: boolean;
@@ -8,7 +8,7 @@ export type BaseColumnDefinition = {
   filterable?: boolean;
   dataType?: 'string' | 'number' | 'date';
   dateFormat?: string;
-  cellRenderer?: (new (...args: any[]) => ICellRenderer) | ((params: any) => string | boolean);
+  cellRenderer?: Type<any> | null | ((params: any) => string | boolean);
 }
 
 export type ColumnDefinition = BaseColumnDefinition & {

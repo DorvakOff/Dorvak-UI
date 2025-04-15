@@ -180,6 +180,7 @@ export class TableComponent implements OnInit {
   set data(data: any[]) {
     this._data = data;
     this.dataAccessor = new TableLocalDataAccessor(data);
+    this.loadRows();
   }
 
   @Input({transform: booleanAttribute}) selectable: boolean = false;

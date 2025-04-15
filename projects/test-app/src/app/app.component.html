@@ -206,9 +206,9 @@
   <div class="flex flex-col gap-2 w-full" slot="content">
     <form (ngSubmit)="testAlert(formModal.value); modal2.close()" [formGroup]="formModal" class="flex gap-2 flex-col">
       <dui-combobox [items]="comboItems" formControlName="combo" label="Combobox" multi required/>
-      <dui-select [items]="selectItems" formControlName="select" label="Select" required/>
       <dui-textarea formControlName="textarea" label="Write something here" placeholder="Write something here"
                     required/>
+      <dui-select [items]="selectItems" formControlName="select" label="Select" required/>
 
       <div class="flex-1"></div>
 
