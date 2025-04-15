@@ -53,7 +53,7 @@ export class TableRowCellComponent {
 
   renderCell(column: ColumnDefinition): any {
     return column.cellRenderer
-      ? (column.cellRenderer as Function)({value: this.rowData[column.field]})
+      ? (column.cellRenderer as Function)(this.getParams())
       : this.rowData[column.field];
   }
 
