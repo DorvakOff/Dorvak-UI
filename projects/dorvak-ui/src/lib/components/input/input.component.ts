@@ -132,18 +132,16 @@ export class InputComponent implements ControlValueAccessor, OnInit {
 
     if (this.type === 'password' && !this.icon) {
       this.icon = 'eye';
-      this.iconClick = () => {
+      this.iconClick.subscribe((e)=> {
+        e.stopPropagation();
         this._type = this._type === 'password' ? 'text' : 'password';
         this.icon = this._type === 'password' ? 'eye' : 'eye-off';
-      }
+      })
     }
   }
 
   protected handleIconClick($event: MouseEvent) {
-    if (this.iconClick) {
-      this.iconClick();
-      $event.stopPropagation()
-    }
+    this.iconClick.emit($event);
   }
 
   @Input()
@@ -158,7 +156,7 @@ export class InputComponent implements ControlValueAccessor, OnInit {
   }
 
   @Output() valueChange: EventEmitter<string> = new EventEmitter<string>();
-  @Output() iconClick: Function | undefined;
+  @Output() iconClick: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   protected readonly cn = cn;
 
