@@ -28,8 +28,7 @@ import {RadioItemComponent} from "../../radio/radio-item/radio-item.component";
         </td>
       }
       @for (column of columnDefinitions; track $index) {
-        <td [ngClass]="column.cellClass"
-            class="flex items-center w-full px-4 py-2"
+        <td [class]="cn('flex items-center w-full px-4 py-2', column.cellClass)"
             [class.cursor-pointer]="$first && enableRowClick"
             (click)="enableRowClick ? rowClick.emit(rowData) : null"
         >
